@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CAP Métiers de la Coiffure | Maths-Sciences</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f7f8;
+      color: #252525;
+    }
+
+    /* ===== EN-TÊTE ===== */
+
+    header {
+      background: white;
+      border-bottom: 5px solid #B21A24;
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #fbeaec;
+      color: #B21A24;
+      font-weight: bold;
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #B21A24;
+      font-size: 1.9rem;
+    }
+
+    header h2 {
+      margin: 8px 0 0;
+      font-size: 1.05rem;
+      font-weight: normal;
+      color: #555;
+    }
+
+    /* ===== CONTENU ===== */
+
+    main {
+      max-width: 1050px;
+      margin: auto;
+      padding: 30px 18px 60px;
+    }
+
+    .welcome {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 36px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    }
+
+    .welcome h2 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+
+    .welcome p {
+      margin-bottom: 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ===== DISCIPLINES ===== */
+
+    .discipline {
+      margin-top: 38px;
+    }
+
+    .discipline-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .discipline-title span {
+      font-size: 1.5rem;
+    }
+
+    .discipline-title h2 {
+      margin: 0;
+      color: #B21A24;
+      font-size: 1.4rem;
+    }
+
+    .apps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    /* ===== CARTES ===== */
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      border-top: 4px solid #F04A3A;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .session {
+      display: inline-block;
+      align-self: flex-start;
+      background: #fbeaec;
+      color: #B21A24;
+      font-size: 0.78rem;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: #555;
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      background: #B21A24;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-weight: bold;
+      padding: 13px 16px;
+      border-radius: 9px;
+    }
+
+    .button:hover {
+      background: #8f141d;
+    }
+
+    /* ===== PIED DE PAGE ===== */
+
+    footer {
+      text-align: center;
+      background: white;
+      border-top: 1px solid #ddd;
+      padding: 24px 15px;
+      color: #666;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* ===== TABLETTE / ORDINATEUR ===== */
+
+    @media (min-width: 700px) {
+      .apps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      header h1 {
+        font-size: 2.3rem;
+      }
+
+      main {
+        padding-top: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="badge">COURS DIGITALISÉ</div>
+
+  <h1>CAP Métiers de la Coiffure</h1>
+
+  <h2>Mathématiques & Physique-Chimie</h2>
+</header>
+
+<main>
+
+  <!-- INTRODUCTION -->
+
+  <section class="welcome">
+    <h2>Bienvenue dans ton espace de cours</h2>
+
+    <p>
+      Retrouve ici les activités et outils numériques utilisés
+      au fil de ta formation. Choisis la séance correspondant
+      à ton cours puis lance directement l'activité.
+    </p>
+  </section>
+
+
+  <!-- MATHÉMATIQUES -->
+
+  <section class="discipline">
+
+    <div class="discipline-title">
+      <span>📐</span>
+      <h2>Mathématiques</h2>
+    </div>
+
+    <div class="apps">
+
+      <!-- A1S3M1 -->
+
+      <article class="card">
+
+        <span class="session">
+          ANNÉE 1 • S3 M1
+        </span>
+
+        <h3>
+          Proportionnalité : tableau & coefficient
+        </h3>
+
+        <p>
+          Reconnaître une situation de proportionnalité,
+          calculer un coefficient et l'utiliser dans des
+          situations professionnelles de dosage en coloration.
+        </p>
+
+        <a class="button" href="./A1S3M1/">
+          Lancer l'activité
+        </a>
+
+      </article>
+
+
+      <!-- A1S3M2 -->
+
+      <article class="card">
+
+        <span class="session">
+          ANNÉE 1 • S3 M2
+        </span>
+
+        <h3>
+          Pourcentages & réductions
+        </h3>
+
+        <p>
+          Calculer un pourcentage de réduction, déterminer
+          le montant d'une remise et le prix final dans
+          des situations professionnelles de salon.
+        </p>
+
+        <a class="button" href="./A1S3M2/">
+          Lancer l'activité
+        </a>
+
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- PHYSIQUE-CHIMIE -->
+
+  <section class="discipline">
+
+    <div class="discipline-title">
+      <span>⚗️</span>
+      <h2>Physique-Chimie</h2>
+    </div>
+
+    <div class="apps">
+
+      <!-- A1S4P1 -->
+
+      <article class="card">
+
+        <span class="session">
+          ANNÉE 1 • S4 P1
+        </span>
+
+        <h3>
+          Solutions aqueuses & mesure du pH
+        </h3>
+
+        <p>
+          Mesurer et interpréter le pH de produits capillaires,
+          identifier leur caractère acide, neutre ou basique
+          et comprendre leur action sur le cheveu.
+        </p>
+
+        <a class="button" href="./A1S4pH/">
+          Lancer l'activité
+        </a>
+
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer>
+  <strong>CAP Métiers de la Coiffure</strong><br>
+  Mathématiques & Physique-Chimie<br>
+  CMA Formation Sainte-Clotilde
+</footer>
+
+</body>
+</html>
