@@ -257,9 +257,7 @@
        TABLETTE / ORDINATEUR
        ========================================= */
 
-    .ruban {
-  width: 245px;
-} {
+    @media (min-width: 700px) {
 
       header {
         padding-top: 26px;
@@ -295,7 +293,17 @@
       outline-offset: 3px;
     }
 
+    [hidden] { display: none !important; }
+    .access-panel { max-width: 520px; margin: 0 auto; }
+    #access-form { margin-top: 20px; }
+    #access-form label { display: block; font-weight: 700; margin-bottom: 8px; }
+    #access-code { width: 100%; min-width: 0; padding: 13px; border: 1px solid #777; border-radius: 9px; font: inherit; }
+    #access-code:focus-visible { outline: 3px solid var(--corail); outline-offset: 3px; }
+    #access-error { color: var(--bordeaux); margin: 10px 0; }
+    button.button { border: 0; font: inherit; font-weight: 700; cursor: pointer; }
   </style>
+  <script src="./applications.js" defer></script>
+  <script src="./portail.js" defer></script>
 </head>
 
 
@@ -339,6 +347,18 @@
 
   <main>
 
+    <section id="acces" class="welcome access-panel" aria-labelledby="access-title">
+      <h2 id="access-title">Accès au cours digitalisé</h2>
+      <p id="access-help">Saisis le code communiqué par ton formateur pour accéder aux activités.</p>
+      <form id="access-form">
+        <label for="access-code">Code d’accès</label>
+        <input id="access-code" type="password" required autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="access-help access-error">
+        <p id="access-error" role="alert"></p>
+        <button class="button" type="submit">Accéder aux activités</button>
+      </form>
+    </section>
+    <noscript><p>Active JavaScript dans ton navigateur pour saisir le code et afficher les activités.</p></noscript>
+    <div id="portail" hidden>
     <!-- INTRODUCTION -->
 
     <section class="welcome">
@@ -356,142 +376,8 @@
     </section>
 
 
-    <!-- =====================================
-         MATHÉMATIQUES
-         ===================================== -->
-
-    <section class="discipline">
-
-      <div class="discipline-title">
-
-        <img
-          src="./assets/fleche_rouge.png"
-          alt=""
-          aria-hidden="true"
-        >
-
-        <h2>
-          Mathématiques
-        </h2>
-
-      </div>
-
-
-      <div class="apps">
-
-        <!-- A1S3M1 -->
-
-        <article class="card">
-
-          <span class="session">
-            ANNÉE 1 • S3 M1
-          </span>
-
-          <h3>
-            Proportionnalité : tableau &amp; coefficient
-          </h3>
-
-          <p>
-            Reconnaître une situation de proportionnalité,
-            calculer un coefficient et l'utiliser dans des
-            situations professionnelles de dosage en coloration.
-          </p>
-
-          <a
-            class="button"
-            href="./A1S3M1/"
-          >
-            Lancer l'activité
-          </a>
-
-        </article>
-
-
-        <!-- A1S3M2 -->
-
-        <article class="card">
-
-          <span class="session">
-            ANNÉE 1 • S3 M2
-          </span>
-
-          <h3>
-            Pourcentages &amp; réductions
-          </h3>
-
-          <p>
-            Calculer un pourcentage de réduction, déterminer
-            le montant d'une remise et le prix final dans
-            des situations professionnelles de salon.
-          </p>
-
-          <a
-            class="button"
-            href="./A1S3M2/"
-          >
-            Lancer l'activité
-          </a>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================
-         PHYSIQUE-CHIMIE
-         ===================================== -->
-
-    <section class="discipline">
-
-      <div class="discipline-title">
-
-        <img
-          src="./assets/fleche_rouge.png"
-          alt=""
-          aria-hidden="true"
-        >
-
-        <h2>
-          Physique-Chimie
-        </h2>
-
-      </div>
-
-
-      <div class="apps">
-
-        <!-- A1S4P1 -->
-
-        <article class="card">
-
-          <span class="session">
-            ANNÉE 1 • S4 P1
-          </span>
-
-          <h3>
-            Solutions aqueuses &amp; mesure du pH
-          </h3>
-
-          <p>
-            Mesurer et interpréter le pH de produits capillaires,
-            identifier leur caractère acide, neutre ou basique
-            et comprendre leur action sur le cheveu.
-          </p>
-
-          <a
-            class="button"
-            href="./A1S4pH/"
-          >
-            Lancer l'activité
-          </a>
-
-        </article>
-
-      </div>
-
-    </section>
+    <div id="catalogue"></div>
+    </div>
 
   </main>
 
