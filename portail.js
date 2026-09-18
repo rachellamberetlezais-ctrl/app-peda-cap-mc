@@ -10,6 +10,21 @@
   const error = document.getElementById('access-error');
   const catalogue = document.getElementById('catalogue');
 
+
+  // Masquage des cartes uniquement, selon l'horloge du navigateur.
+  function isPublished(app, now) {
+    return app.publication === undefined || Date.parse(app.publication) <= now;
+  }
+  let publicationTimer;
+  function schedulePublication(apps, refresh) {
+    clearTimeout(publicationTimer);
+    const now = Date.now();
+    const upcoming = apps.map(app => Date.parse(app.publication)).filter(date => date > now);
+    if (upcoming.length) {
+      publicationTimer = setTimeout(refresh, Math.min(Math.min(...upcoming) - now, 2147483647));
+    }
+  }
+
   function element(tag, className, text) {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -21,9 +36,11 @@
     if (!Array.isArray(window.APPLICATIONS) || !window.APPLICATIONS.length) {
       throw new Error('Catalogue indisponible');
     }
+    const now = Date.now();
     const fragment = document.createDocumentFragment();
     const disciplines = new Map();
     for (const app of window.APPLICATIONS) {
+      if (!isPublished(app, now)) continue;
       if (!disciplines.has(app.discipline)) {
         const section = element('section', 'discipline');
         const heading = element('div', 'discipline-title');
@@ -45,6 +62,7 @@
       disciplines.get(app.discipline).append(card);
     }
     catalogue.replaceChildren(fragment);
+    schedulePublication(window.APPLICATIONS, renderCatalogue);
   }
 
   function unlock(focus) {
