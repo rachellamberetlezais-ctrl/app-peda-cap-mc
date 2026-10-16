@@ -30,5 +30,33 @@ window.APPLICATIONS = [
     "titre": "Solutions aqueuses & mesure du pH",
     "description": "Mesurer et interpréter le pH de produits capillaires, identifier leur caractère acide, neutre ou basique et comprendre leur action sur le cheveu.",
     "lien": "./A1S4pH/"
-  }
+  },
+{
+  "code": "A1S4M1",
+  "publication": "2026-10-19T07:50:00+04:00",
+  "discipline": "Mathématiques",
+  "seance": "ANNÉE 1 • S4 M1",
+  "titre": "Échelles & aménagement de salon",
+  "description": "Utiliser les échelles et la proportionnalité pour aménager un espace professionnel de salon.",
+  "lien": "./applications/A1S4M1/index.html"
+},
+{
+  "code": "A1S4M2",
+  "publication": "2026-10-23T09:00:00+04:00",
+  "discipline": "Mathématiques",
+  "seance": "ANNÉE 1 • S4 M2",
+  "titre": "Équations de la forme ax = b",
+  "description": "Résoudre des équations du premier degré à partir de situations de vente et de caisse en salon.",
+  "lien": "./applications/A1S4M2/index.html"
+},
+{
+  "code": "A1S5P1",
+  "publication": "2026-10-23T09:00:00+04:00",
+  "discipline": "Physique-Chimie",
+  "seance": "ANNÉE 1 • S5 P1",
+  "titre": "Dilution & sécurité du dosage",
+  "description": "Préparer une dilution d’oxydant, déterminer les quantités nécessaires et sécuriser le dosage.",
+  "lien": "./applications/A1S5P1/index.html"
+}
 ];
+
