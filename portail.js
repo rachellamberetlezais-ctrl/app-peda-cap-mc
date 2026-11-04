@@ -2,7 +2,7 @@
   'use strict';
 
   // Verrou pédagogique uniquement : les fichiers GitHub Pages restent publics.
-  const accessCode = 'CMAFormationSC';
+  let accessRole = 'apprenant';
   const storageKey = 'cap-coiffure-access-v1';
   const access = document.getElementById('acces');
   const portal = document.getElementById('portail');
@@ -40,7 +40,7 @@
     const fragment = document.createDocumentFragment();
     const disciplines = new Map();
     for (const app of window.APPLICATIONS) {
-      if (!isPublished(app, now)) continue;
+      if (accessRole !== 'formateur' && !isPublished(app, now)) continue;
       if (!disciplines.has(app.discipline)) {
         const section = element('section', 'discipline');
         const heading = element('div', 'discipline-title');
@@ -59,6 +59,7 @@
       link.href = app.lien;
       card.append(element('span', 'session', app.seance),
         element('h3', '', app.titre), element('p', '', app.description), link);
+      CMAAccess.addStatus(card, app, now, accessRole);
       disciplines.get(app.discipline).append(card);
     }
     catalogue.replaceChildren(fragment);
@@ -75,7 +76,6 @@
     access.hidden = true;
     portal.hidden = false;
     input.value = '';
-    try { sessionStorage.setItem(storageKey, 'granted'); } catch { /* Accès sans stockage. */ }
     if (focus) {
       const heading = portal.querySelector('h2');
       heading.tabIndex = -1;
@@ -83,24 +83,11 @@
     }
   }
 
-  document.getElementById('access-form').addEventListener('submit', event => {
-    event.preventDefault();
-    if (input.value.trim() !== accessCode) {
-      error.textContent = 'Code incorrect. Vérifie le code communiqué par ton formateur.';
-      input.setAttribute('aria-invalid', 'true');
-      input.focus();
-      input.select();
-      return;
+  CMAAccess.mount({ storageKey, access, portal, input, error,
+    onUnlock(role, focus) { accessRole = role; unlock(focus); },
+    onLogout() {
+      accessRole = 'apprenant';
+      clearTimeout(publicationTimer); catalogue.replaceChildren();
     }
-    input.removeAttribute('aria-invalid');
-    error.textContent = '';
-    unlock(true);
   });
-  input.addEventListener('input', () => {
-    input.removeAttribute('aria-invalid');
-    error.textContent = '';
-  });
-  try {
-    if (sessionStorage.getItem(storageKey) === 'granted') unlock(false);
-  } catch { /* Le formulaire reste utilisable si le stockage est désactivé. */ }
 })();
