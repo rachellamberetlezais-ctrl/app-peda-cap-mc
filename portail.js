@@ -3,6 +3,7 @@
 
   // Verrou pédagogique uniquement : les fichiers GitHub Pages restent publics.
   let accessRole = 'apprenant';
+  let unlocked = false;
   const storageKey = 'cap-coiffure-access-v1';
   const access = document.getElementById('acces');
   const portal = document.getElementById('portail');
@@ -33,13 +34,23 @@
   }
 
   function renderCatalogue() {
+    if (!unlocked) return;
     if (!Array.isArray(window.APPLICATIONS) || !window.APPLICATIONS.length) {
       throw new Error('Catalogue indisponible');
+    }
+    const desired = { '#mathematiques': 'Mathématiques', '#physique-chimie': 'Physique-Chimie' }[location.hash];
+    document.getElementById('matieres').hidden = Boolean(desired);
+    document.getElementById('discipline-panel').hidden = !desired;
+    if (!desired) {
+      catalogue.replaceChildren();
+      schedulePublication(window.APPLICATIONS, renderCatalogue);
+      return;
     }
     const now = Date.now();
     const fragment = document.createDocumentFragment();
     const disciplines = new Map();
     for (const app of window.APPLICATIONS) {
+      if (app.discipline !== desired) continue;
       if (accessRole !== 'formateur' && !isPublished(app, now)) continue;
       if (!disciplines.has(app.discipline)) {
         const section = element('section', 'discipline');
@@ -63,13 +74,21 @@
       disciplines.get(app.discipline).append(card);
     }
     catalogue.replaceChildren(fragment);
+    if (!disciplines.size) {
+      const empty = element('section', 'cma-no-activities');
+      const title = element('h2', '', desired); title.tabIndex = -1;
+      empty.append(title, element('p', '', 'Les prochaines activités apparaîtront ici à leur date de publication.'));
+      catalogue.append(empty);
+    }
     schedulePublication(window.APPLICATIONS, renderCatalogue);
   }
 
   function unlock(focus) {
+    unlocked = true;
     try {
       renderCatalogue();
     } catch {
+      unlocked = false;
       error.textContent = 'Les activités ne peuvent pas être chargées. Actualise la page pour réessayer.';
       return;
     }
@@ -77,16 +96,31 @@
     portal.hidden = false;
     input.value = '';
     if (focus) {
-      const heading = portal.querySelector('h2');
+      const heading = document.getElementById('matieres').hidden ? catalogue.querySelector('h2') : document.getElementById('welcome-title');
       heading.tabIndex = -1;
       heading.focus();
     }
   }
 
+  document.querySelectorAll('[data-discipline]').forEach(button => button.addEventListener('click', () => {
+    location.hash = button.dataset.discipline === 'Mathématiques' ? 'mathematiques' : 'physique-chimie';
+  }));
+  document.getElementById('retour-matieres').addEventListener('click', () => { location.hash = 'matieres'; });
+  window.addEventListener('hashchange', () => {
+    renderCatalogue();
+    if (unlocked) {
+      const heading = document.getElementById('matieres').hidden ? catalogue.querySelector('h2') : document.getElementById('welcome-title');
+      if (heading) { heading.tabIndex = -1; heading.focus(); }
+    }
+  });
+  window.addEventListener('pageshow', renderCatalogue);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) renderCatalogue(); });
+
   CMAAccess.mount({ storageKey, access, portal, input, error,
     onUnlock(role, focus) { accessRole = role; unlock(focus); },
     onLogout() {
       accessRole = 'apprenant';
+      unlocked = false;
       clearTimeout(publicationTimer); catalogue.replaceChildren();
     }
   });

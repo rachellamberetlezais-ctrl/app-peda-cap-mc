@@ -306,6 +306,7 @@
   <link rel="stylesheet" href="./assets/acces.css">
   <script src="./assets/acces.js" defer></script>
   <script src="./portail.js" defer></script>
+  <link rel="stylesheet" href="./assets/matieres.css">
 </head>
 
 
@@ -361,24 +362,20 @@
     </section>
     <noscript><p>Active JavaScript dans ton navigateur pour saisir le code et afficher les activités.</p></noscript>
     <div id="portail" hidden>
-    <!-- INTRODUCTION -->
-
-    <section class="welcome">
-
-      <h2>
-        Bienvenue dans ton espace de cours
-      </h2>
-
-      <p>
-        Retrouve ici les activités et outils numériques utilisés
-        au fil de ta formation. Choisis la séance correspondant
-        à ton cours puis lance directement l'activité.
-      </p>
-
+    <section id="matieres" aria-labelledby="welcome-title">
+      <div class="welcome">
+        <h2 id="welcome-title" tabindex="-1">Bienvenue dans ton espace de cours</h2>
+        <p>Choisis une matière pour retrouver les activités et outils numériques utilisés au fil de ta formation.</p>
+      </div>
+      <div class="cma-subjects">
+        <button class="cma-subject" type="button" data-discipline="Mathématiques"><img src="./assets/fleche_rouge.png" alt=""><strong>Mathématiques</strong><span>Calculer, comparer et raisonner dans les situations du salon.</span><span class="cma-subject-action">Accéder aux activités →</span></button>
+        <button class="cma-subject" type="button" data-discipline="Physique-Chimie"><img src="./assets/fleche_rouge.png" alt=""><strong>Physique-Chimie</strong><span>Comprendre les produits et les gestes professionnels.</span><span class="cma-subject-action">Accéder aux activités →</span></button>
+      </div>
     </section>
-
-
-    <div id="catalogue"></div>
+    <section id="discipline-panel" hidden aria-label="Activités de la matière choisie">
+      <button id="retour-matieres" class="cma-return" type="button">← Retour aux matières</button>
+      <div id="catalogue"></div>
+    </section>
     </div>
 
   </main>
