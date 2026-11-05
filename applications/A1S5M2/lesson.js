@@ -1,165 +1,106 @@
 (() => {
-  'use strict';
-  const D = window.LESSON, $ = id => document.getElementById(id);
-  const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const fmt = n => Number.isFinite(n) ? new Intl.NumberFormat('fr-FR',{maximumFractionDigits:5}).format(n) : '—';
-  function parseNumber(value) {
-    const s=String(value).trim().replace(/[\s\u00a0\u202f]/g,'').replace(',','.');
-    return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s) && Number.isFinite(Number(s)) ? Number(s) : null;
-  }
-  function numericCorrect(value,q) {
-    const n=parseNumber(value);if(n===null)return false;
-    if(q.round!==undefined && Math.abs(n*10**q.round-Math.round(n*10**q.round))>1e-6)return false;
-    return Math.abs(n-q.answer)<=Math.max(1e-7,Math.abs(q.answer)*1e-8);
-  }
-  function solve(a,b,c) {
-    if(![a,b,c].every(Number.isFinite))throw Error('Saisir trois nombres finis.');
-    if(a===0)throw Error(b===c?'a = 0 : cette égalité est vraie pour toute valeur de x ; ce n’est pas une équation du premier degré.':'a = 0 : aucune solution, car les deux constantes sont différentes.');
-    return {remaining:c-b,x:(c-b)/a,check:a*((c-b)/a)+b};
-  }
-  function perimeter(shape,l,h,d,third=1,pi=3.1416) {
-    const needed=shape==='cercle'?[d]:shape==='carre'?[l]:shape==='triangle'?[l,h,third]:[l,h];
-    if(!needed.every(v=>Number.isFinite(v)&&v>0&&v<=10000))throw Error('Utiliser des dimensions positives, au plus 10 000 m.');
-    if(shape==='triangle' && (l+h<=third || l+third<=h || h+third<=l))throw Error('Ces trois longueurs ne forment pas un triangle.');
-    switch(shape){case 'rectangle':return 2*(l+h);case 'carre':return 4*l;case 'cercle':return pi*d;case 'triangle':return l+h+third;case 'arche':return l+2*h+pi*l/2;case 'stade':return 2*l+pi*h;default:throw Error('Figure inconnue.');}
-  }
-  function pieces(length,bar) {if(!Number.isFinite(length)||!Number.isFinite(bar)||bar<=0||length<0)throw Error('La longueur d’une barre doit être positive.');return Math.ceil(length/bar-1e-10);}
-  window.LessonMath={parseNumber,numericCorrect,solve,perimeter,pieces};
-  const allFields=[], missions=[], earned=new Set(), unlocked=[true,false,false], positions=[0,0,0];
-  let currentTab='decouverte', currentLevel=0, lastCompleted=0;
-  const levelNames=['Socle CAP','Autonomie','Défi expert'];
-  function completeMission(m){return m.fields.every(f=>f.q.type==='manual'?Boolean(f.input.value.trim())&&m.review.checked:f.correct);}
-  function showMission(level,index){
-    if(!unlocked[level])return;
-    currentLevel=level;positions[level]=Math.max(0,Math.min(D.levels[level].length-1,index));
-    D.levels.forEach((_,i)=>$('level-'+i).hidden=i!==level);
-    missions.forEach(m=>m.card.hidden=m.level!==level||m.index!==positions[level]);
-    document.querySelectorAll('[data-level]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.level)===level)));
-    $('mission-counter').textContent=`${levelNames[level]} · Défi ${positions[level]+1} sur ${D.levels[level].length}`;
-    $('mission-prev').disabled=positions[level]===0;
-    const last=positions[level]===D.levels[level].length-1;
-    $('mission-next').textContent=last?(level===2?'Aller au bilan →':'Niveau suivant →'):'Défi suivant →';
-    $('mission-next').disabled=last&&level<2&&!unlocked[level+1];
-    document.querySelectorAll('[data-mission]').forEach(b=>{const on=Number(b.dataset.mission)===positions[level];b.hidden=Number(b.dataset.missionLevel)!==level;b.setAttribute('aria-current',on?'step':'false');});
-  }
-  function updateGame(){
-    const done=missions.filter(m=>m.completed).length;
-    for(let l=0;l<3;l++){
-      const group=missions.filter(m=>m.level===l),passed=group.filter(m=>m.completed).length;
-      if(passed===group.length&&group.length&&l<2)unlocked[l+1]=true;
-      const button=[...document.querySelectorAll('[data-level]')][l];button.disabled=!unlocked[l];
-      button.innerHTML=`<span class="level-number" aria-hidden="true">${passed===group.length?'✓':unlocked[l]?l+1:'🔒'}</span><span><strong>${levelNames[l]}</strong><small>${!unlocked[l]?'Verrouillé · réussir le niveau précédent':passed+' / '+group.length+' défis réussis'}</small></span>`;
-      $('badge-'+l).className='reward'+(passed===group.length?' earned':'');$('badge-'+l).textContent=(passed===group.length?'★ ':'☆ ')+levelNames[l];
-    }
-    missions.forEach(m=>{const b=$('mission-dot-'+m.level+'-'+m.index);b.className='mission-dot'+(m.completed?' complete':'');b.setAttribute('aria-label',`Défi ${m.index+1}${m.completed?' réussi':''}`);});
-    $('game-xp').textContent=earned.size*10+' XP';$('game-done').textContent=done+' / 12';$('game-rank').textContent=done===12?'Expert du salon':done>=9?'Autonome':done>=5?'Socle validé':'En mission';
-    $('game-meter').value=done;
-    $('game-hint').textContent=unlocked[2]?'Les trois niveaux sont ouverts. Vise les trois badges !':unlocked[1]?'Socle validé ! Réussis tous les défis Autonomie pour ouvrir le Défi expert.':'Réussis les 5 défis du Socle CAP pour débloquer le niveau Autonomie.';
-    if(done>lastCompleted){$('game-event').textContent=done===12?'★ Parcours terminé : les trois badges sont gagnés !':'✓ Défi réussi ! '+(done===5?'Niveau Autonomie débloqué.':done===9?'Défi expert débloqué.':'Continue pour compléter ton badge.');lastCompleted=done;}
-    showMission(currentLevel,positions[currentLevel]);
-  }
-  function heading(title) {return `<h3><img src="fleche_rouge.png" class="arrow" alt="">${esc(title)}</h3>`;}
-  function renderExercise(ex,id,evaluation=false) {
-    const card=document.createElement('article');card.className='card';card.id=id; if(id.startsWith('level-'))card.classList.add('challenge-card');
-    card.innerHTML=heading(ex.title)+`<p class="context">${esc(ex.context)}</p>`;
-    ex.questions.forEach((q,i)=>{
-      const key=`${id}-q${i}`;const wrap=document.createElement('div');wrap.className='question';
-      const points=evaluation?` <span class="competence">(${fmt(q.points||0)} pt${(q.points||0)>1?'s':''})</span>`:'';
-      const label=document.createElement('label');label.htmlFor=key;label.innerHTML=esc(q.label)+points;wrap.append(label);
-      let input;
-      if(q.type==='choice'){
-        input=document.createElement('select');const empty=document.createElement('option');empty.value='';empty.textContent='Choisir une réponse';input.append(empty);
-        q.options.forEach((text,j)=>{const o=document.createElement('option');o.value=String(j);o.textContent=text;input.append(o);});
-      }else if(q.type==='manual'){input=document.createElement('textarea');input.rows=3;input.placeholder='Écris ta réponse ou les étapes de ton raisonnement.';}
-      else{input=document.createElement('input');input.type='text';input.inputMode='decimal';input.autocomplete='off';input.placeholder='Ta réponse';}
-      input.id=key;input.setAttribute('aria-describedby',key+'-feedback');
-      const line=document.createElement('div');line.className='input-line';line.append(input);
-      if(q.unit){const unit=document.createElement('span');unit.className='unit';unit.textContent=q.unit;line.append(unit);}
-      wrap.append(line);const feedback=document.createElement('p');feedback.id=key+'-feedback';feedback.className='answer-status';feedback.setAttribute('role','status');wrap.append(feedback);card.append(wrap);
-      const field={q,input,feedback,evaluation,correct:false,checked:false};allFields.push(field);
-      input.addEventListener('input',()=>{field.checked=false;field.correct=false;feedback.textContent='';feedback.className='answer-status';input.removeAttribute('aria-invalid');updateProgress();if(evaluation)$('eval-score').textContent='Réponses modifiées : vérifie à nouveau le bilan.';});
-    });
-    const fields=allFields.filter(f=>f.input.id.startsWith(id+'-'));
-    const actions=document.createElement('div');actions.className='actions';
-    if(!evaluation){const check=document.createElement('button');check.type='button';check.className='primary';check.textContent='Vérifier mes réponses';check.addEventListener('click',()=>{fields.forEach(checkField);if(card.mission){const m=card.mission;if(completeMission(m)){m.completed=true;card.classList.add('mission-won');}m.fields.filter(f=>f.correct).forEach(f=>earned.add(f.input.id));updateGame();}updateProgress();});actions.append(check);card.append(actions);}
-    const correction=document.createElement('details');correction.className='correction';
-    const summary=document.createElement('summary');summary.textContent=evaluation?'Consulter le corrigé et le barème':'Voir le corrigé détaillé';correction.append(summary);
-    const explanation=document.createElement('p');explanation.textContent=ex.correction;correction.append(explanation);
-    ex.questions.forEach(q=>{if(q.type==='manual'){const p=document.createElement('p');p.textContent=q.label+'\n'+q.answer;correction.append(p);}});card.append(correction);
-    card.fields=fields;return card;
-  }
-  function checkField(field) {
-    const {q,input,feedback}=field;field.checked=true;feedback.className='answer-status';input.removeAttribute('aria-invalid');
+ 'use strict';
+ const D=window.LESSON,$=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const fmt=(n,d=5)=>new Intl.NumberFormat('fr-FR',{maximumFractionDigits:d}).format(n),fixed=n=>new Intl.NumberFormat('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+ function number(v){const s=String(v).trim().replace(/[\s\u00a0\u202f]/g,'').replace(',','.');return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s)&&Number.isFinite(Number(s))?Number(s):null;}
+ function correct(v,q){const n=number(v);return n!==null&&(q.round===undefined||Math.abs(n*10**q.round-Math.round(n*10**q.round))<1e-6)&&Math.abs(n-q.answer)<=Math.max(1e-7,Math.abs(q.answer)*1e-8);}
+ const fields=[],exercises=[],opened=[true,false,false],names=['Débutant / Socle CAP','Avancé / Dépassement','Expert / Excellence'],badges=['Maîtrise du contour · Socle CAP','Expert conversions & commande','Figures composées & raisonnement'];let level=0,noticeDone=new Set();
+ function step(n){for(let i=1;i<=4;i++){$('step-'+i).hidden=i!==n;$('step-'+i).classList.toggle('active',i===n);const b=$('tab-step-'+i);b.setAttribute('aria-selected',String(i===n));b.tabIndex=i===n?0:-1;b.classList.toggle('active',i===n);}window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+ document.querySelectorAll('[data-step]').forEach((b,i)=>{b.addEventListener('click',()=>step(i+1));b.addEventListener('keydown',e=>{let n;if(e.key==='ArrowRight')n=(i+1)%4;else if(e.key==='ArrowLeft')n=(i+3)%4;else if(e.key==='Home')n=0;else if(e.key==='End')n=3;if(n!==undefined){e.preventDefault();step(n+1);$('tab-step-'+(n+1)).focus();}});});
+ document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>step(Number(b.dataset.next))));
+ D.objectives.forEach(text=>{const li=document.createElement('li');li.textContent=text;$('objectives').append(li);});$('prerequisites').textContent=D.prerequisites;
+ function render(ex,id,{training=false,l=0,index=0,evaluation=false}={}){
+  const card=document.createElement('article');card.className='exercise-box';card.id=id;
+  card.innerHTML=`<div class="exercise-meta"><span>${esc(ex.title)}</span><span class="badge-tag ${l===0?'tag-cap':'tag-expert'}">${evaluation?'Bilan /8':training?l===0?'Socle CAP':'Bonus':'Découverte'}</span></div><h3 class="card-title"><img src="fleche_rouge.png" class="icon-bullet" alt="">${esc(ex.title)}</h3><div class="info-callout">${esc(ex.context)}</div>`;
+  const item={card,fields:[],training,l,index};exercises.push(item);
+  ex.questions.forEach((q,j)=>{
+   const key=id+'-q'+j,wrap=document.createElement('div');wrap.className='q-item';wrap.id=key+'-wrap';
+   const title=document.createElement('div');title.className='q-title';const label=document.createElement('label');label.htmlFor=key;label.textContent=q.label+(evaluation?' ('+fmt(q.points||0)+' pt)':'');title.append(label);wrap.append(title);
+   let input;if(q.type==='choice'){input=document.createElement('select');input.innerHTML='<option value="">Choisir une réponse</option>';q.options.forEach((s,k)=>{const o=document.createElement('option');o.value=String(k);o.textContent=s;input.append(o);});}else if(q.type==='manual'){input=document.createElement('textarea');input.rows=3;input.placeholder='Ta méthode ou ta conclusion';}else{input=document.createElement('input');input.type='text';input.inputMode='decimal';input.autocomplete='off';input.placeholder='Ton résultat';}
+   input.id=key;input.className='cma-input';input.setAttribute('aria-describedby',key+'-feedback');
+   const row=document.createElement('div');row.className='input-row';row.append(input);if(q.unit){const unit=document.createElement('span');unit.className='input-unit';unit.textContent=q.unit;row.append(unit);}
+   const button=document.createElement('button');button.type='button';button.className='btn btn-primary btn-sm';button.textContent=q.type==='manual'?'Comparer au corrigé':'Valider';row.append(button);wrap.append(row);
+   const feedback=document.createElement('div');feedback.className='feedback-box';feedback.id=key+'-feedback';feedback.setAttribute('role','status');wrap.append(feedback);
+   const f={q,input,button,feedback,wrap,mastered:false,valid:false,review:null,evaluation,training,l};fields.push(f);item.fields.push(f);
+   if(q.type==='manual'){
+    const reviewLabel=document.createElement('label');reviewLabel.className='manual-review';reviewLabel.hidden=true;const check=document.createElement('input');check.type='checkbox';check.id=key+'-review';f.review=check;f.reviewLabel=reviewLabel;
+    reviewLabel.append(check,document.createTextNode('J’ai comparé et corrigé ma réponse. Cette auto-vérification reste à relire avec le formateur.'));wrap.append(reviewLabel);
+    check.addEventListener('change',()=>{f.valid=check.checked&&Boolean(input.value.trim());if(f.valid)f.mastered=true;wrap.classList.toggle('manual-reviewed',f.valid);progress();});
+   }
+   button.addEventListener('click',()=>{
     if(q.type==='manual'){
-      field.correct=false;feedback.classList.add('manual');feedback.textContent=input.value.trim()?'Réponse à comparer au corrigé avec le formateur. Elle n’est pas notée automatiquement.':'Rédaction à compléter ; appréciation par le formateur.';return;
-    }
-    if(input.value.trim()===''){field.correct=false;feedback.classList.add('retry');feedback.textContent='Réponse manquante.';input.setAttribute('aria-invalid','true');return;}
-    const correct=q.type==='choice'?Number(input.value)===q.answer:numericCorrect(input.value,q);field.correct=correct;
-    feedback.classList.add(correct?'ok':'retry');feedback.textContent=correct?'✓ Réponse correcte.':q.round!==undefined?`↺ Vérifie le calcul, l’unité et l’arrondi à ${q.round} décimales.`:'↺ Reprends une étape du calcul ou consulte le cours.';
-    if(!correct)input.setAttribute('aria-invalid','true');
-  }
-  function updateProgress(){const fields=allFields.filter(f=>!f.evaluation&&f.q.type!=='manual');const count=fields.filter(f=>f.correct).length;$('progress-value').max=fields.length;$('progress-value').value=count;$('progress-text').textContent=`${count} / ${fields.length} réponses vérifiées`;}
-  function showTab(tab,focus=true){currentTab=tab;document.body.setAttribute('data-stage',tab);for(const name of ['decouverte','cours','exercices','bilan']){$(name).hidden=name!==tab;const b=$('tab-'+name);b.setAttribute('aria-selected',String(name===tab));b.tabIndex=name===tab?0:-1;}if(focus)$('title-'+tab).focus();}
-  const tabNames=['decouverte','cours','exercices','bilan'];
-  tabNames.forEach((name,i)=>{const b=$('tab-'+name);b.addEventListener('click',()=>showTab(name));b.addEventListener('keydown',e=>{let j;if(e.key==='ArrowRight')j=(i+1)%4;else if(e.key==='ArrowLeft')j=(i+3)%4;else if(e.key==='Home')j=0;else if(e.key==='End')j=3;if(j!==undefined){e.preventDefault();showTab(tabNames[j],false);$('tab-'+tabNames[j]).focus();}});});
-  document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.next)));
-  $('lesson-title').textContent=D.title;$('lesson-subtitle').textContent=D.subtitle;$('lesson-code').textContent=D.code+' · '+D.duration;$('prerequisites').textContent=D.prerequisites;
-  D.objectives.forEach((text,i)=>{const e=document.createElement('div');e.className='objective';e.innerHTML=`<b>0${i+1}</b>${esc(text)}`;$('objectives').append(e);});
-  D.discovery.forEach((ex,i)=>$('discovery-exercises').append(renderExercise(ex,'discovery-'+i)));
-  D.course.forEach(([title,text],i)=>{const d=document.createElement('details');d.className='course-details';d.open=i===0;d.innerHTML=`<summary>${esc(title)}</summary><p>${esc(text)}</p>`;$('course-content').append(d);});
-  D.levels.forEach((level,i)=>{
-    const container=document.createElement('div');container.id='level-'+i;container.hidden=i!==0;
-    level.forEach((ex,j)=>{
-      const card=renderExercise(ex,`level-${i}-ex-${j}`);const m={card,fields:card.fields,level:i,index:j,completed:false,review:{checked:false}};card.mission=m;missions.push(m);
-      const flag=document.createElement('p');flag.className='challenge-label';flag.textContent=`MISSION ${String(j+1).padStart(2,'0')} / ${level.length} · ${levelNames[i]}`;card.prepend(flag);
-      if(m.fields.some(f=>f.q.type==='manual')){
-        const label=document.createElement('label');label.className='self-review';const check=document.createElement('input');check.type='checkbox';check.id=`review-${i}-${j}`;m.review=check;
-        label.append(check,document.createTextNode('J’ai rédigé mes réponses et comparé mon raisonnement au corrigé. Cette auto-vérification reste à relire avec le formateur.'));
-        card.append(label);check.addEventListener('change',()=>{if(completeMission(m)){m.completed=true;card.classList.add('mission-won');updateGame();}});
-      }
-      container.append(card);
-      const dot=document.createElement('button');dot.id=`mission-dot-${i}-${j}`;dot.type='button';dot.dataset.mission=String(j);dot.dataset.missionLevel=String(i);dot.textContent=String(j+1);dot.addEventListener('click',()=>showMission(i,j));$('mission-dots').append(dot);
-    });$('training-content').append(container);
+     feedback.className='feedback-box hint';feedback.textContent=input.value.trim()?'Réponse de référence à comparer avec ta rédaction :\n'+q.answer+'\nLa rédaction n’est pas notée automatiquement.':'Écris d’abord ta réponse, puis compare-la au corrigé.';
+     f.reviewLabel.hidden=!input.value.trim();if(!input.value.trim()){f.review.checked=false;f.valid=false;}
+    }else{
+     f.valid=q.type==='choice'?input.value!==''&&Number(input.value)===q.answer:correct(input.value,q);
+     feedback.className='feedback-box '+(f.valid?'correct':'incorrect');feedback.textContent=f.valid?'✓ Réponse correcte.':input.value.trim()===''?'Complète ta réponse.':q.round!==undefined?'Revois le calcul, l’unité et l’arrondi à '+q.round+' décimales.':'Reprends les données et les étapes de calcul. Tu peux revenir au cours.';
+     wrap.classList.toggle('completed',f.valid);input.setAttribute('aria-invalid',String(!f.valid));if(f.valid)f.mastered=true;
+    }progress();
+   });
+   input.addEventListener('input',()=>{f.valid=false;input.removeAttribute('aria-invalid');feedback.className='feedback-box';feedback.textContent='';wrap.classList.remove('completed');if(f.review){f.review.checked=false;f.reviewLabel.hidden=true;wrap.classList.remove('manual-reviewed');}if(evaluation)progress();});card.append(wrap);
   });
-  document.querySelectorAll('[data-level]').forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.level);if(unlocked[n])showMission(n,positions[n]);}));
-  $('mission-prev').addEventListener('click',()=>showMission(currentLevel,positions[currentLevel]-1));
-  $('mission-next').addEventListener('click',()=>{if(positions[currentLevel]<D.levels[currentLevel].length-1)showMission(currentLevel,positions[currentLevel]+1);else if(currentLevel<2&&unlocked[currentLevel+1])showMission(currentLevel+1,0);else if(currentLevel===2)showTab('bilan');});
-  window.LessonGame={unlocked,missions,earned,showMission};
-  updateGame();
-  $('evaluation-content').append(renderExercise(D.evaluation,'evaluation',true));
-  $('check-evaluation').addEventListener('click',()=>{
-    const fields=allFields.filter(f=>f.evaluation);fields.forEach(checkField);
-    const auto=fields.filter(f=>f.q.type!=='manual');const possible=auto.reduce((s,f)=>s+(f.q.points||0),0);const score=auto.reduce((s,f)=>s+(f.correct?(f.q.points||0):0),0);const manual=fields.filter(f=>f.q.type==='manual').reduce((s,f)=>s+(f.q.points||0),0);const missing=auto.filter(f=>!f.input.value.trim()).length;
-    $('eval-score').textContent=`Contrôle automatique : ${fmt(score)} / ${fmt(possible)} points.\n${fmt(manual)} point${manual>1?'s':''} de rédaction à apprécier par le formateur. Barème total : 8 points.\n${missing?missing+' réponse(s) à compléter.':'Toutes les réponses à contrôle automatique sont renseignées.'}\nLes étapes du raisonnement et la rédaction restent à relire avec le formateur.`;
-  });
-  $('print-bilan').addEventListener('click',()=>window.print());$('text-size').addEventListener('click',e=>{const on=document.body.classList.toggle('large');e.currentTarget.setAttribute('aria-pressed',String(on));});
-  D.notes.forEach(text=>{const li=document.createElement('li');li.textContent=text;$('teacher-notes').append(li);});
-  function read(id){return parseNumber($(id).value);}
-  function setupEquations(){
-    $('simulation').innerHTML=heading('Atelier interactif · Isoler x')+`<p>Change les nombres, puis effectue la même opération dans les deux membres.</p><div class="sim-layout"><div><div class="sim-inputs"><label>Coefficient a<input id="sim-a" type="text" inputmode="decimal" value="22"></label><label>Forfait b<input id="sim-b" type="text" inputmode="decimal" value="14"></label><label>Total c<input id="sim-c" type="text" inputmode="decimal" value="190"></label></div><div class="actions"><button id="sim-reset" class="secondary">Repartir de l’équation</button><button id="sim-next" class="primary">Étape suivante →</button></div><div id="equation-steps" class="sim-steps" aria-live="polite"></div></div><div class="sim-graphic"><div id="sim-formula" class="formula"></div><label for="sim-x">Tester une valeur de x</label><input id="sim-x" type="range" min="0" max="20" step="0.5" value="0" style="width:100%"><div id="sim-test" class="sim-result" role="status"></div><p class="competence">Le curseur explore des valeurs positives ou nulles. La résolution algébrique peut aussi donner une valeur négative.</p></div></div>`;
-    let step=0;
-    const update=()=>{const a=read('sim-a'),b=read('sim-b'),c=read('sim-c');let result;try{result=solve(a,b,c);}catch(e){$('equation-steps').textContent=e.message;$('sim-next').disabled=true;$('sim-formula').textContent='Équation à vérifier';$('sim-test').textContent='Saisir des coefficients valides.';return;}$('sim-next').disabled=step===3;const sign=b<0?'−':'+';$('sim-formula').textContent=`${fmt(a)}x ${sign} ${fmt(Math.abs(b))} = ${fmt(c)}`;
-      const lines=[`${fmt(a)}x ${sign} ${fmt(Math.abs(b))} = ${fmt(c)}`,`Soustraire (${fmt(b)}) aux deux membres : ${fmt(a)}x = ${fmt(c)} − (${fmt(b)}) = ${fmt(result.remaining)}`,`Diviser par (${fmt(a)}) : x = ${fmt(result.remaining)} ÷ (${fmt(a)}) = ${fmt(result.x)}`,`Vérifier : ${fmt(a)} × (${fmt(result.x)}) + (${fmt(b)}) = ${fmt(result.check)}`];$('equation-steps').replaceChildren();lines.slice(0,step+1).forEach((text,i)=>{const d=document.createElement('div');d.className='sim-step'+(i===step?' active':'');d.textContent=text;$('equation-steps').append(d);});
-      const x=Number($('sim-x').value),value=a*x+b;const same=Math.abs(value-c)<1e-7;$('sim-test').textContent=`x testé = ${fmt(x)}\n${fmt(a)} × ${fmt(x)} + (${fmt(b)}) = ${fmt(value)}\n${same?'✓ Égalité vérifiée.':'Le total diffère de '+fmt(c)+'.'}`;
-    };
-    ['sim-a','sim-b','sim-c'].forEach(id=>$(id).addEventListener('input',()=>{step=0;update();}));$('sim-x').addEventListener('input',update);$('sim-reset').addEventListener('click',()=>{step=0;update();});$('sim-next').addEventListener('click',()=>{step=Math.min(3,step+1);update();});update();
+  const correction=document.createElement('details');correction.className='exercise-correction no-print';correction.innerHTML=`<summary>Voir le corrigé détaillé</summary><p>${esc(ex.correction)}</p>`;card.append(correction);return card;
+ }
+ D.discovery.forEach((ex,i)=>$('discovery-content').append(render(ex,'discovery-'+i)));
+ D.course.forEach(([title,text],i)=>{const d=document.createElement('div');d.className='accordion-item'+(i===0?' open':'');const b=document.createElement('button');b.type='button';b.className='accordion-header';b.textContent=title;b.setAttribute('aria-expanded',String(i===0));const p=document.createElement('div');p.className='accordion-body';p.textContent=text;b.addEventListener('click',()=>{const on=d.classList.toggle('open');b.setAttribute('aria-expanded',String(on));});d.append(b,p);$('course-content').append(d);});
+ D.levels.forEach((group,l)=>{
+  const b=document.createElement('button');b.type='button';b.id='level-button-'+l;b.className='level-card';b.innerHTML=`<span><span class="level-pill pill-l${l+1}">NIVEAU ${l+1} ${['🟢','🟡','🔴'][l]}</span><span class="level-description">${names[l]} (${group.length} exercices)</span><small>${l===0?'Valider le socle ouvre le niveau 2 et le bilan imprimable.':'Réussir le niveau précédent pour continuer.'}</small></span><span class="level-status" id="level-status-${l}">En cours</span>`;
+  b.addEventListener('click',()=>{if(opened[l]){level=l;progress();}});$('level-selectors').append(b);
+  const panel=document.createElement('div');panel.id='level-panel-'+l;group.forEach((ex,j)=>panel.append(render(ex,`level-${l}-ex-${j}`,{training:true,l,index:j})));$('training-content').append(panel);
+  const badge=document.createElement('div');badge.className='cma-badge locked';badge.id='badge-'+l;badge.textContent=['⚖ ','★ ','🏆 '][l]+badges[l];$('badge-shelf').append(badge);
+ });
+ $('evaluation-content').append(render(D.evaluation,'evaluation',{evaluation:true}));
+ function progress(){
+  const counts=D.levels.map((_,l)=>{const f=fields.filter(f=>f.training&&f.l===l);return {all:f.length,done:f.filter(f=>f.mastered).length};});
+  counts.forEach((c,l)=>{if(c.all===c.done&&l<2)opened[l+1]=true;$('level-button-'+l).disabled=!opened[l];$('level-button-'+l).classList.toggle('locked',!opened[l]);$('level-button-'+l).classList.toggle('active-lvl',l===level);$('level-status-'+l).textContent=!opened[l]?'🔒 Verrouillé':c.all===c.done?'✓ Validé':c.done+' / '+c.all+' questions';$('level-panel-'+l).hidden=l!==level;$('badge-'+l).classList.toggle('locked',c.done!==c.all);$('badge-'+l).classList.toggle('unlocked',c.done===c.all);});
+  exercises.filter(e=>e.training).forEach(e=>{const previous=exercises.find(p=>p.training&&p.l===e.l&&p.index===e.index-1);if(!previous||previous.fields.every(f=>f.mastered))e.opened=true;const available=opened[e.l]&&e.opened;e.card.classList.toggle('locked-exercise',!available);for(const f of e.fields){f.input.disabled=!available;f.button.disabled=!available;if(f.review)f.review.disabled=!available;}});
+  const pct=Math.round(counts[0].done/counts[0].all*100),bonus=fields.filter(f=>f.training&&f.l>0&&f.q.type!=='manual'&&f.mastered).reduce((s,f)=>s+(f.l===1?10:15),0);
+  $('capProgressTxt').textContent=pct+'%';$('bonusScoreTxt').textContent='+'+bonus+' pts';$('att-cap').textContent=pct+'%';$('att-bonus').textContent='+'+bonus+' pts';$('att-status').textContent=pct===100?'Socle de cette séance terminé. Les réponses rédigées auto-vérifiées restent à relire avec la formatrice.':'Socle en cours. Ce bilan ne valide pas encore la réussite du socle.';$('print-bilan').disabled=pct<100;
+  const total=counts.reduce((s,c)=>s+c.all,0),done=counts.reduce((s,c)=>s+c.done,0),global=Math.round(done/total*100);$('globalProgressBar').style.width=global+'%';$('global-progress').setAttribute('aria-valuenow',String(global));
+  const score=fields.filter(f=>f.evaluation&&f.q.type!=='manual'&&f.valid).reduce((s,f)=>s+f.q.points,0);$('evaluation-score').textContent='Contrôle automatique : '+fmt(score)+' / 7,5 points. Conclusion rédigée : 0,5 point à apprécier par le formateur. Total : /8 points.';$('att-score').textContent=fmt(score)+' / 7,5';
+ }
+ $('learner-name').addEventListener('input',e=>$('att-learner').textContent=e.target.value.trim()||'APPRENANT(E) EN FORMATION');$('print-bilan').addEventListener('click',()=>window.print());$('att-date').textContent=new Intl.DateTimeFormat('fr-FR',{timeZone:'Indian/Reunion',dateStyle:'long'}).format(new Date());
+ D.notes.forEach(text=>{const li=document.createElement('li');li.textContent=text;$('teacher-notes').append(li);});progress();
+ // Atelier de contour : les données sont en mètres ; les unités de saisie sont converties explicitement.
+ const S={shape:'rectangle',unit:'m',a:2.4,b:1.2,c:2,stage:1,visited:new Set(),plan:null};
+ const factor=()=>({m:1,cm:.01,mm:.001}[S.unit]);
+ function dimensions(){
+  const specs=S.shape==='cercle'?[['a','Diamètre D']]:S.shape==='carre'?[['a','Côté']]:S.shape==='triangle'?[['a','Côté AB'],['b','Côté CA'],['c','Côté BC']]:S.shape==='arche'?[['a','Largeur / diamètre'],['b','Hauteur droite']]:S.shape==='stade'?[['a','Longueur droite'],['b','Largeur / diamètre']]:[['a','Longueur'],['b','Largeur']];
+  $('mirror-dimensions').replaceChildren();const f=factor();
+  for(const [key,label] of specs){
+   const div=document.createElement('div');div.className='dimension-control';div.innerHTML=`<label for="dim-${key}">${label} (${S.unit})</label><div class="input-row"><input class="cma-input dimension-value" type="text" inputmode="decimal" id="dim-${key}" value="${fmt(S[key]/f)}"><span>${S.unit}</span></div><input id="range-${key}" type="range" min="${.05/f}" max="${10/f}" step="${.05/f}" value="${S[key]/f}" aria-label="Modifier ${label.toLowerCase()} en ${S.unit}">`;$('mirror-dimensions').append(div);
+   $('dim-'+key).addEventListener('input',e=>{const n=number(e.target.value);S[key]=n===null?NaN:n*f;$('range-'+key).value=Number.isFinite(S[key])?S[key]/f:.05/f;resetWalk();});
+   $('range-'+key).addEventListener('input',e=>{S[key]=Number(e.target.value)*f;$('dim-'+key).value=fmt(S[key]/f);resetWalk();});
   }
-  function geometryDrawing(shape,l,h,d,unit){
-    let paths='',label='';const line='fill="#e9f2f7" stroke="#A50F23" stroke-width="5"';
-    if(shape==='cercle'){paths=`<circle cx="210" cy="125" r="76" ${line}/><path d="M134 125H286" stroke="#4c6e88" stroke-dasharray="5 5" stroke-width="2"/>`;label=`D = ${fmt(d)} ${unit}`;}
-    else if(shape==='arche'){paths=`<path d="M130 210V110A80 80 0 0 1 290 110V210Z" ${line}/><path d="M130 110H290" stroke="#7a8c9f" stroke-dasharray="5 5"/>`;label=`Largeur ${fmt(l)} ${unit} · hauteur droite ${fmt(h)} ${unit}`;}
-    else if(shape==='stade'){paths=`<path d="M112 52H305A68 68 0 0 1 305 188H112A68 68 0 0 1 112 52Z" ${line}/><path d="M112 52V188M305 52V188" stroke="#7a8c9f" stroke-dasharray="5 5"/>`;label=`Côté droit ${fmt(l)} ${unit} · largeur ${fmt(h)} ${unit}`;}
-    else if(shape==='triangle'){paths=`<path d="M105 192L175 45 320 192Z" ${line}/>`;label='Trois côtés : schéma indicatif';}
-    else{const ratio=shape==='carre'?1:l/h;const w=Math.min(245,155*ratio),ht=Math.min(155,245/ratio),x=(420-w)/2,y=(245-ht)/2;paths=`<rect x="${x}" y="${y}" width="${w}" height="${ht}" ${line}/>`;label=shape==='carre'?`c = ${fmt(l)} ${unit}`:`L = ${fmt(l)} ${unit} · l = ${fmt(h)} ${unit}`;}
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 270" role="img" aria-label="${esc(label)}">${paths}<text x="210" y="248" text-anchor="middle" font-family="Arial" font-size="13" fill="#405470">${esc(label)}</text></svg>`;
-  }
-  function setupGeometry(){
-    $('simulation').innerHTML=heading('Atelier interactif · Suivre le contour')+`<p>Le trait bordeaux représente le contour à mesurer. Les pointillés intérieurs ne sont pas comptés.</p><label for="sim-shape">Figure</label><select id="sim-shape"><option value="rectangle">Rectangle</option><option value="carre">Carré</option><option value="cercle">Cercle</option><option value="triangle">Triangle</option><option value="arche">Rectangle + demi-cercle</option><option value="stade">Stade : rectangle + deux demi-cercles</option></select><div class="sim-layout"><div><div class="sim-inputs"><label id="wrap-l"><span id="label-l">Longueur L</span><input id="geo-l" type="text" inputmode="decimal" value="2,4"></label><label id="wrap-h"><span id="label-h">Largeur / hauteur</span><input id="geo-h" type="text" inputmode="decimal" value="1,2"></label><label id="wrap-d" hidden>Diamètre D<input id="geo-d" type="text" inputmode="decimal" value="0,8"></label><label id="wrap-third" hidden>Troisième côté<input id="geo-third" type="text" inputmode="decimal" value="2"></label><label>Unité des dimensions<select id="geo-unit"><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option></select></label><label>Longueur commerciale (m)<input id="geo-bar" type="text" inputmode="decimal" value="2,5"></label></div><div id="geo-result" class="sim-result" role="status"></div><div class="important">Le nombre de barres est une estimation de linéaire, avec raccords possibles et pertes négligées. Pour des pièces rigides sans raccord, vérifier la découpe. Un cercle exige une finition cintrable ou souple.</div></div><div class="sim-graphic"><div id="geo-drawing"></div><p class="competence">Schéma indicatif. Les dimensions chiffrées font foi. π ≈ 3,1416.</p></div></div>`;
-    const update=()=>{const shape=$('sim-shape').value,unit=$('geo-unit').value,scale={m:1,cm:.01,mm:.001}[unit];const l=read('geo-l'),h=read('geo-h'),d=read('geo-d'),third=read('geo-third'),bar=read('geo-bar');$('wrap-l').hidden=shape==='cercle';$('wrap-h').hidden=['cercle','carre'].includes(shape);$('wrap-d').hidden=shape!=='cercle';$('wrap-third').hidden=shape!=='triangle';$('label-l').textContent=shape==='arche'?'Largeur / diamètre':shape==='stade'?'Longueur droite':shape==='carre'?'Côté c':'Longueur / côté a';$('label-h').textContent=shape==='arche'?'Hauteur droite':shape==='stade'?'Largeur / diamètre':'Largeur / côté b';
-      try{const p=perimeter(shape,l===null?NaN:l*scale,h===null?NaN:h*scale,d===null?NaN:d*scale,third===null?NaN:third*scale);const n=pieces(p,bar);$('geo-result').textContent=`Périmètre : ${fmt(p)} m\nSoit ${fmt(p*100)} cm ou ${fmt(p*1000)} mm\nAu centième : ${fmt(Math.round(p*100)/100)} m\nEstimation de linéaire : ${n} longueur(s) de ${fmt(bar)} m.\nLongueur achetée : ${fmt(n*bar)} m.`;$('geo-drawing').innerHTML=geometryDrawing(shape,l,h,d,unit);}catch(e){$('geo-result').textContent=e.message;$('geo-drawing').replaceChildren();}
-    };
-    ['sim-shape','geo-unit'].forEach(id=>$(id).addEventListener('change',update));['geo-l','geo-h','geo-d','geo-third','geo-bar'].forEach(id=>$(id).addEventListener('input',update));update();
-  }
-  if(D.kind==='equations')setupEquations();else setupGeometry();
-  updateProgress();showTab('decouverte',false);
+ }
+ function resetWalk(){S.visited.clear();$('mirror-result').hidden=true;$('perimeter-guess').value='';if(S.stage===3)S.stage=2;draw();}
+ function chooseStage(n){if(n===3&&(!S.plan||S.visited.size!==S.plan.segments.length))return;S.stage=n;draw();if(n===3)reveal();}
+ function toggle(id){if(!S.plan?.segments.some(s=>s.id===id))return;if(S.stage===1){$('mirror-instruction').textContent='Passe à l’étape 2 pour parcourir le contour, après avoir observé les dimensions.';return;}S.visited.has(id)?S.visited.delete(id):S.visited.add(id);$('mirror-result').hidden=true;if(S.stage===3)S.stage=2;draw();}
+ function draw(){
+  try{S.plan=ContourMath.plan(S.shape,S.a,S.b,S.c);}catch(e){S.plan=null;$('inspect-interior').hidden=true;$('walk-counter').textContent='Dimensions à vérifier';$('mirror-drawing').textContent='Figure à vérifier';$('mirror-instruction').textContent=e.message;$('segment-buttons').replaceChildren();$('contour-sum').textContent='Corrige les dimensions avant de tracer.';$('trace-next').disabled=true;$('reveal-result').disabled=true;$('reveal-stage').disabled=true;$('mirror-result').hidden=true;return;}
+  $('inspect-interior').hidden=!S.plan.inside.length;
+  const p=S.plan,scale=factor(),len=n=>fmt(n/scale)+' '+S.unit;
+  const curved=s=>S.shape==='cercle'||S.shape==='arche'&&s.id==='b'||S.shape==='stade'&&['b','d'].includes(s.id);
+  const shown=s=>!S.visited.has(s.id)&&curved(s)?(S.shape==='cercle'?'Contour circulaire':'Demi-cercle'):len(s.length);
+  const body=p.segments.map(s=>`<path class="contour-path ${S.visited.has(s.id)?'visited':''}" d="${s.d}"/><path id="contour-segment-${s.id}" class="contour-hit" d="${s.d}" role="button" tabindex="0" aria-label="${esc(s.name+' : '+shown(s)+(S.visited.has(s.id)?', comptée':', à compter'))}" aria-pressed="${S.visited.has(s.id)}" data-segment="${s.id}"/><text class="diagram-label" x="${s.x}" y="${s.y}" text-anchor="middle">${esc(shown(s))}</text>`).join('');
+  const inside=p.inside.map(d=>`<path class="interior-path" d="${d}"/><path class="interior-hit" d="${d}" role="button" tabindex="0" aria-label="Ligne intérieure, aide de construction" data-interior="true"/>`).join('');
+  $('mirror-drawing').innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 310" role="group" aria-label="Miroir : contour extérieur et dimensions en ${S.unit}"><defs><linearGradient id="glass" x2="1" y2="1"><stop stop-color="#e0eff0"/><stop offset="1" stop-color="#f9ffff"/></linearGradient></defs><path d="${p.outline}" fill="url(#glass)" stroke="none"/>${inside}${body}${p.points.map(([t,x,y])=>`<text class="diagram-point" x="${x}" y="${y}" text-anchor="middle">${t}</text>`).join('')}${S.shape==='cercle'?`<text class="diagram-label" x="210" y="170" text-anchor="middle">D = ${esc(len(S.a))}</text>`:''}</svg>`;
+  $('mirror-drawing').querySelectorAll('[data-segment]').forEach(el=>{const action=()=>{toggle(el.dataset.segment);$('contour-segment-'+el.dataset.segment)?.focus();};el.addEventListener('click',action);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();action();}});});
+  $('mirror-drawing').querySelectorAll('[data-interior]').forEach(el=>{const action=()=>$('mirror-instruction').textContent='Cette ligne est à l’intérieur du miroir : on ne la compte pas dans le périmètre. Suis uniquement le bord extérieur.';el.addEventListener('click',action);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();action();}});});
+  $('segment-buttons').replaceChildren();for(const seg of p.segments){const b=document.createElement('button');b.type='button';b.id='segment-button-'+seg.id;b.className='segment-button';b.dataset.answer=seg.id;b.setAttribute('aria-pressed',String(S.visited.has(seg.id)));b.textContent=(S.visited.has(seg.id)?'✓ ':'')+seg.name+' · '+shown(seg);b.addEventListener('click',()=>{toggle(seg.id);$('segment-button-'+seg.id)?.focus();});$('segment-buttons').append(b);}
+  const selected=p.segments.filter(s=>S.visited.has(s.id)),total=selected.reduce((sum,s)=>sum+s.length,0),complete=selected.length===p.segments.length;
+  $('walk-counter').textContent=selected.length+' / '+p.segments.length+' portions comptées';$('contour-sum').textContent=selected.length?(selected.map(s=>fmt(s.length/scale)).join(' + ')+' = '+fmt(total/scale)+' '+S.unit+(complete?' · Tour complet !':' · Trajet partiel')):'Aucune portion comptée. Choisis un point de départ.';
+  $('walk-live').hidden=S.stage===1;$('contour-walk').hidden=S.stage===1;$('mirror-result').hidden=S.stage!==3;$('trace-next').disabled=complete;$('reveal-result').disabled=!complete;$('reveal-stage').disabled=!complete;
+  $('mirror-instruction').textContent=S.stage===1?'Observe les dimensions. Change un curseur : la forme et les longueurs se mettent à jour. Puis passe à l’étape 2.':complete?'Tu es revenu au point de départ : le contour est complet. Compare maintenant la somme et la formule.':'Suis le bord extérieur du miroir. Les portions vertes sont déjà comptées ; les pointillés intérieurs ne comptent pas.';
+  document.querySelectorAll('[data-sim-stage]').forEach(b=>{b.classList.toggle('active-step',Number(b.dataset.simStage)===S.stage);b.setAttribute('aria-current',Number(b.dataset.simStage)===S.stage?'step':'false');});
+ }
+ function purchase(){if(!S.plan)return;try{const bar=number($('stock-length').value),n=ContourMath.pieces(S.plan.perimeter,bar);$('purchase-result').textContent=n+' longueur(s) de '+fmt(bar)+' m, soit '+fmt(n*bar)+' m achetés pour '+fmt(S.plan.perimeter)+' m de contour. Ce nombre est arrondi à l’entier supérieur.';}catch(e){$('purchase-result').textContent=e.message;}}
+ function reveal(){const p=S.plan;if(!p||S.visited.size!==p.segments.length)return;S.stage=3;draw();$('mirror-result').hidden=false;$('result-formula').textContent=p.symbol+'\n'+p.segments.map(s=>fmt(s.length)).join(' + ')+' '+(p.curved?'≈':'=')+' '+fmt(p.perimeter)+' m';$('result-value').textContent='Au centième : '+fixed(p.perimeter)+' m.'+(p.curved?' Les longueurs courbes utilisent π ≈ 3,1416.':'');const guess=$('perimeter-guess').value;$('guess-feedback').textContent=!guess.trim()?'Compare chaque portion du dessin avec un terme de la somme.':correct(guess,{answer:Math.round(p.perimeter*100)/100,round:2})?'✓ Ton périmètre au centième est correct.':'Reprends le tour : une portion manque-t-elle ? Une ligne intérieure a-t-elle été ajoutée ? Vérifie aussi la conversion et l’arrondi.';$('result-conversions').replaceChildren();for(const [n,u,caption] of [[p.perimeter,'m','mètres'],[p.perimeter*100,'cm','centimètres'],[p.perimeter*1000,'mm','millimètres']]){const c=document.createElement('div');c.className='conversion-card';c.innerHTML=`<strong>${esc(fmt(n))} ${u}</strong><span>${caption}</span>`;$('result-conversions').append(c);}purchase();}
+ $('inspect-interior').addEventListener('click',()=>$('mirror-instruction').textContent='Cette ligne est à l’intérieur du miroir : on ne la compte pas dans le périmètre. Suis uniquement le bord extérieur.');
+ $('mirror-shape').addEventListener('change',e=>{S.shape=e.target.value;S.a=S.shape==='cercle'?.8:2.4;S.b=1.2;S.c=2;S.stage=1;dimensions();resetWalk();});
+ $('mirror-unit').addEventListener('change',e=>{S.unit=e.target.value;dimensions();resetWalk();});
+ $('mirror-reset').addEventListener('click',()=>{Object.assign(S,{shape:'rectangle',unit:'m',a:2.4,b:1.2,c:2,stage:1});$('mirror-shape').value='rectangle';$('mirror-unit').value='m';dimensions();resetWalk();});
+ document.querySelectorAll('[data-sim-stage]').forEach(b=>b.addEventListener('click',()=>chooseStage(Number(b.dataset.simStage))));
+ $('trace-next').addEventListener('click',()=>{const seg=S.plan?.segments.find(s=>!S.visited.has(s.id));if(seg)toggle(seg.id);});$('trace-reset').addEventListener('click',()=>{S.stage=2;resetWalk();});$('reveal-result').addEventListener('click',reveal);$('stock-length').addEventListener('input',purchase);dimensions();draw();
+ window.S5M2={number,correct,fields,exercises,opened,progress,sim:S,toggle,chooseStage};
 })();
