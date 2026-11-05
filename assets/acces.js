@@ -53,6 +53,11 @@
   function addStatus(card, app, now, role) {
     if (role !== 'formateur') return;
     const badge = document.createElement('p');
+    if (app.formateurSeulement === true) {
+      badge.className = 'cma-publication-status cma-is-upcoming';
+      badge.textContent = 'Brouillon · Formateur uniquement';
+      card.prepend(badge); return;
+    }
     const published = app.publication === undefined || Date.parse(app.publication) <= now;
     badge.className = 'cma-publication-status ' + (published ? 'cma-is-visible' : 'cma-is-upcoming');
     const date = app.publication === undefined ? 'Sans date différée' : new Intl.DateTimeFormat('fr-FR', {

@@ -14,6 +14,7 @@
 
   // Masquage des cartes uniquement, selon l'horloge du navigateur.
   function isPublished(app, now) {
+    if (app.formateurSeulement === true) return false;
     return app.publication === undefined || Date.parse(app.publication) <= now;
   }
   let publicationTimer;
