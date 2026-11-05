@@ -65,7 +65,7 @@ window.APPLICATIONS = [
   "titre": "Équations du premier degré : ax + b = c",
   "description": "Modéliser une recette, résoudre une équation en deux étapes et vérifier sa solution.",
   "lien": "./applications/A1S5M1/index.html",
-  "formateurSeulement": true
+  "publication": "2026-11-09T07:50:00+04:00"
 },
 {
   "code": "A1S5M2",
@@ -74,6 +74,6 @@ window.APPLICATIONS = [
   "titre": "Longueurs, périmètres et conversions",
   "description": "Calculer des contours de miroirs, convertir les unités et estimer une commande.",
   "lien": "./applications/A1S5M2/index.html",
-  "formateurSeulement": true
+  "publication": "2026-11-13T07:50:00+04:00"
 }
 ];
