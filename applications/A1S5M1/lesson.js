@@ -25,10 +25,42 @@
   }
   function pieces(length,bar) {if(!Number.isFinite(length)||!Number.isFinite(bar)||bar<=0||length<0)throw Error('La longueur d’une barre doit être positive.');return Math.ceil(length/bar-1e-10);}
   window.LessonMath={parseNumber,numericCorrect,solve,perimeter,pieces};
-  const allFields=[];let currentTab='decouverte';let currentLevel=0;
+  const allFields=[], missions=[], earned=new Set(), unlocked=[true,false,false], positions=[0,0,0];
+  let currentTab='decouverte', currentLevel=0, lastCompleted=0;
+  const levelNames=['Socle CAP','Autonomie','Défi expert'];
+  function completeMission(m){return m.fields.every(f=>f.q.type==='manual'?Boolean(f.input.value.trim())&&m.review.checked:f.correct);}
+  function showMission(level,index){
+    if(!unlocked[level])return;
+    currentLevel=level;positions[level]=Math.max(0,Math.min(D.levels[level].length-1,index));
+    D.levels.forEach((_,i)=>$('level-'+i).hidden=i!==level);
+    missions.forEach(m=>m.card.hidden=m.level!==level||m.index!==positions[level]);
+    document.querySelectorAll('[data-level]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.level)===level)));
+    $('mission-counter').textContent=`${levelNames[level]} · Défi ${positions[level]+1} sur ${D.levels[level].length}`;
+    $('mission-prev').disabled=positions[level]===0;
+    const last=positions[level]===D.levels[level].length-1;
+    $('mission-next').textContent=last?(level===2?'Aller au bilan →':'Niveau suivant →'):'Défi suivant →';
+    $('mission-next').disabled=last&&level<2&&!unlocked[level+1];
+    document.querySelectorAll('[data-mission]').forEach(b=>{const on=Number(b.dataset.mission)===positions[level];b.hidden=Number(b.dataset.missionLevel)!==level;b.setAttribute('aria-current',on?'step':'false');});
+  }
+  function updateGame(){
+    const done=missions.filter(m=>m.completed).length;
+    for(let l=0;l<3;l++){
+      const group=missions.filter(m=>m.level===l),passed=group.filter(m=>m.completed).length;
+      if(passed===group.length&&group.length&&l<2)unlocked[l+1]=true;
+      const button=[...document.querySelectorAll('[data-level]')][l];button.disabled=!unlocked[l];
+      button.innerHTML=`<span class="level-number" aria-hidden="true">${passed===group.length?'✓':unlocked[l]?l+1:'🔒'}</span><span><strong>${levelNames[l]}</strong><small>${!unlocked[l]?'Verrouillé · réussir le niveau précédent':passed+' / '+group.length+' défis réussis'}</small></span>`;
+      $('badge-'+l).className='reward'+(passed===group.length?' earned':'');$('badge-'+l).textContent=(passed===group.length?'★ ':'☆ ')+levelNames[l];
+    }
+    missions.forEach(m=>{const b=$('mission-dot-'+m.level+'-'+m.index);b.className='mission-dot'+(m.completed?' complete':'');b.setAttribute('aria-label',`Défi ${m.index+1}${m.completed?' réussi':''}`);});
+    $('game-xp').textContent=earned.size*10+' XP';$('game-done').textContent=done+' / 12';$('game-rank').textContent=done===12?'Expert du salon':done>=9?'Autonome':done>=5?'Socle validé':'En mission';
+    $('game-meter').value=done;
+    $('game-hint').textContent=unlocked[2]?'Les trois niveaux sont ouverts. Vise les trois badges !':unlocked[1]?'Socle validé ! Réussis tous les défis Autonomie pour ouvrir le Défi expert.':'Réussis les 5 défis du Socle CAP pour débloquer le niveau Autonomie.';
+    if(done>lastCompleted){$('game-event').textContent=done===12?'★ Parcours terminé : les trois badges sont gagnés !':'✓ Défi réussi ! '+(done===5?'Niveau Autonomie débloqué.':done===9?'Défi expert débloqué.':'Continue pour compléter ton badge.');lastCompleted=done;}
+    showMission(currentLevel,positions[currentLevel]);
+  }
   function heading(title) {return `<h3><img src="fleche_rouge.png" class="arrow" alt="">${esc(title)}</h3>`;}
   function renderExercise(ex,id,evaluation=false) {
-    const card=document.createElement('article');card.className='card';card.id=id;
+    const card=document.createElement('article');card.className='card';card.id=id; if(id.startsWith('level-'))card.classList.add('challenge-card');
     card.innerHTML=heading(ex.title)+`<p class="context">${esc(ex.context)}</p>`;
     ex.questions.forEach((q,i)=>{
       const key=`${id}-q${i}`;const wrap=document.createElement('div');wrap.className='question';
@@ -49,12 +81,12 @@
     });
     const fields=allFields.filter(f=>f.input.id.startsWith(id+'-'));
     const actions=document.createElement('div');actions.className='actions';
-    if(!evaluation){const check=document.createElement('button');check.type='button';check.className='primary';check.textContent='Vérifier mes réponses';check.addEventListener('click',()=>{fields.forEach(checkField);updateProgress();});actions.append(check);card.append(actions);}
+    if(!evaluation){const check=document.createElement('button');check.type='button';check.className='primary';check.textContent='Vérifier mes réponses';check.addEventListener('click',()=>{fields.forEach(checkField);if(card.mission){const m=card.mission;if(completeMission(m)){m.completed=true;card.classList.add('mission-won');}m.fields.filter(f=>f.correct).forEach(f=>earned.add(f.input.id));updateGame();}updateProgress();});actions.append(check);card.append(actions);}
     const correction=document.createElement('details');correction.className='correction';
     const summary=document.createElement('summary');summary.textContent=evaluation?'Consulter le corrigé et le barème':'Voir le corrigé détaillé';correction.append(summary);
     const explanation=document.createElement('p');explanation.textContent=ex.correction;correction.append(explanation);
     ex.questions.forEach(q=>{if(q.type==='manual'){const p=document.createElement('p');p.textContent=q.label+'\n'+q.answer;correction.append(p);}});card.append(correction);
-    return card;
+    card.fields=fields;return card;
   }
   function checkField(field) {
     const {q,input,feedback}=field;field.checked=true;feedback.className='answer-status';input.removeAttribute('aria-invalid');
@@ -67,7 +99,7 @@
     if(!correct)input.setAttribute('aria-invalid','true');
   }
   function updateProgress(){const fields=allFields.filter(f=>!f.evaluation&&f.q.type!=='manual');const count=fields.filter(f=>f.correct).length;$('progress-value').max=fields.length;$('progress-value').value=count;$('progress-text').textContent=`${count} / ${fields.length} réponses vérifiées`;}
-  function showTab(tab,focus=true){currentTab=tab;for(const name of ['decouverte','cours','exercices','bilan']){$(name).hidden=name!==tab;const b=$('tab-'+name);b.setAttribute('aria-selected',String(name===tab));b.tabIndex=name===tab?0:-1;}if(focus)$('title-'+tab).focus();}
+  function showTab(tab,focus=true){currentTab=tab;document.body.setAttribute('data-stage',tab);for(const name of ['decouverte','cours','exercices','bilan']){$(name).hidden=name!==tab;const b=$('tab-'+name);b.setAttribute('aria-selected',String(name===tab));b.tabIndex=name===tab?0:-1;}if(focus)$('title-'+tab).focus();}
   const tabNames=['decouverte','cours','exercices','bilan'];
   tabNames.forEach((name,i)=>{const b=$('tab-'+name);b.addEventListener('click',()=>showTab(name));b.addEventListener('keydown',e=>{let j;if(e.key==='ArrowRight')j=(i+1)%4;else if(e.key==='ArrowLeft')j=(i+3)%4;else if(e.key==='Home')j=0;else if(e.key==='End')j=3;if(j!==undefined){e.preventDefault();showTab(tabNames[j],false);$('tab-'+tabNames[j]).focus();}});});
   document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.next)));
@@ -75,8 +107,25 @@
   D.objectives.forEach((text,i)=>{const e=document.createElement('div');e.className='objective';e.innerHTML=`<b>0${i+1}</b>${esc(text)}`;$('objectives').append(e);});
   D.discovery.forEach((ex,i)=>$('discovery-exercises').append(renderExercise(ex,'discovery-'+i)));
   D.course.forEach(([title,text],i)=>{const d=document.createElement('details');d.className='course-details';d.open=i===0;d.innerHTML=`<summary>${esc(title)}</summary><p>${esc(text)}</p>`;$('course-content').append(d);});
-  D.levels.forEach((level,i)=>{const container=document.createElement('div');container.id='level-'+i;container.hidden=i!==0;level.forEach((ex,j)=>container.append(renderExercise(ex,`level-${i}-ex-${j}`)));$('training-content').append(container);});
-  document.querySelectorAll('[data-level]').forEach(b=>b.addEventListener('click',()=>{currentLevel=Number(b.dataset.level);D.levels.forEach((_,i)=>$('level-'+i).hidden=i!==currentLevel);document.querySelectorAll('[data-level]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));}));
+  D.levels.forEach((level,i)=>{
+    const container=document.createElement('div');container.id='level-'+i;container.hidden=i!==0;
+    level.forEach((ex,j)=>{
+      const card=renderExercise(ex,`level-${i}-ex-${j}`);const m={card,fields:card.fields,level:i,index:j,completed:false,review:{checked:false}};card.mission=m;missions.push(m);
+      const flag=document.createElement('p');flag.className='challenge-label';flag.textContent=`MISSION ${String(j+1).padStart(2,'0')} / ${level.length} · ${levelNames[i]}`;card.prepend(flag);
+      if(m.fields.some(f=>f.q.type==='manual')){
+        const label=document.createElement('label');label.className='self-review';const check=document.createElement('input');check.type='checkbox';check.id=`review-${i}-${j}`;m.review=check;
+        label.append(check,document.createTextNode('J’ai rédigé mes réponses et comparé mon raisonnement au corrigé. Cette auto-vérification reste à relire avec le formateur.'));
+        card.append(label);check.addEventListener('change',()=>{if(completeMission(m)){m.completed=true;card.classList.add('mission-won');updateGame();}});
+      }
+      container.append(card);
+      const dot=document.createElement('button');dot.id=`mission-dot-${i}-${j}`;dot.type='button';dot.dataset.mission=String(j);dot.dataset.missionLevel=String(i);dot.textContent=String(j+1);dot.addEventListener('click',()=>showMission(i,j));$('mission-dots').append(dot);
+    });$('training-content').append(container);
+  });
+  document.querySelectorAll('[data-level]').forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.level);if(unlocked[n])showMission(n,positions[n]);}));
+  $('mission-prev').addEventListener('click',()=>showMission(currentLevel,positions[currentLevel]-1));
+  $('mission-next').addEventListener('click',()=>{if(positions[currentLevel]<D.levels[currentLevel].length-1)showMission(currentLevel,positions[currentLevel]+1);else if(currentLevel<2&&unlocked[currentLevel+1])showMission(currentLevel+1,0);else if(currentLevel===2)showTab('bilan');});
+  window.LessonGame={unlocked,missions,earned,showMission};
+  updateGame();
   $('evaluation-content').append(renderExercise(D.evaluation,'evaluation',true));
   $('check-evaluation').addEventListener('click',()=>{
     const fields=allFields.filter(f=>f.evaluation);fields.forEach(checkField);
