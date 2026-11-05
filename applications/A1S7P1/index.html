@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>S7 P1 - Tension, Intensité & Plaques signalétiques | CMA Formation Sainte-Clotilde</title>
+
+  <!-- MathJax v3 pour le rendu fluide des formules physiques et électriques -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { enableMenu: false }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* Charte graphique officielle CMA Formation */
+    :root {
+      --cma-bordeaux: #A50F23;
+      --cma-bordeaux-dark: #7F0B1A;
+      --cma-corail: #EE3C3D;
+      --cma-corail-light: #FEE2E2;
+      --cma-bg: #F8FAFC;
+      --cma-card-bg: #FFFFFF;
+      --cma-text: #1E293B;
+      --cma-text-muted: #64748B;
+      --cma-border: #E2E8F0;
+      --cma-success: #16A34A;
+      --cma-success-bg: #DCFCE7;
+      --cma-warning: #D97706;
+      --cma-warning-bg: #FEF3C7;
+      --radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 14px rgba(165, 15, 35, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--cma-bg);
+      color: var(--cma-text);
+      line-height: 1.5;
+      font-size: 15px;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Puces officielles CMA Formation */
+    .icon-bullet {
+      height: 18px;
+      width: 18px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+      margin-right: 6px;
+    }
+
+    /* Header principal conforme aux directives CMA */
+    .app-header {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 20px;
+      padding-top: 14px;
+      padding-left: 16px;
+      padding-right: 16px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
+      border-bottom: 1px solid var(--cma-border);
+    }
+
+    .header-content {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .app-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-titles {
+      flex: 1;
+    }
+
+    .header-titles h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      line-height: 1.25;
+    }
+
+    .header-titles p {
+      font-size: 0.82rem;
+      color: var(--cma-text-muted);
+      margin-top: 3px;
+    }
+
+    /* Ruban officiel répété au bord inférieur du header (14px) */
+    .cma-wave-border {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: 14px;
+      margin: 0;
+      border: 0;
+      background-image: url("ruban_vague.png");
+      background-repeat: repeat-x;
+      background-size: 102.941176px 102.941176px;
+      background-position: left -46.941176px;
+    }
+
+    /* Barre de progression compacte de 8px */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background-color: #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cma-corail) 0%, var(--cma-bordeaux) 100%);
+      transition: width 0.4s ease;
+    }
+
+    /* Onglets de navigation tactiles Mobile-First */
+    .nav-container {
+      max-width: 960px;
+      margin: 12px auto 6px auto;
+      padding: 0 12px;
+      width: 100%;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .nav-btn {
+      flex: 1 0 auto;
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--cma-border);
+      background: #FFFFFF;
+      color: var(--cma-text);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--cma-corail);
+      color: var(--cma-bordeaux);
+    }
+
+    .nav-btn.active {
+      background: var(--cma-bordeaux);
+      color: #FFFFFF;
+      border-color: var(--cma-bordeaux);
+      box-shadow: 0 2px 8px rgba(165, 15, 35, 0.3);
+    }
+
+    /* Conteneur principal */
+    .main-container {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px 14px 40px 14px;
+      flex: 1;
+    }
+
+    .step-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .step-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cartes & Éléments */
+    .card {
+      background: var(--cma-card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--cma-border);
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-callout {
+      background: #F1F5F9;
+      border-left: 4px solid var(--cma-corail);
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 14px;
+      font-size: 0.93rem;
+    }
+
+    .info-callout strong {
+      color: var(--cma-bordeaux);
+    }
+
+    /* Plaque signalétique stylisée */
+    .plate-box {
+      background: #0F172A;
+      color: #F8FAFC;
+      border: 2px solid #64748B;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.92rem;
+      letter-spacing: 0.5px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .plate-box .plate-title {
+      color: #38BDF8;
+      font-weight: bold;
+      border-bottom: 1px dashed #475569;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+    }
+
+    /* Champs de saisie Mobile-First conformes */
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .cma-input {
+      font-size: 16px;
+      height: 44px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 8px;
+      color: var(--cma-text);
+      background: #FFFFFF;
+      min-width: 140px;
+      flex: 1;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .cma-input:focus {
+      outline: none;
+      border-color: var(--cma-corail);
+      box-shadow: 0 0 0 3px rgba(238, 60, 61, 0.15);
+    }
+
+    .input-unit {
+      font-weight: 600;
+      color: var(--cma-text-muted);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .btn {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary { background: var(--cma-bordeaux); color: #FFFFFF; }
+    .btn-primary:hover { background: var(--cma-bordeaux-dark); }
+    .btn-corail { background: var(--cma-corail); color: #FFFFFF; }
+    .btn-corail:hover { background: #D92B2C; }
+    .btn-sm { min-height: 38px; padding: 6px 14px; font-size: 0.88rem; }
+
+    /* Feedbacks */
+    .feedback-box {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+    .feedback-box.correct {
+      display: block;
+      background: var(--cma-success-bg);
+      border: 1px solid var(--cma-success);
+      color: #065F46;
+    }
+    .feedback-box.incorrect {
+      display: block;
+      background: #FEE2E2;
+      border: 1px solid #EF4444;
+      color: #991B1B;
+    }
+    .feedback-box.hint {
+      display: block;
+      background: var(--cma-warning-bg);
+      border: 1px solid var(--cma-warning);
+      color: #92400E;
+    }
+
+    /* Accordéons */
+    .accordion-item {
+      border: 1px solid var(--cma-border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+    .accordion-header {
+      padding: 14px 16px;
+      min-height: 48px;
+      background: #FFFFFF;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .accordion-header::after {
+      content: '+';
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--cma-corail);
+    }
+    .accordion-item.open .accordion-header::after { content: '−'; }
+    .accordion-body {
+      padding: 14px 16px;
+      border-top: 1px solid var(--cma-border);
+      background: #FDFDFE;
+      display: none;
+      font-size: 0.93rem;
+    }
+    .accordion-item.open .accordion-body { display: block; }
+
+    /* Tableaux adaptatifs */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid var(--cma-border);
+    }
+    .cma-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      min-width: 480px;
+    }
+    .cma-table th {
+      background: #F8FAFC;
+      color: var(--cma-bordeaux);
+      font-weight: 700;
+      padding: 10px;
+      border-bottom: 2px solid var(--cma-border);
+    }
+    .cma-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--cma-border);
+      background: #FFFFFF;
+    }
+
+    /* Simulateur interactif */
+    .sim-container {
+      background: #FFFFFF;
+      border: 1px solid var(--cma-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .sim-controls-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    @media (min-width: 600px) {
+      .sim-controls-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .sim-slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+    }
+    .sim-slider {
+      width: 100%;
+      height: 6px;
+      accent-color: var(--cma-bordeaux);
+      cursor: pointer;
+    }
+
+    /* Multimètre virtuel & jauge disjoncteur */
+    .multimeter-card {
+      background: #0F172A;
+      color: #E2E8F0;
+      border: 3px solid #334155;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+    }
+    .lcd-display {
+      background: #0284C7;
+      color: #F0F9FF;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+    }
+    .lcd-val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .gauge-track {
+      width: 100%;
+      height: 14px;
+      background: #334155;
+      border-radius: 7px;
+      overflow: hidden;
+      margin: 8px 0;
+      position: relative;
+    }
+    .gauge-fill {
+      height: 100%;
+      width: 0%;
+      background: #22C55E;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Entraînement gamifié */
+    .score-banner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .score-card {
+      background: #FFFFFF;
+      border: 1px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    .score-card.cap-highlight {
+      border-color: #86EFAC;
+      background: #F0FDF4;
+    }
+    .score-card-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--cma-text-muted);
+    }
+    .score-card-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      margin-top: 2px;
+    }
+
+    .level-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+    }
+    .level-card.active-lvl {
+      border-color: var(--cma-bordeaux);
+      box-shadow: 0 0 0 2px rgba(165, 15, 35, 0.1);
+    }
+    .level-card.locked {
+      background: #F1F5F9;
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+    .level-pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .pill-l1 { background: #DCFCE7; color: #15803D; }
+    .pill-l2 { background: #FEF3C7; color: #B45309; }
+    .pill-l3 { background: #EDE9FE; color: #6D28D9; }
+
+    .exercise-box {
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .exercise-box.locked-exercise { display: none; }
+    .exercise-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cma-text-muted);
+    }
+    .badge-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+    .tag-cap { background: var(--cma-corail-light); color: var(--cma-bordeaux); }
+    .tag-bonus { background: #FEF3C7; color: #B45309; }
+    .tag-expert { background: #EDE9FE; color: #6D28D9; }
+
+    .q-item {
+      padding: 12px;
+      border-radius: 8px;
+      background: #F8FAFC;
+      border: 1px solid var(--cma-border);
+      margin-bottom: 12px;
+    }
+    .q-item.completed {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+    }
+    .q-title {
+      font-weight: 600;
+      font-size: 0.94rem;
+      margin-bottom: 8px;
+      color: var(--cma-text);
+    }
+
+    /* Badges */
+    .badge-shelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .cma-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .cma-badge.unlocked {
+      border-color: #F59E0B;
+      background: #FFFBEB;
+      color: #92400E;
+    }
+    .cma-badge.locked {
+      opacity: 0.5;
+      background: #F1F5F9;
+      color: #94A3B8;
+    }
+
+    /* Attestation officielle */
+    .attestation-sheet {
+      background: #FFFFFF;
+      border: 3px double var(--cma-bordeaux);
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    .att-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 2px solid var(--cma-corail);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+    .att-logo {
+      max-height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+    .att-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .att-sub {
+      font-size: 0.88rem;
+      color: var(--cma-text-muted);
+      font-weight: 600;
+    }
+    .att-learner {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .att-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 16px 0;
+      background: #F8FAFC;
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid var(--cma-border);
+    }
+    @media (min-width: 600px) {
+      .att-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .att-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--cma-border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .att-sig-block {
+      text-align: right;
+      font-size: 0.85rem;
+    }
+    .att-sig-name {
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      margin-top: 4px;
+    }
+
+    @media print {
+      body { background: #FFFFFF; color: #000000; }
+      .app-header, .progress-track, .nav-container, .step-section:not(#step-4), .no-print, .btn, .input-row, input, select {
+        display: none !important;
+      }
+      #step-4 { display: block !important; }
+      .main-container { padding: 0; max-width: 100%; }
+      .attestation-sheet {
+        border: 2px solid #A50F23;
+        box-shadow: none;
+        page-break-inside: avoid;
+        margin: 0;
+        padding: 20px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="../../assets/retour-portail.css?v=1"><script src="../../assets/retour-portail.js?v=1" data-portal="../../index.html" data-section="physique-chimie" data-label="Coiffure · Année 1 · Semaine B" defer></script></head>
+<body>
+
+  <!-- Header officiel avec logo et ruban de vague (14px) -->
+  <header class="app-header">
+    <div class="header-content">
+      <img src="logo.png" alt="Logo CMA Formation" class="app-logo" onerror="this.src='https://placehold.co/120x48/A50F23/ffffff?text=CMA+Formation'">
+      <div class="header-titles">
+        <h1>Tension, Intensité & Plaques signalétiques</h1>
+        <p>Physique-Chimie | CAP Métiers de la Coiffure | Année 1 - S7 P1 | CMA Formation Sainte-Clotilde (Rachel Lamberet-Lezais)</p>
+      </div>
+    </div>
+    <div class="cma-wave-border"></div>
+  </header>
+
+  <!-- Barre de progression générale (8px) -->
+  <div class="progress-track" aria-label="Progression de la séance">
+    <div class="progress-bar-fill" id="globalProgressBar"></div>
+  </div>
+
+  <!-- Barre d'onglets de navigation Mobile-First -->
+  <div class="nav-container">
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-btn active" onclick="switchStep(1)" id="tab-step-1" role="tab" aria-selected="true">
+        <span>1.</span> Découverte
+      </button>
+      <button class="nav-btn" onclick="switchStep(2)" id="tab-step-2" role="tab" aria-selected="false">
+        <span>2.</span> Cours & Simu
+      </button>
+      <button class="nav-btn" onclick="switchStep(3)" id="tab-step-3" role="tab" aria-selected="false">
+        <span>3.</span> Entraînement
+      </button>
+      <button class="nav-btn" onclick="switchStep(4)" id="tab-step-4" role="tab" aria-selected="false">
+        <span>4.</span> Bilan & Attestation
+      </button>
+    </nav>
+  </div>
+
+  <!-- Conteneur principal SPA -->
+  <main class="main-container">
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 1 — DÉCOUVERTE                       -->
+    <!-- ========================================== -->
+    <section id="step-1" class="step-section active">
+      <div class="card">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Situation Professionnelle : Contrôle électrique au salon de Sainte-Clotilde
+        </h2>
+        <div class="info-callout">
+          <strong>Contexte réunionnais :</strong> Au salon <strong>« L'Atelier Kréol »</strong> à Sainte-Clotilde, Sarah, apprentie en CAP Coiffure, participe à l'inventaire et au contrôle technique des appareils avant le pic d'activité de l'été austral.<br><br>
+          Le salon est raccordé au réseau basse tension monophasé d'<strong>EDF Réunion</strong> délivrant une tension alternative de <strong>230 V sous 50 Hz</strong>.<br><br>
+          Afin d'éviter l'échauffement des prises et les disjonctions intempestives lors des fortes chaleurs (climatisation et appareils thermiques en continu), Sarah analyse la plaque signalétique de deux équipements :
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin: 12px 0;">
+          <div class="plate-box">
+            <div class="plate-title">ÉQUIPEMENT 1 : SÉCHOIR PROFESSIONNEL IONIQUE</div>
+            <div>Tension nominale : <strong>230 V ~</strong></div>
+            <div>Fréquence : <strong>50-60 Hz</strong></div>
+            <div>Puissance : <strong>2 070 W</strong></div>
+            <div>Isolation : <strong>Classe II 回</strong> • Made in EU</div>
+          </div>
+          <div class="plate-box">
+            <div class="plate-title">ÉQUIPEMENT 2 : FER À LISSER CÉRAMIQUE</div>
+            <div>Tension d'usage : <strong>220-240 V ~</strong></div>
+            <div>Fréquence : <strong>50 Hz</strong></div>
+            <div>Puissance : <strong>46 W</strong></div>
+            <div>Isolation : <strong>Classe II 回</strong></div>
+          </div>
+        </div>
+
+        <p style="font-weight: 600; color: var(--cma-bordeaux); margin: 10px 0 6px 0;">
+          Tableau de référence des grandeurs électriques :
+        </p>
+        <div class="table-scroll">
+          <table class="cma-table">
+            <thead>
+              <tr>
+                <th>Grandeur physique</th>
+                <th>Symbole usuel</th>
+                <th>Unité légale (Symbole)</th>
+                <th>Appareil de mesure & branchement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Tension électrique</strong></td>
+                <td>$U$</td>
+                <td>Volt (V)</td>
+                <td>Voltmètre (en <strong>dérivation</strong>)</td>
+              </tr>
+              <tr>
+                <td><strong>Intensité du courant</strong></td>
+                <td>$I$</td>
+                <td>Ampère (A)</td>
+                <td>Ampèremètre (en <strong>série</strong>)</td>
+              </tr>
+              <tr>
+                <td><strong>Puissance électrique</strong></td>
+                <td>$P$</td>
+                <td>Watt (W)</td>
+                <td>Wattmètre</td>
+              </tr>
+              <tr>
+                <td><strong>Fréquence du réseau</strong></td>
+                <td>$f$</td>
+                <td>Hertz (Hz)</td>
+                <td>Fréquencemètre / Oscilloscope</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Questions d'investigation -->
+      <div class="card">
+        <h3 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Questions d'investigation (Étape de découverte)
+        </h3>
+
+        <!-- Q1 -->
+        <div class="q-item" id="block-disc-1">
+          <div class="q-title">1. [C1 - S'informer] Relever la puissance électrique nominale $P$ du séchoir (en W) :</div>
+          <div class="input-row">
+            <span class="input-unit">$P =$</span>
+            <input type="text" inputmode="decimal" class="cma-input" id="disc_q1" placeholder="Votre résultat...">
+            <span class="input-unit">W</span>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc1()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-1"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-item" id="block-disc-2">
+          <div class="q-title">2. [C1 - S'informer] Que signifie le symbole tilde « ~ » présent à côté de la valeur de la tension ?</div>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="disc_q2" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc2()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-2"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-item" id="block-disc-3">
+          <div class="q-title">3. [C2 - Exécuter] Sachant que $P = U \times I$, donner la formule dérivée pour calculer l'intensité $I$ :</div>
+          <div class="input-row">
+            <span class="input-unit">$I =$</span>
+            <input type="text" class="cma-input" id="disc_q3" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc3()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-3"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-item" id="block-disc-4">
+          <div class="q-title">4. [C2 - Exécuter] Calculer l'intensité $I_{\text{séchoir}}$ absorbée par le séchoir sous 230 V ($I = 2070 / 230$) :</div>
+          <div class="input-row">
+            <span class="input-unit">$I_{\text{séchoir}} =$</span>
+            <input type="text" inputmode="decimal" class="cma-input" id="disc_q4" placeholder="Votre résultat...">
+            <span class="input-unit">A</span>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc4()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-4"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-item" id="block-disc-5">
+          <div class="q-title">5. [C2 - Exécuter] Calculer l'intensité $I_{\text{lisseur}}$ absorbée par le fer à lisser sous 230 V ($I = 46 / 230$) :</div>
+          <div class="input-row">
+            <span class="input-unit">$I_{\text{lisseur}} =$</span>
+            <input type="text" inputmode="decimal" class="cma-input" id="disc_q5" placeholder="Votre résultat...">
+            <span class="input-unit">A</span>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc5()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-5"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-item" id="block-disc-6">
+          <div class="q-title">6. [C3 - Appliquer] Le disjoncteur est calibré à 10 A. Calculer l'intensité cumulée $I_{\text{total}} = I_{\text{séchoir}} + I_{\text{lisseur}}$ :</div>
+          <div class="input-row">
+            <span class="input-unit">$I_{\text{total}} =$</span>
+            <input type="text" inputmode="decimal" class="cma-input" id="disc_q6" placeholder="Votre résultat...">
+            <span class="input-unit">A</span>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc6()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-6"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-item" id="block-disc-7">
+          <div class="q-title">7. [C4 - Communiquer] Les deux appareils peuvent-ils fonctionner ensemble sur cette ligne de 10 A sans disjoncter ? (oui / non) :</div>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="disc_q7" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc7()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-7"></div>
+        </div>
+
+        <div style="text-align: right; margin-top: 14px;">
+          <button class="btn btn-corail" onclick="switchStep(2)">Passer au Cours & Simulateur →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 2 — COURS & SIMULATEUR INTERACTIF    -->
+    <!-- ========================================== -->
+    <section id="step-2" class="step-section">
+      <div class="card">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Synthèse de cours : Électricité appliquée au salon
+        </h2>
+
+        <div class="accordion-item open">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            1. Grandeurs fondamentales & Réseau EDF Réunion
+          </div>
+          <div class="accordion-body">
+            <p>• <strong>Tension électrique ($U$, en Volts V) :</strong> Différence de potentiel aux bornes d'un récepteur. Mesurée par un voltmètre branché en <strong>dérivation</strong> (en parallèle).</p>
+            <p style="margin-top: 6px;">• <strong>Intensité du courant ($I$, en Ampères A) :</strong> Débit de charges électriques. Mesurée par un ampèremètre branché en <strong>série</strong> (dans la boucle de courant).</p>
+            <p style="margin-top: 6px;">• <strong>Puissance électrique ($P$, en Watts W) :</strong> Énergie consommée par seconde ($1\text{ kW} = 1000\text{ W}$).</p>
+            <p style="margin-top: 6px;">• <strong>Réseau EDF Réunion :</strong> Tension alternative sinusoïdale de valeur efficace $U = 230\text{ V}$ et de fréquence normalisée $f = 50\text{ Hz}$.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            2. Relations fondamentales ($P = U \times I$)
+          </div>
+          <div class="accordion-body">
+            <p>Pour un appareil purement thermique (résistif) de coiffure fonctionnant en monophasé :</p>
+            <div style="background: #FFF5F5; border-left: 4px solid var(--cma-bordeaux); padding: 12px; margin: 10px 0; border-radius: 4px; text-align: center;">
+              $$P = U \times I$$
+            </div>
+            <p><strong>Formules dérivées pour les calculs :</strong></p>
+            <p>• Calcul de l'intensité : $$I = \frac{P}{U}$$ (en Ampères A)</p>
+            <p>• Calcul de la tension : $$U = \frac{P}{I}$$ (en Volts V)</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            3. Décryptage des symboles de plaque signalétique
+          </div>
+          <div class="accordion-body">
+            <p>• <strong>Tilde « ~ » :</strong> Courant alternatif (AC). La polarité change 50 fois par seconde.</p>
+            <p style="margin-top: 6px;">• <strong>Trait continu / tirets « ⎓ » :</strong> Courant continu (DC), utilisé sur batterie ou socle basse tension.</p>
+            <p style="margin-top: 6px;">• <strong>Double carré « 回 » :</strong> Matériel de <strong>Classe II</strong> (double isolation renforcée). La carcasse ne peut pas être mise sous tension, aucune prise de terre n'est requise. Sécurité optimale en milieu humide de salon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulateur interactif de poste de coiffage -->
+      <div class="card">
+        <h3 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Simulateur interactif : Multimètre & Contrôle thermique du disjoncteur
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--cma-text-muted); margin-bottom: 12px;">
+          Sélectionnez un appareil de coiffure et ajustez la tension secteur pour observer l'intensité mesurée et vérifier le risque de disjonction.
+        </p>
+
+        <div class="sim-container">
+          <div class="sim-controls-grid">
+            <div>
+              <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">
+                Appareil raccordé au poste :
+              </label>
+              <select id="simApplianceSelect" class="cma-input" onchange="updateSim()" style="width: 100%;">
+                <option value="2070">Séchoir ionique Pro (2 070 W)</option>
+                <option value="46">Fer à lisser céramique (46 W)</option>
+                <option value="1035">Casque séchant sur pied (1 035 W)</option>
+                <option value="15">Socle tondeuse de finition (15 W)</option>
+                <option value="2116">Combiné : Séchoir + Lisseur (2 116 W)</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">
+                Calibre de protection disjoncteur :
+              </label>
+              <select id="simBreakerSelect" class="cma-input" onchange="updateSim()" style="width: 100%;">
+                <option value="10">Disjoncteur 10 A (Poste individuel)</option>
+                <option value="16">Disjoncteur 16 A (Ligne de prises standard)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sim-slider-group">
+            <div class="sim-slider-label">
+              <span>Tension du secteur ($U$) :</span>
+              <span id="txtSimVoltage" style="color: var(--cma-bordeaux); font-weight: bold;">230 V (EDF Réunion)</span>
+            </div>
+            <input type="range" class="sim-slider" id="sliderSimVoltage" min="100" max="250" step="5" value="230" oninput="updateSim()">
+          </div>
+
+          <!-- Multimètre virtuel -->
+          <div class="multimeter-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-size: 0.82rem; font-weight: bold; letter-spacing: 1px; color: #94A3B8;">MULTIMÈTRE NUMÉRIQUE D'ATELIER</span>
+              <span style="font-size: 0.78rem; background: #1E293B; color: #38BDF8; padding: 2px 8px; border-radius: 4px;">MODE AC ~</span>
+            </div>
+
+            <div class="lcd-display">
+              <div style="font-size: 0.8rem; color: #BAE6FD;">INTENSITÉ MESURÉE (A)</div>
+              <div class="lcd-val" id="lcdCurrent">9.00 A</div>
+              <div style="font-size: 0.85rem; color: #E0F2FE; margin-top: 4px;" id="lcdCurrentMilli">9 000 mA</div>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: bold;">
+                <span>Charge de la ligne :</span>
+                <span id="txtGaugePct">90%</span>
+              </div>
+              <div class="gauge-track">
+                <div class="gauge-fill" id="simGaugeBar"></div>
+              </div>
+              <div id="simAlarmText" style="font-size: 0.85rem; font-weight: bold; text-align: center; margin-top: 6px;">
+                ✓ Fonctionnement nominal sous le seuil de disjonction
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 14px;">
+            <button class="btn btn-sm btn-corail" onclick="resetSim()">Réinitialiser au standard EDF Réunion (230 V)</button>
+          </div>
+        </div>
+
+        <div style="text-align: right; margin-top: 14px;">
+          <button class="btn btn-corail" onclick="switchStep(3)">Passer aux Entraînements Gamifiés →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 3 — ENTRAÎNEMENT GAMIFIÉ             -->
+    <!-- ========================================== -->
+    <section id="step-3" class="step-section">
+      <!-- Bannières de score -->
+      <div class="score-banner">
+        <div class="score-card cap-highlight">
+          <div class="score-card-title">Socle CAP (Niveau 1)</div>
+          <div class="score-card-val" id="capProgressTxt">0%</div>
+        </div>
+        <div class="score-card">
+          <div class="score-card-title">Points Bonus Dépassement</div>
+          <div class="score-card-val" id="bonusScoreTxt">+0 pts</div>
+        </div>
+      </div>
+
+      <!-- Sélecteurs de niveaux -->
+      <div class="level-card active-lvl" id="hdr-lvl-1" onclick="switchLvlTab(1)">
+        <div>
+          <span class="level-pill pill-l1">NIVEAU 1 🟢</span>
+          <div style="font-weight: 700; margin-top: 4px;">Débutant / Socle CAP (5 Exercices complets)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Valide 100% du socle CAP et débloque le diplôme numérique</div>
+        </div>
+        <span id="badge-status-1" style="font-weight: bold; color: var(--cma-bordeaux);">En cours</span>
+      </div>
+
+      <div class="level-card locked" id="hdr-lvl-2" onclick="switchLvlTab(2)">
+        <div>
+          <span class="level-pill pill-l2">NIVEAU 2 🟡</span>
+          <div style="font-weight: 700; margin-top: 4px;">Avancé / Dépassement (4 Exercices)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Poste double à Saint-Denis, bi-voltage voyage, diagnostic de panne, facture EDF</div>
+        </div>
+        <span id="badge-status-2" style="font-size: 0.82rem; color: var(--cma-text-muted);">🔒 Verrouillé</span>
+      </div>
+
+      <div class="level-card locked" id="hdr-lvl-3" onclick="switchLvlTab(3)">
+        <div>
+          <span class="level-pill pill-l3">NIVEAU 3 🔴</span>
+          <div style="font-weight: 700; margin-top: 4px;">Expert / Excellence (3 Situations)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Audit salon écoresponsable Saint-Gilles, loi d'Ohm & effet Joule, circuit PhET</div>
+        </div>
+        <span id="badge-status-3" style="font-size: 0.82rem; color: var(--cma-text-muted);">🔒 Verrouillé</span>
+      </div>
+
+      <!-- ================= NIVEAU 1 ================= -->
+      <div id="cnt-lvl-1">
+
+        <!-- Ex 1.1 -->
+        <div class="exercise-box" id="exbox-p1-1">
+          <div class="exercise-meta">
+            <span>Exercice 1.1 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Association des grandeurs, unités et symboles
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Indiquer le symbole usuel (V, A, W, Hz) correspondant à chaque grandeur :
+          </p>
+
+          <div class="q-item" id="q-p1-1-1">
+            <div class="q-title">1. Tension électrique (mesurée en Volts) :</div>
+            <div class="input-row">
+              <span class="input-unit">Symbole de l'unité =</span>
+              <input type="text" class="cma-input" id="ex1_1_u" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_u()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-u"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-1-2">
+            <div class="q-title">2. Intensité du courant (mesurée en Ampères) :</div>
+            <div class="input-row">
+              <span class="input-unit">Symbole de l'unité =</span>
+              <input type="text" class="cma-input" id="ex1_1_i" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_i()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-i"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-1-3">
+            <div class="q-title">3. Puissance électrique (mesurée en Watts) :</div>
+            <div class="input-row">
+              <span class="input-unit">Symbole de l'unité =</span>
+              <input type="text" class="cma-input" id="ex1_1_p" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_p()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-p"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-1-4">
+            <div class="q-title">4. Fréquence électrique (mesurée en Hertz) :</div>
+            <div class="input-row">
+              <span class="input-unit">Symbole de l'unité =</span>
+              <input type="text" class="cma-input" id="ex1_1_f" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_f()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-f"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-2">
+          <div class="exercise-meta">
+            <span>Exercice 1.2 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Plaque signalétique de tondeuse de finition
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Sur le socle de charge, on lit : <em>« Input: 230 V ~ 50 Hz - 15 W »</em>.
+          </p>
+
+          <div class="q-item" id="q-p1-2-1">
+            <div class="q-title">1. Relever la tension nominale d'alimentation en Volts :</div>
+            <div class="input-row">
+              <span class="input-unit">$U =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_2_u" placeholder="Votre résultat...">
+              <span class="input-unit">V</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_u()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-u"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-2-2">
+            <div class="q-title">2. Relever la fréquence du courant en Hertz :</div>
+            <div class="input-row">
+              <span class="input-unit">$f =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_2_f" placeholder="Votre résultat...">
+              <span class="input-unit">Hz</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_f()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-f"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-2-3">
+            <div class="q-title">3. Relever la puissance électrique consommée en Watts :</div>
+            <div class="input-row">
+              <span class="input-unit">$P =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_2_p" placeholder="Votre résultat...">
+              <span class="input-unit">W</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_p()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-p"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-3">
+          <div class="exercise-meta">
+            <span>Exercice 1.3 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Calcul direct de l'intensité d'un fer à boucler ($I = P / U$)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Un fer à boucler de puissance $P = 69\text{ W}$ fonctionne sous la tension du secteur réunionnais $U = 230\text{ V}$.
+          </p>
+
+          <div class="q-item" id="q-p1-3-1">
+            <div class="q-title">2. Calculer l'intensité $I$ du courant en ampères ($69 / 230$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$I =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_3_i" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_i()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-i"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-3-2">
+            <div class="q-title">3. Convertir cette intensité en milliampères (mA) :</div>
+            <div class="input-row">
+              <span class="input-unit">$I =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_3_ma" placeholder="Votre résultat...">
+              <span class="input-unit">mA</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_ma()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-ma"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.4 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-4">
+          <div class="exercise-meta">
+            <span>Exercice 1.4 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Calcul de la puissance d'un casque séchant ($P = U \times I$)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Un casque séchant branché sous $230\text{ V}$ absorbe un courant d'intensité $I = 4{,}5\text{ A}$.
+          </p>
+
+          <div class="q-item" id="q-p1-4-1">
+            <div class="q-title">1. Calculer la puissance électrique $P$ en Watts ($230 \times 4{,}5$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$P =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_4_w" placeholder="Votre résultat...">
+              <span class="input-unit">W</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_4_w()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-4-w"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-4-2">
+            <div class="q-title">2. Exprimer cette puissance en kilowatts (kW) :</div>
+            <div class="input-row">
+              <span class="input-unit">$P =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_4_kw" placeholder="Votre résultat...">
+              <span class="input-unit">kW</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_4_kw()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-4-kw"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.5 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-5">
+          <div class="exercise-meta">
+            <span>Exercice 1.5 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Branchement sécurisé des appareils de mesure
+          </h4>
+
+          <div class="q-item" id="q-p1-5-1">
+            <div class="q-title">1. Comment se branche un voltmètre pour mesurer la tension ? (série / dérivation) :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex1_5_volt" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_volt()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-volt"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-5-2">
+            <div class="q-title">2. Comment se branche un ampèremètre pour mesurer le courant ? (série / dérivation) :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex1_5_amp" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_amp()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-amp"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-5-3">
+            <div class="q-title">3. Quel mode (AC ou DC) doit être sélectionné pour le réseau EDF Réunion ? :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex1_5_mode" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_mode()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-mode"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= NIVEAU 2 ================= -->
+      <div id="cnt-lvl-2" style="display: none;">
+
+        <!-- Ex 2.1 -->
+        <div class="exercise-box" id="exbox-p2-1">
+          <div class="exercise-meta">
+            <span>Exercice 2.1 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Bilan de charge d'une rampe de coiffage à Saint-Denis
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Poste double : 2 séchoirs de $1840\text{ W}$ et 2 fers à lisser de $92\text{ W}$ sous $230\text{ V}$.
+          </p>
+
+          <div class="q-item" id="q-p2-1-1">
+            <div class="q-title">1. Intensité $I_1$ absorbée par un séchoir ($1840 / 230$) en ampères :</div>
+            <div class="input-row">
+              <span class="input-unit">$I_1 =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_1_i1" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_i1()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-i1"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-1-2">
+            <div class="q-title">2. Intensité $I_2$ absorbée par un lisseur ($92 / 230$) en ampères :</div>
+            <div class="input-row">
+              <span class="input-unit">$I_2 =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_1_i2" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_i2()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-i2"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-1-3">
+            <div class="q-title">3. Intensité totale cumulée ($2 \times I_1 + 2 \times I_2$) en ampères :</div>
+            <div class="input-row">
+              <span class="input-unit">$I_{\text{total}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_1_itot" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_itot()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-itot"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-1-4">
+            <div class="q-title">4. La ligne a un disjoncteur de 16 A. Y a-t-il risque de disjonction ? (oui / non) :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex2_1_disj" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_disj()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-disj"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-p2-2">
+          <div class="exercise-meta">
+            <span>Exercice 2.2 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Lisseur bi-voltage pour voyage international (110-240 V ~ 50 W)
+          </h4>
+
+          <div class="q-item" id="q-p2-2-1">
+            <div class="q-title">2. Intensité $I_1$ sous $230\text{ V}$ à La Réunion ($50 / 230$) arrondie au millième (3 décimales) :</div>
+            <div class="input-row">
+              <span class="input-unit">$I_1 =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_2_i230" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_2_i230()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-2-i230"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-2-2">
+            <div class="q-title">3. Intensité $I_2$ sous $110\text{ V}$ aux USA ($50 / 110$) arrondie au millième (3 décimales) :</div>
+            <div class="input-row">
+              <span class="input-unit">$I_2 =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_2_i110" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_2_i110()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-2-i110"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-p2-3">
+          <div class="exercise-meta">
+            <span>Exercice 2.3 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Diagnostic de panne d'un chauffe-serviettes à Saint-Pierre (230 V - 250 W)
+          </h4>
+
+          <div class="q-item" id="q-p2-3-1">
+            <div class="q-title">1. Calculer l'intensité théorique $I_{\text{théorique}}$ ($250 / 230$) en A arrondie au centième :</div>
+            <div class="input-row">
+              <span class="input-unit">$I_{\text{th}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_3_ith" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_3_ith()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-3-ith"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-3-2">
+            <div class="q-title">3. Consigne impérative de sécurité avant toute ouverture du carter de l'appareil :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex2_3_secu" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_3_secu()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-3-secu"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.4 -->
+        <div class="exercise-box locked-exercise" id="exbox-p2-4">
+          <div class="exercise-meta">
+            <span>Exercice 2.4 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Consommation d'énergie et facture d'électricité ($E = P \times t$)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Séchoir de $P = 2\text{ kW}$ utilisé 4 h par jour, salon ouvert 22 jours/mois. Tarif EDF : $0{,}22\text{ €/kWh}$.
+          </p>
+
+          <div class="q-item" id="q-p2-4-1">
+            <div class="q-title">1. Énergie consommée en 1 journée ($2\text{ kW} \times 4\text{ h}$) en kWh :</div>
+            <div class="input-row">
+              <span class="input-unit">$E_{\text{jour}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_4_ej" placeholder="Votre résultat...">
+              <span class="input-unit">kWh</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_ej()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-ej"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-4-2">
+            <div class="q-title">2. Énergie mensuelle totale ($E_{\text{jour}} \times 22$) en kWh :</div>
+            <div class="input-row">
+              <span class="input-unit">$E_{\text{mois}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_4_em" placeholder="Votre résultat...">
+              <span class="input-unit">kWh</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_em()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-em"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-4-3">
+            <div class="q-title">3. Coût financier mensuel ($E_{\text{mois}} \times 0{,}22$) en euros :</div>
+            <div class="input-row">
+              <span class="input-unit">Coût =</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_4_cout" placeholder="Votre résultat...">
+              <span class="input-unit">€</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_cout()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-cout"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= NIVEAU 3 ================= -->
+      <div id="cnt-lvl-3" style="display: none;">
+
+        <!-- Ex 3.1 -->
+        <div class="exercise-box" id="exbox-p3-1">
+          <div class="exercise-meta">
+            <span>Exercice 3.1 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Audit électrique complet d'un salon à Saint-Gilles
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Appareils simultanés : 3 séchoirs ($3 \times 2070 = 6210\text{ W}$), 2 lisseurs ($2 \times 69 = 138\text{ W}$), 1 casque ($1150\text{ W}$), 1 chauffe-eau ($3450\text{ W}$), LED ($368\text{ W}$).
+          </p>
+
+          <div class="q-item" id="q-p3-1-1">
+            <div class="q-title">1. Calculer la puissance totale cumulée $P_{\text{totale}}$ en Watts :</div>
+            <div class="input-row">
+              <span class="input-unit">$P_{\text{totale}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_1_ptot" placeholder="Votre résultat...">
+              <span class="input-unit">W</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_ptot()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-ptot"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-1-2">
+            <div class="q-title">2. Calculer l'intensité totale appelée sous 230 V ($11316 / 230$ ou $11330 / 230$) arrondie au dixième (A) :</div>
+            <div class="input-row">
+              <span class="input-unit">$I_{\text{totale}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_1_itot" placeholder="Votre résultat...">
+              <span class="input-unit">A</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_itot()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-itot"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-1-3">
+            <div class="q-title">3. L'abonnement 9 kVA (45 A maxi) est-il suffisant ou y a-t-il coupure ? (suffisant / coupure) :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex3_1_diag" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_diag()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-diag"></div>
+          </div>
+        </div>
+
+        <!-- Ex 3.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-p3-2">
+          <div class="exercise-meta">
+            <span>Exercice 3.2 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Résistance ohmique et échauffement par effet Joule (Loi d'Ohm $R = U / I$)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Séchoir fonctionnant sous $230\text{ V}$ avec un courant de $8{,}0\text{ A}$.
+          </p>
+
+          <div class="q-item" id="q-p3-2-1">
+            <div class="q-title">2. Calculer la résistance chauffante $R = 230 / 8$ en Ohms ($\Omega$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$R =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_2_r" placeholder="Votre résultat...">
+              <span class="input-unit">Ω</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_r()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-r"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-2-2">
+            <div class="q-title">3. Calculer la puissance dissipée par effet Joule $P = R \times I^2 = 28{,}75 \times 64$ en Watts :</div>
+            <div class="input-row">
+              <span class="input-unit">$P =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_2_p" placeholder="Votre résultat...">
+              <span class="input-unit">W</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_p()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-p"></div>
+          </div>
+        </div>
+
+        <!-- Ex 3.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-p3-3">
+          <div class="exercise-meta">
+            <span>Exercice 3.3 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Simulation PhET « Circuit Construction Kit » & relation $I = U / R$
+          </h4>
+
+          <div class="q-item" id="q-p3-3-1">
+            <div class="q-title">3. Si l'on augmente la résistance $R$, comment évolue l'intensité $I$ ? (augmente / diminue) :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex3_3_evol" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_3_evol()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-3-evol"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 4 — BILAN ET ATTESTATION OFFICIELLE  -->
+    <!-- ========================================== -->
+    <section id="step-4" class="step-section">
+      <div class="card no-print">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Bilan de compétences & Attestation officielle CMA Formation
+        </h2>
+        <p style="font-size: 0.93rem; color: var(--cma-text-muted); margin-bottom: 12px;">
+          Félicitations pour vos calculs et vos diagnostics d'électricité en salon ! Renseignez votre prénom et nom pour générer et imprimer votre attestation officielle.
+        </p>
+
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-weight: 600; font-size: 0.92rem; margin-bottom: 6px;">
+            Nom et Prénom de l'apprenant(e) :
+          </label>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="studentNameInput" placeholder="Votre résultat..." oninput="updateStudentName(this.value)">
+            <button class="btn btn-corail" onclick="window.print()">
+              🖨️ Imprimer / Exporter en PDF
+            </button>
+          </div>
+        </div>
+
+        <div class="badge-shelf">
+          <div class="cma-badge" id="badge-stat-cap">
+            <span>⚡</span>
+            <span>Expertise Plaques Signalétiques (Socle CAP)</span>
+          </div>
+          <div class="cma-badge locked" id="badge-stat-bonus">
+            <span>🔌</span>
+            <span>Maîtrise Calibres & Bilans Électriques</span>
+          </div>
+          <div class="cma-badge locked" id="badge-stat-master">
+            <span>🏆</span>
+            <span>Élite Audit d'Atelier & Loi d'Ohm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attestation officielle imprimable -->
+      <div class="attestation-sheet" id="attestationPrintArea">
+        <div class="att-header">
+          <img src="logo.png" alt="Logo CMA Formation" class="att-logo" onerror="this.src='https://placehold.co/120x48/A50F23/ffffff?text=CMA+Formation'">
+          <div>
+            <h2 class="att-title">Attestation Pédagogique de Réussite</h2>
+            <div class="att-sub">CMA Formation de Sainte-Clotilde • Île de La Réunion</div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.95rem; line-height: 1.6; color: var(--cma-text);">
+          <p>La direction pédagogique et le pôle Physique-Chimie certifient que l'apprenant(e) :</p>
+          <p style="text-align: center; margin: 12px 0;">
+            <span class="att-learner" id="attestationLearnerDisplay">APPRENANT(E) EN FORMATION</span>
+          </p>
+          <p>
+            a suivi et validé avec succès l'ensemble du parcours d'apprentissage consacré à l'<strong>identification des grandeurs électriques</strong> (Tension $U$, Intensité $I$, Puissance $P$, Fréquence $f$), à l'exploitation des <strong>plaques signalétiques</strong>, au calcul de l'intensité nominale selon <strong>$P = U \times I$</strong> et au respect des calibres de protection sur le réseau monophasé d'EDF Réunion.
+          </p>
+
+          <div class="att-grid">
+            <div>
+              <strong>Séance :</strong> S7 P1 - Tension, Intensité & Plaques signalétiques<br>
+              <strong>Diplôme :</strong> CAP Métiers de la Coiffure (Gr. 1)<br>
+              <strong>Date d'évaluation :</strong> <span id="currentDateDisplay"></span>
+            </div>
+            <div>
+              <strong>Socle CAP validé :</strong> <span id="attSocleScore" style="color: var(--cma-bordeaux); font-weight: bold;">0%</span><br>
+              <strong>Points Bonus Dépassement :</strong> <span id="attBonusScore" style="color: var(--cma-corail); font-weight: bold;">0 pts</span><br>
+              <strong>Sécurité électrique :</strong> <span style="color: var(--cma-success); font-weight: bold;">Certifiée conforme</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.88rem; color: var(--cma-text-muted); margin-top: 10px;">
+            <strong>Compétences attestées :</strong> C1 (S'informer : repérer les indications d'une plaque signalétique et les symboles AC/Classe II), C2 (Exécuter : calculer $I = P/U$ et $P = U \times I$), C3 (Appliquer : vérifier la non-disjonction et dimensionner une rampe de coiffage), C4 (Communiquer : valider la conformité d'une installation d'atelier).
+          </p>
+        </div>
+
+        <div class="att-footer">
+          <div style="font-size: 0.8rem; color: var(--cma-text-muted);">
+            Attestation pédagogique de réussite de séance • Document numérique d'atelier
+          </div>
+          <div class="att-sig-block">
+            <div>Formatrice Référente Physique-Chimie :</div>
+            <div class="att-sig-name">Rachel Lamberet-Lezais</div>
+            <div style="font-size: 0.78rem; color: var(--cma-text-muted);">CMA Formation Sainte-Clotilde</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* État global réactif */
+    const appState = {
+      currentStep: 1,
+      learnerName: "APPRENANT(E) EN FORMATION",
+      disc: { q1: false, q2: false, q3: false, q4: false, q5: false, q6: false, q7: false },
+      lvl1: {
+        '1-1-u': false, '1-1-i': false, '1-1-p': false, '1-1-f': false,
+        '1-2-u': false, '1-2-f': false, '1-2-p': false,
+        '1-3-i': false, '1-3-ma': false,
+        '1-4-w': false, '1-4-kw': false,
+        '1-5-volt': false, '1-5-amp': false, '1-5-mode': false
+      },
+      lvl2: {
+        '2-1-i1': false, '2-1-i2': false, '2-1-itot': false, '2-1-disj': false,
+        '2-2-i230': false, '2-2-i110': false,
+        '2-3-ith': false, '2-3-secu': false,
+        '2-4-ej': false, '2-4-em': false, '2-4-cout': false
+      },
+      lvl3: {
+        '3-1-ptot': false, '3-1-itot': false, '3-1-diag': false,
+        '3-2-r': false, '3-2-p': false,
+        '3-3-evol': false
+      },
+      unlockedLvl2: false,
+      unlockedLvl3: false
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const today = new Date();
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      document.getElementById('currentDateDisplay').textContent = today.toLocaleDateString('fr-FR', options);
+
+      updateSim();
+      updateProgressBar();
+    });
+
+    function switchStep(stepNumber) {
+      appState.currentStep = stepNumber;
+      for (let i = 1; i <= 4; i++) {
+        const tab = document.getElementById(`tab-step-${i}`);
+        const sec = document.getElementById(`step-${i}`);
+        if (tab && sec) {
+          if (i === stepNumber) {
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            sec.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+            tab.setAttribute('aria-selected', 'false');
+            sec.classList.remove('active');
+          }
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    function toggleAccordion(header) {
+      header.parentElement.classList.toggle('open');
+    }
+
+    function updateStudentName(val) {
+      const trimmed = val.trim();
+      const display = document.getElementById('attestationLearnerDisplay');
+      if (trimmed.length > 0) {
+        display.textContent = trimmed.toUpperCase();
+        appState.learnerName = trimmed;
+      } else {
+        display.textContent = "APPRENANT(E) EN FORMATION";
+        appState.learnerName = "APPRENANT(E) EN FORMATION";
+      }
+    }
+
+    function parseInputNumber(valStr) {
+      if (!valStr) return null;
+      const clean = valStr.toString().trim().replace(',', '.');
+      const num = parseFloat(clean);
+      return isNaN(num) ? null : num;
+    }
+
+    function setFeedback(elemId, type, message) {
+      const fb = document.getElementById(elemId);
+      if (!fb) return;
+      fb.className = `feedback-box ${type}`;
+      fb.innerHTML = message;
+    }
+
+    function showCustomModal(msg) {
+      const existing = document.getElementById('cma-dialog-box');
+      if (existing) existing.remove();
+
+      const modal = document.createElement('div');
+      modal.id = 'cma-dialog-box';
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100vw';
+      modal.style.height = '100vh';
+      modal.style.backgroundColor = 'rgba(0, 0, 0, 0.45)';
+      modal.style.display = 'flex';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      modal.style.zIndex = '9999';
+      modal.style.padding = '16px';
+
+      modal.innerHTML = `
+        <div style="background: white; border-radius: 12px; max-width: 380px; width: 100%; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-left: 6px solid #A50F23;">
+          <h3 style="color: #A50F23; margin-bottom: 10px; font-size: 1.1rem;">Information CMA Formation</h3>
+          <p style="font-size: 0.95rem; color: #1E293B; line-height: 1.5; margin-bottom: 16px;">${msg}</p>
+          <div style="text-align: right;">
+            <button class="btn btn-primary btn-sm" onclick="document.getElementById('cma-dialog-box').remove()">Compris</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function updateProgressBar() {
+      const totalL1 = Object.keys(appState.lvl1).length;
+      let countL1 = 0;
+      for (const k in appState.lvl1) if (appState.lvl1[k]) countL1++;
+
+      const pctCap = Math.round((countL1 / totalL1) * 100);
+      document.getElementById('capProgressTxt').textContent = `${pctCap}%`;
+      document.getElementById('attSocleScore').textContent = `${pctCap}%`;
+
+      if (pctCap >= 100 && !appState.unlockedLvl2) {
+        appState.unlockedLvl2 = true;
+        document.getElementById('hdr-lvl-2').classList.remove('locked');
+        document.getElementById('badge-status-2').textContent = 'Disponible !';
+        document.getElementById('badge-status-1').textContent = '✅ Validé (100%)';
+        document.getElementById('badge-stat-cap').classList.add('unlocked');
+      }
+
+      let bonus = 0;
+      for (const k in appState.lvl2) if (appState.lvl2[k]) bonus += 10;
+      for (const k in appState.lvl3) if (appState.lvl3[k]) bonus += 15;
+
+      document.getElementById('bonusScoreTxt').textContent = `+${bonus} pts`;
+      document.getElementById('attBonusScore').textContent = `+${bonus} pts`;
+
+      const totalL2 = Object.keys(appState.lvl2).length;
+      let countL2 = 0;
+      for (const k in appState.lvl2) if (appState.lvl2[k]) countL2++;
+
+      if (countL2 === totalL2 && !appState.unlockedLvl3) {
+        appState.unlockedLvl3 = true;
+        document.getElementById('hdr-lvl-3').classList.remove('locked');
+        document.getElementById('badge-status-3').textContent = 'Disponible !';
+        document.getElementById('badge-status-2').textContent = '✅ Validé (Bonus max)';
+        document.getElementById('badge-stat-bonus').classList.remove('locked');
+        document.getElementById('badge-stat-bonus').classList.add('unlocked');
+      }
+
+      const totalL3 = Object.keys(appState.lvl3).length;
+      let countL3 = 0;
+      for (const k in appState.lvl3) if (appState.lvl3[k]) countL3++;
+
+      if (countL3 === totalL3) {
+        document.getElementById('badge-status-3').textContent = '✅ Maîtrise totale !';
+        document.getElementById('badge-stat-master').classList.remove('locked');
+        document.getElementById('badge-stat-master').classList.add('unlocked');
+      }
+
+      const globalPct = Math.min(100, Math.round((countL1 + countL2 + countL3) / (totalL1 + totalL2 + totalL3) * 100));
+      document.getElementById('globalProgressBar').style.width = `${globalPct}%`;
+    }
+
+    function switchLvlTab(lvl) {
+      if (lvl === 2 && !appState.unlockedLvl2) {
+        showCustomModal("Le Niveau 2 🟡 est verrouillé. Vous devez d'abord valider les 5 exercices du Niveau 1 🟢 (Socle CAP à 100%) !");
+        return;
+      }
+      if (lvl === 3 && !appState.unlockedLvl3) {
+        showCustomModal("Le Niveau 3 🔴 est verrouillé. Vous devez d'abord réussir l'ensemble des exercices du Niveau 2 🟡 !");
+        return;
+      }
+
+      const tabs = [1, 2, 3];
+      tabs.forEach(l => {
+        const hdr = document.getElementById(`hdr-lvl-${l}`);
+        const cnt = document.getElementById(`cnt-lvl-${l}`);
+        if (hdr && cnt) {
+          if (l === lvl) {
+            hdr.classList.add('active-lvl');
+            cnt.style.display = 'block';
+          } else {
+            hdr.classList.remove('active-lvl');
+            cnt.style.display = 'none';
+          }
+        }
+      });
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    /* ================= DÉCOUVERTE ================= */
+    function checkDisc1() {
+      const v = parseInputNumber(document.getElementById('disc_q1').value);
+      if (v === 2070) {
+        setFeedback('fb-disc-1', 'correct', 'Exact : la plaque indique bien $P = \\mathbf{2070\text{ W}}$.');
+        document.getElementById('block-disc-1').classList.add('completed');
+        appState.disc.q1 = true;
+      } else { setFeedback('fb-disc-1', 'incorrect', 'Relevez la valeur devant la lettre W (2 070 W).'); }
+    }
+
+    function checkDisc2() {
+      const v = document.getElementById('disc_q2').value.trim().toLowerCase();
+      if (v.includes('alternatif') || v.includes('alternative') || v.includes('ac')) {
+        setFeedback('fb-disc-2', 'correct', 'Exact : « ~ » indique un <strong>courant alternatif</strong> (AC).');
+        document.getElementById('block-disc-2').classList.add('completed');
+        appState.disc.q2 = true;
+      } else { setFeedback('fb-disc-2', 'incorrect', 'Le symbole tilde signifie courant alternatif.'); }
+    }
+
+    function checkDisc3() {
+      const v = document.getElementById('disc_q3').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === 'p/u' || v === 'p:u') {
+        setFeedback('fb-disc-3', 'correct', 'Parfait ! De $P = U \\times I$, on déduit : <strong>$I = \\frac{P}{U}$</strong>.');
+        document.getElementById('block-disc-3').classList.add('completed');
+        appState.disc.q3 = true;
+      } else { setFeedback('fb-disc-3', 'incorrect', 'La formule est I = P / U.'); }
+    }
+
+    function checkDisc4() {
+      const v = parseInputNumber(document.getElementById('disc_q4').value);
+      if (v === 9 || v === 9.0) {
+        setFeedback('fb-disc-4', 'correct', 'Bravo ! $I_{\\text{séchoir}} = \\frac{2070}{230} = \\mathbf{9{,}0\text{ A}}$.');
+        document.getElementById('block-disc-4').classList.add('completed');
+        appState.disc.q4 = true;
+      } else { setFeedback('fb-disc-4', 'incorrect', 'Calculez 2070 / 230 = 9 A.'); }
+    }
+
+    function checkDisc5() {
+      const v = parseInputNumber(document.getElementById('disc_q5').value);
+      if (v === 0.2 || v === 0.20) {
+        setFeedback('fb-disc-5', 'correct', 'Très bien ! $I_{\\text{lisseur}} = \\frac{46}{230} = \\mathbf{0{,}20\text{ A}}$ (soit 200 mA).');
+        document.getElementById('block-disc-5').classList.add('completed');
+        appState.disc.q5 = true;
+      } else { setFeedback('fb-disc-5', 'incorrect', 'Calculez 46 / 230 = 0,2 A.'); }
+    }
+
+    function checkDisc6() {
+      const v = parseInputNumber(document.getElementById('disc_q6').value);
+      if (v === 9.2 || v === 9.20) {
+        setFeedback('fb-disc-6', 'correct', 'Exact : $I_{\\text{total}} = 9 + 0{,}2 = \\mathbf{9{,}2\text{ A}}$.');
+        document.getElementById('block-disc-6').classList.add('completed');
+        appState.disc.q6 = true;
+      } else { setFeedback('fb-disc-6', 'incorrect', 'Additionnez 9 + 0,2 = 9,2 A.'); }
+    }
+
+    function checkDisc7() {
+      const v = document.getElementById('disc_q7').value.trim().toLowerCase();
+      if (v === 'oui' || v.includes('sans risque') || v.includes('possible')) {
+        setFeedback('fb-disc-7', 'correct', 'Exact : <strong>Oui</strong>, car $9{,}2\text{ A} < 10\text{ A}$, le disjoncteur ne sautera pas.');
+        document.getElementById('block-disc-7').classList.add('completed');
+        appState.disc.q7 = true;
+      } else { setFeedback('fb-disc-7', 'incorrect', 'Répondez par "oui" (9,2 A est inférieur au calibre de 10 A).'); }
+    }
+
+    /* ================= NIVEAU 1 ================= */
+    function checkEx1_1_u() {
+      const v = document.getElementById('ex1_1_u').value.trim().toUpperCase();
+      if (v === 'V') {
+        setFeedback('fb-ex1-1-u', 'correct', 'Exact : Volt = V.');
+        appState.lvl1['1-1-u'] = true;
+        document.getElementById('q-p1-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-u', 'incorrect', 'Symbole : V.'); }
+    }
+
+    function checkEx1_1_i() {
+      const v = document.getElementById('ex1_1_i').value.trim().toUpperCase();
+      if (v === 'A') {
+        setFeedback('fb-ex1-1-i', 'correct', 'Exact : Ampère = A.');
+        appState.lvl1['1-1-i'] = true;
+        document.getElementById('q-p1-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-i', 'incorrect', 'Symbole : A.'); }
+    }
+
+    function checkEx1_1_p() {
+      const v = document.getElementById('ex1_1_p').value.trim().toUpperCase();
+      if (v === 'W') {
+        setFeedback('fb-ex1-1-p', 'correct', 'Exact : Watt = W.');
+        appState.lvl1['1-1-p'] = true;
+        document.getElementById('q-p1-1-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-p', 'incorrect', 'Symbole : W.'); }
+    }
+
+    function checkEx1_1_f() {
+      const v = document.getElementById('ex1_1_f').value.trim();
+      if (v === 'Hz' || v === 'HZ') {
+        setFeedback('fb-ex1-1-f', 'correct', 'Exact : Hertz = Hz.');
+        appState.lvl1['1-1-f'] = true;
+        document.getElementById('q-p1-1-4').classList.add('completed');
+        document.getElementById('exbox-p1-2').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-f', 'incorrect', 'Symbole : Hz.'); }
+    }
+
+    function checkEx1_2_u() {
+      const v = parseInputNumber(document.getElementById('ex1_2_u').value);
+      if (v === 230) {
+        setFeedback('fb-ex1-2-u', 'correct', 'Exact : $U = \\mathbf{230\text{ V}}$.');
+        appState.lvl1['1-2-u'] = true;
+        document.getElementById('q-p1-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-u', 'incorrect', 'La tension est de 230 V.'); }
+    }
+
+    function checkEx1_2_f() {
+      const v = parseInputNumber(document.getElementById('ex1_2_f').value);
+      if (v === 50) {
+        setFeedback('fb-ex1-2-f', 'correct', 'Exact : $f = \\mathbf{50\text{ Hz}}$.');
+        appState.lvl1['1-2-f'] = true;
+        document.getElementById('q-p1-2-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-f', 'incorrect', 'La fréquence est de 50 Hz.'); }
+    }
+
+    function checkEx1_2_p() {
+      const v = parseInputNumber(document.getElementById('ex1_2_p').value);
+      if (v === 15) {
+        setFeedback('fb-ex1-2-p', 'correct', 'Exact : $P = \\mathbf{15\text{ W}}$.');
+        appState.lvl1['1-2-p'] = true;
+        document.getElementById('q-p1-2-3').classList.add('completed');
+        document.getElementById('exbox-p1-3').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-p', 'incorrect', 'La puissance est de 15 W.'); }
+    }
+
+    function checkEx1_3_i() {
+      const v = parseInputNumber(document.getElementById('ex1_3_i').value);
+      if (v === 0.3 || v === 0.30) {
+        setFeedback('fb-ex1-3-i', 'correct', 'Exact : $I = \\frac{69}{230} = \\mathbf{0{,}30\text{ A}}$.');
+        appState.lvl1['1-3-i'] = true;
+        document.getElementById('q-p1-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-i', 'incorrect', '69 / 230 = 0,3 A.'); }
+    }
+
+    function checkEx1_3_ma() {
+      const v = parseInputNumber(document.getElementById('ex1_3_ma').value);
+      if (v === 300) {
+        setFeedback('fb-ex1-3-ma', 'correct', 'Exact : $0{,}3\text{ A} = \\mathbf{300\text{ mA}}$.');
+        appState.lvl1['1-3-ma'] = true;
+        document.getElementById('q-p1-3-2').classList.add('completed');
+        document.getElementById('exbox-p1-4').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-ma', 'incorrect', 'Multipliez par 1 000 : 0,3 * 1000 = 300 mA.'); }
+    }
+
+    function checkEx1_4_w() {
+      const v = parseInputNumber(document.getElementById('ex1_4_w').value);
+      if (v === 1035) {
+        setFeedback('fb-ex1-4-w', 'correct', 'Exact : $P = 230 \times 4{,}5 = \\mathbf{1035\text{ W}}$.');
+        appState.lvl1['1-4-w'] = true;
+        document.getElementById('q-p1-4-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-4-w', 'incorrect', '230 * 4,5 = 1035 W.'); }
+    }
+
+    function checkEx1_4_kw() {
+      const v = parseInputNumber(document.getElementById('ex1_4_kw').value);
+      if (v === 1.035) {
+        setFeedback('fb-ex1-4-kw', 'correct', 'Exact : $1035\text{ W} = \\mathbf{1{,}035\text{ kW}}$.');
+        appState.lvl1['1-4-kw'] = true;
+        document.getElementById('q-p1-4-2').classList.add('completed');
+        document.getElementById('exbox-p1-5').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-4-kw', 'incorrect', '1035 / 1000 = 1,035 kW.'); }
+    }
+
+    function checkEx1_5_volt() {
+      const v = document.getElementById('ex1_5_volt').value.trim().toLowerCase();
+      if (v.includes('dériv') || v.includes('deriv') || v.includes('parall')) {
+        setFeedback('fb-ex1-5-volt', 'correct', 'Exact : un voltmètre se branche en <strong>dérivation</strong>.');
+        appState.lvl1['1-5-volt'] = true;
+        document.getElementById('q-p1-5-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-5-volt', 'incorrect', 'En dérivation (ou parallèle).'); }
+    }
+
+    function checkEx1_5_amp() {
+      const v = document.getElementById('ex1_5_amp').value.trim().toLowerCase();
+      if (v.includes('série') || v.includes('serie')) {
+        setFeedback('fb-ex1-5-amp', 'correct', 'Exact : un ampèremètre se branche en <strong>série</strong>.');
+        appState.lvl1['1-5-amp'] = true;
+        document.getElementById('q-p1-5-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-5-amp', 'incorrect', 'En série.'); }
+    }
+
+    function checkEx1_5_mode() {
+      const v = document.getElementById('ex1_5_mode').value.trim().toUpperCase();
+      if (v === 'AC' || v.includes('ALTERNATIF')) {
+        setFeedback('fb-ex1-5-mode', 'correct', 'Bravo ! Mode <strong>AC</strong> (~). SOCLE CAP VALIDÉ À 100% !');
+        appState.lvl1['1-5-mode'] = true;
+        document.getElementById('q-p1-5-3').classList.add('completed');
+        updateProgressBar();
+        showCustomModal("Félicitations ! Vous avez validé l'intégralité du Niveau 1 🟢 (Socle CAP à 100%). Votre Attestation Officielle CMA Formation est débloquée et le Niveau 2 🟡 est accessible !");
+      } else { setFeedback('fb-ex1-5-mode', 'incorrect', 'Mode AC (courant alternatif).'); }
+    }
+
+    /* ================= NIVEAU 2 ================= */
+    function checkEx2_1_i1() {
+      const v = parseInputNumber(document.getElementById('ex2_1_i1').value);
+      if (v === 8 || v === 8.0) {
+        setFeedback('fb-ex2-1-i1', 'correct', 'Exact : $I_1 = \\frac{1840}{230} = \\mathbf{8{,}0\text{ A}}$.');
+        appState.lvl2['2-1-i1'] = true;
+        document.getElementById('q-p2-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-i1', 'incorrect', '1840 / 230 = 8 A.'); }
+    }
+
+    function checkEx2_1_i2() {
+      const v = parseInputNumber(document.getElementById('ex2_1_i2').value);
+      if (v === 0.4 || v === 0.40) {
+        setFeedback('fb-ex2-1-i2', 'correct', 'Exact : $I_2 = \\frac{92}{230} = \\mathbf{0{,}40\text{ A}}$.');
+        appState.lvl2['2-1-i2'] = true;
+        document.getElementById('q-p2-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-i2', 'incorrect', '92 / 230 = 0,4 A.'); }
+    }
+
+    function checkEx2_1_itot() {
+      const v = parseInputNumber(document.getElementById('ex2_1_itot').value);
+      if (v === 16.8) {
+        setFeedback('fb-ex2-1-itot', 'correct', 'Exact : $I_{\\text{total}} = 2 \\times 8 + 2 \\times 0{,}4 = \\mathbf{16{,}8\text{ A}}$.');
+        appState.lvl2['2-1-itot'] = true;
+        document.getElementById('q-p2-1-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-itot', 'incorrect', '(2 * 8) + (2 * 0,4) = 16,8 A.'); }
+    }
+
+    function checkEx2_1_disj() {
+      const v = document.getElementById('ex2_1_disj').value.trim().toLowerCase();
+      if (v === 'oui' || v.includes('risque')) {
+        setFeedback('fb-ex2-1-disj', 'correct', 'Exact : <strong>Oui</strong>, car $16{,}8\text{ A} > 16\text{ A}$, le disjoncteur va déclencher.');
+        appState.lvl2['2-1-disj'] = true;
+        document.getElementById('q-p2-1-4').classList.add('completed');
+        document.getElementById('exbox-p2-2').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-disj', 'incorrect', 'Répondez par "oui" (16,8 A dépasse le calibre de 16 A).'); }
+    }
+
+    function checkEx2_2_i230() {
+      const v = parseInputNumber(document.getElementById('ex2_2_i230').value);
+      if (v === 0.217 || Math.abs(v - 0.217) < 0.005) {
+        setFeedback('fb-ex2-2-i230', 'correct', 'Exact : $I_1 = \\frac{50}{230} \\approx \\mathbf{0{,}217\text{ A}}$ (soit 217 mA).');
+        appState.lvl2['2-2-i230'] = true;
+        document.getElementById('q-p2-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-2-i230', 'incorrect', '50 / 230 = 0,217 A.'); }
+    }
+
+    function checkEx2_2_i110() {
+      const v = parseInputNumber(document.getElementById('ex2_2_i110').value);
+      if (v === 0.455 || Math.abs(v - 0.455) < 0.005) {
+        setFeedback('fb-ex2-2-i110', 'correct', 'Exact : $I_2 = \\frac{50}{110} \\approx \\mathbf{0{,}455\text{ A}}$ (soit 455 mA). Plus la tension baisse, plus le courant augmente.');
+        appState.lvl2['2-2-i110'] = true;
+        document.getElementById('q-p2-2-2').classList.add('completed');
+        document.getElementById('exbox-p2-3').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-2-i110', 'incorrect', '50 / 110 = 0,455 A.'); }
+    }
+
+    function checkEx2_3_ith() {
+      const v = parseInputNumber(document.getElementById('ex2_3_ith').value);
+      if (v === 1.09 || Math.abs(v - 1.09) < 0.02) {
+        setFeedback('fb-ex2-3-ith', 'correct', 'Exact : $I_{\\text{th}} = \\frac{250}{230} \\approx \\mathbf{1{,}09\text{ A}}$.');
+        appState.lvl2['2-3-ith'] = true;
+        document.getElementById('q-p2-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-3-ith', 'incorrect', '250 / 230 = 1,09 A.'); }
+    }
+
+    function checkEx2_3_secu() {
+      const v = document.getElementById('ex2_3_secu').value.trim().toLowerCase();
+      if (v.includes('débranch') || v.includes('debranch') || v.includes('prise') || v.includes('hors tension') || v.includes('couper')) {
+        setFeedback('fb-ex2-3-secu', 'correct', 'Parfait : <strong>Débrancher impérativement la prise secteur</strong> (mise hors tension complète).');
+        appState.lvl2['2-3-secu'] = true;
+        document.getElementById('q-p2-3-2').classList.add('completed');
+        document.getElementById('exbox-p2-4').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-3-secu', 'incorrect', 'Débrancher la prise de courant.'); }
+    }
+
+    function checkEx2_4_ej() {
+      const v = parseInputNumber(document.getElementById('ex2_4_ej').value);
+      if (v === 8 || v === 8.0) {
+        setFeedback('fb-ex2-4-ej', 'correct', 'Exact : $E = 2\text{ kW} \times 4\text{ h} = \\mathbf{8\text{ kWh}}$.');
+        appState.lvl2['2-4-ej'] = true;
+        document.getElementById('q-p2-4-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-ej', 'incorrect', '2 kW * 4 h = 8 kWh.'); }
+    }
+
+    function checkEx2_4_em() {
+      const v = parseInputNumber(document.getElementById('ex2_4_em').value);
+      if (v === 176) {
+        setFeedback('fb-ex2-4-em', 'correct', 'Exact : $E_{\\text{mois}} = 8 \times 22 = \\mathbf{176\text{ kWh}}$.');
+        appState.lvl2['2-4-em'] = true;
+        document.getElementById('q-p2-4-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-em', 'incorrect', '8 * 22 = 176 kWh.'); }
+    }
+
+    function checkEx2_4_cout() {
+      const v = parseInputNumber(document.getElementById('ex2_4_cout').value);
+      if (v === 38.72 || Math.abs(v - 38.72) < 0.05) {
+        setFeedback('fb-ex2-4-cout', 'correct', 'Bravo ! $\\text{Coût} = 176 \times 0{,}22 = \\mathbf{38{,}72\text{ € TTC}}$. NIVEAU 2 VALIDÉ !');
+        appState.lvl2['2-4-cout'] = true;
+        document.getElementById('q-p2-4-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-cout', 'incorrect', '176 * 0,22 = 38,72 €.'); }
+    }
+
+    /* ================= NIVEAU 3 ================= */
+    function checkEx3_1_ptot() {
+      const v = parseInputNumber(document.getElementById('ex3_1_ptot').value);
+      if (v === 11316 || v === 11330) {
+        setFeedback('fb-ex3-1-ptot', 'correct', 'Exact : $P_{\\text{totale}} = \\mathbf{11316\text{ W}}$ (soit $\\approx 11{,}3\text{ kW}$).');
+        appState.lvl3['3-1-ptot'] = true;
+        document.getElementById('q-p3-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-ptot', 'incorrect', 'Somme : (3*2070) + (2*69) + 1150 + 3450 + 368 = 11 316 W.'); }
+    }
+
+    function checkEx3_1_itot() {
+      const v = parseInputNumber(document.getElementById('ex3_1_itot').value);
+      if (v === 49.2 || v === 49.3 || Math.abs(v - 49.2) < 0.2) {
+        setFeedback('fb-ex3-1-itot', 'correct', 'Exact : $I_{\\text{totale}} = \\frac{11316}{230} \\approx \\mathbf{49{,}2\text{ A}}$.');
+        appState.lvl3['3-1-itot'] = true;
+        document.getElementById('q-p3-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-itot', 'incorrect', '11316 / 230 = 49,2 A.'); }
+    }
+
+    function checkEx3_1_diag() {
+      const v = document.getElementById('ex3_1_diag').value.trim().toLowerCase();
+      if (v.includes('coupure') || v.includes('insuffisant') || v.includes('disjonct')) {
+        setFeedback('fb-ex3-1-diag', 'correct', 'Exact : <strong>Coupure générale</strong> car $49{,}2\text{ A} > 45\text{ A}$. Passage au contrat 12 kVA (60 A) nécessaire.');
+        appState.lvl3['3-1-diag'] = true;
+        document.getElementById('q-p3-1-3').classList.add('completed');
+        document.getElementById('exbox-p3-2').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-diag', 'incorrect', 'Répondez "coupure" (49,2 A dépasse le contrat 45 A).'); }
+    }
+
+    function checkEx3_2_r() {
+      const v = parseInputNumber(document.getElementById('ex3_2_r').value);
+      if (v === 28.75) {
+        setFeedback('fb-ex3-2-r', 'correct', 'Exact : $R = \\frac{230}{8} = \\mathbf{28{,}75\text{ }\\Omega}$.');
+        appState.lvl3['3-2-r'] = true;
+        document.getElementById('q-p3-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-r', 'incorrect', '230 / 8 = 28,75 ohms.'); }
+    }
+
+    function checkEx3_2_p() {
+      const v = parseInputNumber(document.getElementById('ex3_2_p').value);
+      if (v === 1840) {
+        setFeedback('fb-ex3-2-p', 'correct', 'Exact : $P = 28{,}75 \\times 64 = \\mathbf{1840\text{ W}}$. On vérifie bien $U \\times I = 230 \\times 8 = 1840\text{ W}$.');
+        appState.lvl3['3-2-p'] = true;
+        document.getElementById('q-p3-2-2').classList.add('completed');
+        document.getElementById('exbox-p3-3').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-p', 'incorrect', '28,75 * (8^2) = 1840 W.'); }
+    }
+
+    function checkEx3_3_evol() {
+      const v = document.getElementById('ex3_3_evol').value.trim().toLowerCase();
+      if (v.includes('diminue') || v.includes('baisse')) {
+        setFeedback('fb-ex3-3-evol', 'correct', 'Bravo ! $I$ <strong>diminue</strong> ($I = \\frac{U}{R}$, $R$ est au dénominateur). PARCOURS COMPLET RÉUSSI !');
+        appState.lvl3['3-3-evol'] = true;
+        document.getElementById('q-p3-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-3-evol', 'incorrect', 'L\'intensité diminue.'); }
+    }
+
+    /* ================= LOGIQUE DU SIMULATEUR ================= */
+    function updateSim() {
+      const p = parseFloat(document.getElementById('simApplianceSelect').value);
+      const breaker = parseFloat(document.getElementById('simBreakerSelect').value);
+      const u = parseFloat(document.getElementById('sliderSimVoltage').value);
+
+      document.getElementById('txtSimVoltage').textContent = `${u} V ${u === 230 ? '(EDF Réunion)' : ''}`;
+
+      const i = p / u;
+      const iMa = Math.round(i * 1000);
+
+      document.getElementById('lcdCurrent').textContent = `${i.toFixed(2)} A`;
+      document.getElementById('lcdCurrentMilli').textContent = `${iMa.toLocaleString('fr-FR')} mA`;
+
+      const pct = Math.min(100, Math.round((i / breaker) * 100));
+      document.getElementById('txtGaugePct').textContent = `${pct}% de la capacité du disjoncteur (${breaker} A)`;
+
+      const bar = document.getElementById('simGaugeBar');
+      bar.style.width = `${pct}%`;
+
+      const alarm = document.getElementById('simAlarmText');
+      if (i > breaker) {
+        bar.style.backgroundColor = '#EF4444';
+        alarm.style.color = '#EF4444';
+        alarm.textContent = `⚠️ DÉPASSEMENT (${i.toFixed(2)} A > ${breaker} A) : DÉCLENCHEMENT DU DISJONCTEUR DIVISIONNAIRE !`;
+      } else if (pct > 80) {
+        bar.style.backgroundColor = '#F59E0B';
+        alarm.style.color = '#F59E0B';
+        alarm.textContent = `⚡ Attention : charge élevée (${i.toFixed(2)} A). Ligne proche de la limite.`;
+      } else {
+        bar.style.backgroundColor = '#22C55E';
+        alarm.style.color = '#22C55E';
+        alarm.textContent = `✓ Fonctionnement normal et sécurisé (${i.toFixed(2)} A < ${breaker} A).`;
+      }
+    }
+
+    function resetSim() {
+      document.getElementById('sliderSimVoltage').value = 230;
+      document.getElementById('simApplianceSelect').value = "2070";
+      document.getElementById('simBreakerSelect').value = "10";
+      updateSim();
+    }
+  </script>
+</body>
+</html>

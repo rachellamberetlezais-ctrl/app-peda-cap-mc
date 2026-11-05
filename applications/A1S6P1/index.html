@@ -1,0 +1,2735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>S6 P1 - Dissolution & Concentration massique (Cm = m/V) | CMA Formation Sainte-Clotilde</title>
+
+  <!-- MathJax v3 pour le rendu fluide des formules chimiques et mathématiques -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        enableMenu: false
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* Charte graphique officielle CMA Formation */
+    :root {
+      --cma-bordeaux: #A50F23;
+      --cma-bordeaux-dark: #7F0B1A;
+      --cma-corail: #EE3C3D;
+      --cma-corail-light: #FEE2E2;
+      --cma-bg: #F8FAFC;
+      --cma-card-bg: #FFFFFF;
+      --cma-text: #1E293B;
+      --cma-text-muted: #64748B;
+      --cma-border: #E2E8F0;
+      --cma-success: #16A34A;
+      --cma-success-bg: #DCFCE7;
+      --cma-warning: #D97706;
+      --cma-warning-bg: #FEF3C7;
+      --radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 14px rgba(165, 15, 35, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--cma-bg);
+      color: var(--cma-text);
+      line-height: 1.5;
+      font-size: 15px;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Puces officielles CMA Formation */
+    .icon-bullet {
+      height: 18px;
+      width: 18px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+      margin-right: 6px;
+    }
+
+    /* Header principal conforme aux directives CMA */
+    .app-header {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 20px;
+      padding-top: 14px;
+      padding-left: 16px;
+      padding-right: 16px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
+      border-bottom: 1px solid var(--cma-border);
+    }
+
+    .header-content {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .app-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-titles {
+      flex: 1;
+    }
+
+    .header-titles h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      line-height: 1.25;
+    }
+
+    .header-titles p {
+      font-size: 0.82rem;
+      color: var(--cma-text-muted);
+      margin-top: 3px;
+    }
+
+    /* Ruban officiel répété au bord inférieur du header (14px) */
+    .cma-wave-border {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: 14px;
+      margin: 0;
+      border: 0;
+      background-image: url("ruban_vague.png");
+      background-repeat: repeat-x;
+      background-size: 102.941176px 102.941176px;
+      background-position: left -46.941176px;
+    }
+
+    /* Barre de progression compacte de 8px */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background-color: #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cma-corail) 0%, var(--cma-bordeaux) 100%);
+      transition: width 0.4s ease;
+    }
+
+    /* Onglets de navigation tactiles Mobile-First */
+    .nav-container {
+      max-width: 960px;
+      margin: 12px auto 6px auto;
+      padding: 0 12px;
+      width: 100%;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .nav-btn {
+      flex: 1 0 auto;
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--cma-border);
+      background: #FFFFFF;
+      color: var(--cma-text);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--cma-corail);
+      color: var(--cma-bordeaux);
+    }
+
+    .nav-btn.active {
+      background: var(--cma-bordeaux);
+      color: #FFFFFF;
+      border-color: var(--cma-bordeaux);
+      box-shadow: 0 2px 8px rgba(165, 15, 35, 0.3);
+    }
+
+    /* Conteneur principal */
+    .main-container {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px 14px 40px 14px;
+      flex: 1;
+    }
+
+    .step-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .step-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cartes & Éléments de présentation */
+    .card {
+      background: var(--cma-card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--cma-border);
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-callout {
+      background: #F1F5F9;
+      border-left: 4px solid var(--cma-corail);
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 14px;
+      font-size: 0.93rem;
+    }
+
+    .info-callout strong {
+      color: var(--cma-bordeaux);
+    }
+
+    /* Champs de saisie Mobile-First conformes */
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .cma-input {
+      font-size: 16px;
+      height: 44px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 8px;
+      color: var(--cma-text);
+      background: #FFFFFF;
+      min-width: 140px;
+      flex: 1;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .cma-input:focus {
+      outline: none;
+      border-color: var(--cma-corail);
+      box-shadow: 0 0 0 3px rgba(238, 60, 61, 0.15);
+    }
+
+    .input-unit {
+      font-weight: 600;
+      color: var(--cma-text-muted);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .btn {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--cma-bordeaux);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--cma-bordeaux-dark);
+    }
+
+    .btn-corail {
+      background: var(--cma-corail);
+      color: #FFFFFF;
+    }
+
+    .btn-corail:hover {
+      background: #D92B2C;
+    }
+
+    .btn-sm {
+      min-height: 38px;
+      padding: 6px 14px;
+      font-size: 0.88rem;
+    }
+
+    /* Retours feedbacks */
+    .feedback-box {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .feedback-box.correct {
+      display: block;
+      background: var(--cma-success-bg);
+      border: 1px solid var(--cma-success);
+      color: #065F46;
+    }
+
+    .feedback-box.incorrect {
+      display: block;
+      background: #FEE2E2;
+      border: 1px solid #EF4444;
+      color: #991B1B;
+    }
+
+    .feedback-box.hint {
+      display: block;
+      background: var(--cma-warning-bg);
+      border: 1px solid var(--cma-warning);
+      color: #92400E;
+    }
+
+    /* Accordéons pour le cours */
+    .accordion-item {
+      border: 1px solid var(--cma-border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    .accordion-header {
+      padding: 14px 16px;
+      min-height: 48px;
+      background: #FFFFFF;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .accordion-header::after {
+      content: '+';
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--cma-corail);
+    }
+
+    .accordion-item.open .accordion-header::after {
+      content: '−';
+    }
+
+    .accordion-body {
+      padding: 14px 16px;
+      border-top: 1px solid var(--cma-border);
+      background: #FDFDFE;
+      display: none;
+      font-size: 0.93rem;
+    }
+
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+
+    /* Tableaux adaptatifs */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid var(--cma-border);
+    }
+
+    .cma-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      min-width: 480px;
+    }
+
+    .cma-table th {
+      background: #F8FAFC;
+      color: var(--cma-bordeaux);
+      font-weight: 700;
+      padding: 10px;
+      border-bottom: 2px solid var(--cma-border);
+    }
+
+    .cma-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--cma-border);
+      background: #FFFFFF;
+    }
+
+    /* Cartes illustrées du protocole de dissolution (Étape 2) */
+    .protocol-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    @media (min-width: 680px) {
+      .protocol-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .protocol-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .protocol-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--cma-corail);
+    }
+
+    .protocol-step-badge {
+      align-self: flex-start;
+      background: var(--cma-corail-light);
+      color: var(--cma-bordeaux);
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .protocol-svg {
+      width: 110px;
+      height: 90px;
+      margin: 4px 0 10px 0;
+    }
+
+    .protocol-card h4 {
+      font-size: 0.9rem;
+      color: var(--cma-bordeaux);
+      margin-bottom: 4px;
+    }
+
+    .protocol-card p {
+      font-size: 0.8rem;
+      color: var(--cma-text-muted);
+      line-height: 1.35;
+    }
+
+    /* Simulateur interactif */
+    .sim-container {
+      background: #FFFFFF;
+      border: 1px solid var(--cma-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .sim-slider-group {
+      margin-bottom: 14px;
+    }
+
+    .sim-slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+    }
+
+    .sim-slider {
+      width: 100%;
+      height: 6px;
+      accent-color: var(--cma-bordeaux);
+      cursor: pointer;
+    }
+
+    .sim-visual-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: #F8FAFC;
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+      border: 1px solid var(--cma-border);
+    }
+
+    @media (min-width: 600px) {
+      .sim-visual-wrap {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+    }
+
+    .fiole-canvas {
+      width: 140px;
+      height: 180px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      border: 1px solid var(--cma-border);
+      display: block;
+    }
+
+    .sim-readout {
+      text-align: center;
+      max-width: 320px;
+    }
+
+    .sim-cm-badge {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      margin: 4px 0;
+    }
+
+    /* Entraînement gamifié */
+    .score-banner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .score-card {
+      background: #FFFFFF;
+      border: 1px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .score-card.cap-highlight {
+      border-color: #86EFAC;
+      background: #F0FDF4;
+    }
+
+    .score-card-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--cma-text-muted);
+    }
+
+    .score-card-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      margin-top: 2px;
+    }
+
+    .level-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+    }
+
+    .level-card.active-lvl {
+      border-color: var(--cma-bordeaux);
+      box-shadow: 0 0 0 2px rgba(165, 15, 35, 0.1);
+    }
+
+    .level-card.locked {
+      background: #F1F5F9;
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+
+    .level-pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .pill-l1 { background: #DCFCE7; color: #15803D; }
+    .pill-l2 { background: #FEF3C7; color: #B45309; }
+    .pill-l3 { background: #EDE9FE; color: #6D28D9; }
+
+    .exercise-box {
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .exercise-box.locked-exercise {
+      display: none;
+    }
+
+    .exercise-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cma-text-muted);
+    }
+
+    .badge-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .tag-cap { background: var(--cma-corail-light); color: var(--cma-bordeaux); }
+    .tag-bonus { background: #FEF3C7; color: #B45309; }
+    .tag-expert { background: #EDE9FE; color: #6D28D9; }
+
+    .q-item {
+      padding: 12px;
+      border-radius: 8px;
+      background: #F8FAFC;
+      border: 1px solid var(--cma-border);
+      margin-bottom: 12px;
+    }
+
+    .q-item.completed {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+    }
+
+    .q-title {
+      font-weight: 600;
+      font-size: 0.94rem;
+      margin-bottom: 8px;
+      color: var(--cma-text);
+    }
+
+    /* Badges */
+    .badge-shelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .cma-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .cma-badge.unlocked {
+      border-color: #F59E0B;
+      background: #FFFBEB;
+      color: #92400E;
+    }
+
+    .cma-badge.locked {
+      opacity: 0.5;
+      background: #F1F5F9;
+      color: #94A3B8;
+    }
+
+    /* Attestation officielle */
+    .attestation-sheet {
+      background: #FFFFFF;
+      border: 3px double var(--cma-bordeaux);
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .att-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 2px solid var(--cma-corail);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .att-logo {
+      max-height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .att-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .att-sub {
+      font-size: 0.88rem;
+      color: var(--cma-text-muted);
+      font-weight: 600;
+    }
+
+    .att-learner {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .att-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 16px 0;
+      background: #F8FAFC;
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid var(--cma-border);
+    }
+
+    @media (min-width: 600px) {
+      .att-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .att-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--cma-border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .att-sig-block {
+      text-align: right;
+      font-size: 0.85rem;
+    }
+
+    .att-sig-name {
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      margin-top: 4px;
+    }
+
+    /* Impression / Export PDF */
+    @media print {
+      body {
+        background: #FFFFFF;
+        color: #000000;
+      }
+      .app-header, .progress-track, .nav-container, .step-section:not(#step-4), .no-print, .btn, .input-row, input, select {
+        display: none !important;
+      }
+      #step-4 {
+        display: block !important;
+      }
+      .main-container {
+        padding: 0;
+        max-width: 100%;
+      }
+      .attestation-sheet {
+        border: 2px solid #A50F23;
+        box-shadow: none;
+        page-break-inside: avoid;
+        margin: 0;
+        padding: 20px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="../../assets/retour-portail.css?v=1"><script src="../../assets/retour-portail.js?v=1" data-portal="../../index.html" data-section="physique-chimie" data-label="Coiffure · Année 1 · Semaine B" defer></script></head>
+<body>
+
+  <!-- En-tête principal officiel CMA Formation -->
+  <header class="app-header">
+    <div class="header-content">
+      <img src="logo.png" alt="Logo CMA Formation" class="app-logo" onerror="this.src='https://placehold.co/120x48/A50F23/ffffff?text=CMA+Formation'">
+      <div class="header-titles">
+        <h1>Dissolution & Concentration massique (Cm = m / V)</h1>
+        <p>Physique-Chimie | CAP Métiers de la Coiffure | Année 1 - S6 P1 | CMA Formation Sainte-Clotilde (Rachel Lamberet-Lezais)</p>
+      </div>
+    </div>
+    <!-- Ruban officiel répété au bord inférieur du header -->
+    <div class="cma-wave-border"></div>
+  </header>
+
+  <!-- Barre de progression générale compacte (8px) -->
+  <div class="progress-track" aria-label="Progression de la séance">
+    <div class="progress-bar-fill" id="globalProgressBar"></div>
+  </div>
+
+  <!-- Barre d'onglets tactiles Mobile-First -->
+  <div class="nav-container">
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-btn active" onclick="switchStep(1)" id="tab-step-1" role="tab" aria-selected="true">
+        <span>1.</span> Découverte
+      </button>
+      <button class="nav-btn" onclick="switchStep(2)" id="tab-step-2" role="tab" aria-selected="false">
+        <span>2.</span> Cours & Protocole
+      </button>
+      <button class="nav-btn" onclick="switchStep(3)" id="tab-step-3" role="tab" aria-selected="false">
+        <span>3.</span> Entraînement
+      </button>
+      <button class="nav-btn" onclick="switchStep(4)" id="tab-step-4" role="tab" aria-selected="false">
+        <span>4.</span> Bilan & Attestation
+      </button>
+    </nav>
+  </div>
+
+  <!-- Conteneur principal SPA -->
+  <main class="main-container">
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 1 — DÉCOUVERTE (Plongée directe salon)-->
+    <!-- ========================================== -->
+    <section id="step-1" class="step-section active">
+      <div class="card">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Mise en situation : Préparation d'un rinçage capillaire à Sainte-Clotilde
+        </h2>
+        <div class="info-callout">
+          <strong>Contexte professionnel réunionnais :</strong> Au salon <strong>« Tendance Kréol »</strong> à Sainte-Clotilde, Sarah prépare le protocole de soin pour une cliente dont la chevelure a été ternie par les eaux calcaires et le sel marin après les baignades de l'été austral.<br><br>
+          Le protocole technique préconise un <strong>rinçage neutralisant et lustrant</strong> à base d'<strong>acide citrique en poudre cristallisée</strong> (soluté solide) dissous dans de <strong>l'eau tiède déminéralisée</strong> (solvant liquide).<br><br>
+          <strong>Consigne de la fiche technique du salon :</strong><br>
+          <em>« Préparer un flacon applicateur de volume $V = 250\text{ mL}$ de solution de rinçage à la concentration massique $C_m = 20\text{ g/L}$. »</em><br><br>
+          Sarah dispose d'un pot d'acide citrique en poudre, d'une balance électronique de précision au dixième de gramme, d'une fiole jaugée de 250 mL, d'un entonnoir et d'une pissette d'eau déminéralisée.
+        </div>
+        <p style="font-weight: 600; color: var(--cma-bordeaux); margin-bottom: 8px;">
+          Problématique professionnelle :
+        </p>
+        <p style="font-size: 0.93rem; color: var(--cma-text); margin-bottom: 14px;">
+          Quelle masse exacte $m$ d'acide citrique Sarah doit-elle peser à la balance et quel protocole expérimental précis doit-elle suivre pour obtenir une solution parfaitement homogène à la concentration prescrite sans altérer le cuir chevelu de la cliente ?
+        </p>
+
+        <!-- Tableau de cadrage de la préparation -->
+        <div class="table-scroll">
+          <table class="cma-table">
+            <thead>
+              <tr>
+                <th>Grandeur chimique</th>
+                <th>Concentration massique ($C_m$)</th>
+                <th>Volume de solution ($V$)</th>
+                <th>Masse de soluté à peser ($m$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Valeur du protocole</strong></td>
+                <td><strong>20 g/L</strong></td>
+                <td><strong>250 mL (soit 0,250 L)</strong></td>
+                <td><span style="color: var(--cma-bordeaux); font-weight: bold;">... ? g</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Questions d'investigation -->
+      <div class="card">
+        <h3 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Questions d'investigation (Étape de découverte)
+        </h3>
+
+        <!-- Q1 -->
+        <div class="q-item" id="block-disc-1">
+          <div class="q-title">1. [C1 - S'approprier] Dans cette préparation, quel est le soluté solide ?</div>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="disc_q1" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc1()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-1"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-item" id="block-disc-2">
+          <div class="q-title">2. [C1 - S'approprier] Relever le volume $V = 250\text{ mL}$ et le convertir en litres (L) :</div>
+          <div class="input-row">
+            <span class="input-unit">$V =$</span>
+            <input type="text" inputmode="decimal" class="cma-input" id="disc_q2" placeholder="Votre résultat...">
+            <span class="input-unit">L</span>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc2()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-2"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-item" id="block-disc-3">
+          <div class="q-title">3. [C2 - Analyser] On rappelle $C_m = \frac{m}{V}$. Donner la formule dérivée permettant de calculer la masse $m$ :</div>
+          <div class="input-row">
+            <span class="input-unit">$m =$</span>
+            <input type="text" class="cma-input" id="disc_q3" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc3()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-3"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-item" id="block-disc-4">
+          <div class="q-title">4. [C2 - Analyser] Calculer la masse $m$ d'acide citrique à peser ($m = 20 \times 0{,}250$) :</div>
+          <div class="input-row">
+            <span class="input-unit">$m =$</span>
+            <input type="text" inputmode="decimal" class="cma-input" id="disc_q4" placeholder="Votre résultat...">
+            <span class="input-unit">g</span>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc4()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-4"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-item" id="block-disc-5">
+          <div class="q-title">5. [C3 - Réaliser] Quel geste obligatoire effectue-t-on sur la balance après y avoir posé la coupelle vide ?</div>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="disc_q5" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc5()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-5"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-item" id="block-disc-6">
+          <div class="q-title">6. [C4 - Communiquer] Rédiger la consigne technique pour Sarah pour éviter tout grumeau dans le flacon :</div>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="disc_q6" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc6()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-6"></div>
+        </div>
+
+        <div style="text-align: right; margin-top: 14px;">
+          <button class="btn btn-corail" onclick="switchStep(2)">Passer au Cours & Protocole Illustré →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 2 — COURS, PROTOCOLE & SIMULATEUR    -->
+    <!-- ========================================== -->
+    <section id="step-2" class="step-section">
+
+      <!-- Synthèse de cours -->
+      <div class="card">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Synthèse de cours : Dissolution & Concentration massique
+        </h2>
+
+        <div class="accordion-item open">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            1. Vocabulaire fondamental de la dissolution
+          </div>
+          <div class="accordion-body">
+            <p>• <strong>Soluté :</strong> Espèce chimique solide, liquide ou gazeuse dissoute dans un liquide (ex : cristaux d'acide citrique, poudre de henné, sels minéraux).</p>
+            <p style="margin-top: 6px;">• <strong>Solvant :</strong> Liquide présent en grande majorité qui dissout le soluté (en salon de coiffure, il s'agit très majoritairement de l'eau déminéralisée : on parle de solution aqueuse).</p>
+            <p style="margin-top: 6px;">• <strong>Solution :</strong> Mélange homogène issu de la dissolution complète du soluté dans le solvant.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            2. Formule de la concentration massique ($C_m = m / V$)
+          </div>
+          <div class="accordion-body">
+            <p>La <strong>concentration massique</strong> (notée $C_m$) représente la masse $m$ de soluté dissous par unité de volume $V$ de solution :</p>
+            <div style="background: #FFF5F5; border-left: 4px solid var(--cma-bordeaux); padding: 12px; margin: 10px 0; border-radius: 4px; text-align: center;">
+              $$C_m = \frac{m}{V}$$
+            </div>
+            <ul style="padding-left: 20px; margin: 8px 0;">
+              <li>$m$ : masse du soluté en <strong>grammes (g)</strong></li>
+              <li>$V$ : volume de la solution en <strong>litres (L)</strong></li>
+              <li>$C_m$ : concentration massique en <strong>grammes par litre (g/L)</strong></li>
+            </ul>
+            <p style="margin-top: 8px;"><strong>Formules dérivées indispensables :</strong></p>
+            <p>• Calcul de la masse à peser : $$m = C_m \times V$$</p>
+            <p>• Calcul du volume préparable : $$V = \frac{m}{C_m}$$</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Protocole expérimental illustré par schémas SVG interactifs -->
+      <div class="card">
+        <h3 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Protocole expérimental illustré : Dissolution en 5 étapes clés
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--cma-text-muted); margin-bottom: 12px;">
+          Chaque geste technique garantit la précision métrologique et la sécurité de la cliente en salon.
+        </p>
+
+        <div class="protocol-grid">
+          <!-- Étape 1 -->
+          <div class="protocol-card">
+            <span class="protocol-step-badge">ÉTAPE 1</span>
+            <svg class="protocol-svg" viewBox="0 0 120 90">
+              <!-- Balance -->
+              <rect x="20" y="55" width="80" height="25" rx="4" fill="#E2E8F0" stroke="#64748B" stroke-width="2"/>
+              <!-- Écran LCD -->
+              <rect x="35" y="62" width="50" height="12" rx="2" fill="#1E293B"/>
+              <text x="60" y="71" fill="#22C55E" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">0.0 g</text>
+              <!-- Plateau -->
+              <rect x="30" y="50" width="60" height="5" rx="1" fill="#94A3B8"/>
+              <!-- Coupelle vide -->
+              <path d="M 40 50 Q 60 55 80 50 Z" fill="#F1F5F9" stroke="#A50F23" stroke-width="2"/>
+            </svg>
+            <h4>Coupelle & TARE</h4>
+            <p>Poser la coupelle de pesée vide sur la balance et appuyer sur <strong>TARE</strong> pour remettre l'affichage à 0,0 g.</p>
+          </div>
+
+          <!-- Étape 2 -->
+          <div class="protocol-card">
+            <span class="protocol-step-badge">ÉTAPE 2</span>
+            <svg class="protocol-svg" viewBox="0 0 120 90">
+              <!-- Balance avec masse -->
+              <rect x="20" y="55" width="80" height="25" rx="4" fill="#E2E8F0" stroke="#64748B" stroke-width="2"/>
+              <rect x="35" y="62" width="50" height="12" rx="2" fill="#1E293B"/>
+              <text x="60" y="71" fill="#22C55E" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">5.0 g</text>
+              <rect x="30" y="50" width="60" height="5" rx="1" fill="#94A3B8"/>
+              <!-- Coupelle avec poudre -->
+              <path d="M 40 50 Q 60 55 80 50 Z" fill="#F1F5F9" stroke="#A50F23" stroke-width="2"/>
+              <ellipse cx="60" cy="48" rx="14" ry="4" fill="#EE3C3D"/>
+              <!-- Spatule -->
+              <path d="M 75 30 L 95 15 L 98 18 L 78 33 Z" fill="#64748B"/>
+            </svg>
+            <h4>Pesée précise</h4>
+            <p>Peser la masse exacte $m$ (ex: 5,0 g) à l'aide d'une spatule propre et sans contact digital direct.</p>
+          </div>
+
+          <!-- Étape 3 -->
+          <div class="protocol-card">
+            <span class="protocol-step-badge">ÉTAPE 3</span>
+            <svg class="protocol-svg" viewBox="0 0 120 90">
+              <!-- Fiole jaugée col haut -->
+              <path d="M 54 45 L 54 25 L 66 25 L 66 45 L 82 75 A 10 10 0 0 1 74 85 L 46 85 A 10 10 0 0 1 38 75 Z" fill="#F8FAFC" stroke="#334155" stroke-width="2"/>
+              <!-- Entonnoir -->
+              <polygon points="45,15 75,15 62,35 58,35" fill="#CBD5E1" stroke="#475569" stroke-width="1.5"/>
+              <rect x="58" y="35" width="4" height="14" fill="#CBD5E1" stroke="#475569" stroke-width="1.5"/>
+              <!-- Particules de poudre qui tombent -->
+              <circle cx="60" cy="42" r="1.5" fill="#EE3C3D"/>
+              <circle cx="59" cy="46" r="1.5" fill="#EE3C3D"/>
+            </svg>
+            <h4>Transfert à l'entonnoir</h4>
+            <p>Verser le solide dans la fiole jaugée de 250 mL via un entonnoir propre. Rincer l'entonnoir à l'eau.</p>
+          </div>
+
+          <!-- Étape 4 -->
+          <div class="protocol-card">
+            <span class="protocol-step-badge">ÉTAPE 4</span>
+            <svg class="protocol-svg" viewBox="0 0 120 90">
+              <!-- Fiole remplie aux 2/3 -->
+              <path d="M 54 45 L 54 25 L 66 25 L 66 45 L 82 75 A 10 10 0 0 1 74 85 L 46 85 A 10 10 0 0 1 38 75 Z" fill="#F8FAFC" stroke="#334155" stroke-width="2"/>
+              <!-- Liquide agité -->
+              <path d="M 41 73 Q 60 70 79 73 L 74 85 L 46 85 Z" fill="rgba(238,60,61,0.3)"/>
+              <!-- Flèches d'agitation circulaire -->
+              <path d="M 88 55 Q 98 62 90 70" fill="none" stroke="#A50F23" stroke-width="2" stroke-dasharray="2 2"/>
+              <polygon points="90,70 94,66 95,73" fill="#A50F23"/>
+            </svg>
+            <h4>Dissolution aux 2/3</h4>
+            <p>Remplir d'eau tiède aux 2/3, boucher hermétiquement et agiter vigoureusement jusqu'à dissolution complète.</p>
+          </div>
+
+          <!-- Étape 5 -->
+          <div class="protocol-card" style="grid-column: 1 / -1; max-width: 480px; margin: 0 auto; width: 100%;">
+            <span class="protocol-step-badge">ÉTAPE 5</span>
+            <svg class="protocol-svg" viewBox="0 0 160 90">
+              <!-- Col de fiole zoomé -->
+              <rect x="68" y="20" width="24" height="65" fill="#F8FAFC" stroke="#334155" stroke-width="2"/>
+              <!-- Trait de jauge -->
+              <line x1="60" y1="48" x2="100" y2="48" stroke="#A50F23" stroke-width="2"/>
+              <text x="105" y="51" font-size="8" fill="#A50F23" font-weight="bold">Trait de jauge</text>
+              <!-- Liquide avec ménisque (bas tangent au trait) -->
+              <path d="M 68 48 Q 80 52 92 48 L 92 85 L 68 85 Z" fill="rgba(238,60,61,0.35)"/>
+              <!-- Compte-gouttes -->
+              <rect x="78" y="2" width="4" height="15" fill="#CBD5E1" stroke="#475569"/>
+              <circle cx="80" cy="22" r="2" fill="#EE3C3D"/>
+              <!-- Œil horizontal pour visée -->
+              <text x="32" y="51" font-size="10">👁️</text>
+            </svg>
+            <h4>Ajustement du ménisque au trait de jauge</h4>
+            <p>Compléter à la pissette puis au compte-gouttes : le <strong>bas du ménisque concave</strong> doit affleurer exactement le trait de jauge à hauteur des yeux.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulateur interactif de préparation -->
+      <div class="card">
+        <h3 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Simulateur interactif : Calculateur de concentration & fiole dynamique
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--cma-text-muted); margin-bottom: 12px;">
+          Faites varier la masse pesée $m$ et le volume $V$ de la fiole pour observer l'évolution de la concentration $C_m$ et la teinte du soin.
+        </p>
+
+        <div class="sim-container">
+          <div class="sim-slider-group">
+            <div class="sim-slider-label">
+              <span>Masse pesée ($m$) :</span>
+              <span id="txtSimM" style="color: var(--cma-bordeaux); font-weight: bold;">5,0 g</span>
+            </div>
+            <input type="range" class="sim-slider" id="sliderSimM" min="1" max="50" step="0.5" value="5" oninput="updateSim()">
+          </div>
+
+          <div class="sim-slider-group">
+            <div class="sim-slider-label">
+              <span>Volume de la fiole ($V$) :</span>
+              <span id="txtSimV" style="color: var(--cma-bordeaux); font-weight: bold;">250 mL (0,250 L)</span>
+            </div>
+            <input type="range" class="sim-slider" id="sliderSimV" min="50" max="1000" step="50" value="250" oninput="updateSim()">
+          </div>
+
+          <div class="sim-visual-wrap">
+            <canvas id="simCanvas" class="fiole-canvas" width="140" height="180"></canvas>
+            <div class="sim-readout">
+              <div style="font-size: 0.85rem; color: var(--cma-text-muted);">Concentration massique calculée :</div>
+              <div class="sim-cm-badge" id="txtSimCm">20,0 g/L</div>
+              <div id="txtSimFormule" style="font-size: 0.95rem; font-weight: bold; margin-bottom: 6px;">
+                $$C_m = \frac{5{,}0\text{ g}}{0{,}250\text{ L}} = 20{,}0\text{ g/L}$$
+              </div>
+              <div id="txtSimDiagnostic" style="font-size: 0.85rem; color: var(--cma-success); font-weight: bold;">
+                ✓ Dosage parfait pour le rinçage lustrant au bac
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 12px;">
+            <button class="btn btn-sm btn-corail" onclick="resetSimToSalon()">Réinitialiser au protocole du salon (5 g / 250 mL)</button>
+          </div>
+        </div>
+
+        <div style="text-align: right; margin-top: 14px;">
+          <button class="btn btn-corail" onclick="switchStep(3)">Passer aux Entraînements Gamifiés →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 3 — ENTRAÎNEMENT GAMIFIÉ             -->
+    <!-- ========================================== -->
+    <section id="step-3" class="step-section">
+
+      <!-- Barre de score différenciée -->
+      <div class="score-banner">
+        <div class="score-card cap-highlight">
+          <div class="score-card-title">Socle CAP (Niveau 1)</div>
+          <div class="score-card-val" id="capProgressTxt">0%</div>
+        </div>
+        <div class="score-card">
+          <div class="score-card-title">Points Bonus Dépassement</div>
+          <div class="score-card-val" id="bonusScoreTxt">+0 pts</div>
+        </div>
+      </div>
+
+      <!-- Sélecteurs de niveaux -->
+      <div class="level-card active-lvl" id="hdr-lvl-1" onclick="switchLvlTab(1)">
+        <div>
+          <span class="level-pill pill-l1">NIVEAU 1 🟢</span>
+          <div style="font-weight: 700; margin-top: 4px;">Débutant / Socle CAP (5 Exercices complets)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Valide 100% du socle CAP et débloque le diplôme numérique</div>
+        </div>
+        <span id="badge-status-1" style="font-weight: bold; color: var(--cma-bordeaux);">En cours</span>
+      </div>
+
+      <div class="level-card locked" id="hdr-lvl-2" onclick="switchLvlTab(2)">
+        <div>
+          <span class="level-pill pill-l2">NIVEAU 2 🟡</span>
+          <div style="font-weight: 700; margin-top: 4px;">Avancé / Dépassement (4 Exercices)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Lotion tonique romarin, calcul de volume, sulfate de zinc, surdosage</div>
+        </div>
+        <span id="badge-status-2" style="font-size: 0.82rem; color: var(--cma-text-muted);">🔒 Verrouillé</span>
+      </div>
+
+      <div class="level-card locked" id="hdr-lvl-3" onclick="switchLvlTab(3)">
+        <div>
+          <span class="level-pill pill-l3">NIVEAU 3 🔴</span>
+          <div style="font-weight: 700; margin-top: 4px;">Expert / Excellence (3 Situations)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Saturation sel marin Saint-Gilles, dilution en 2 étapes, PhET molaire</div>
+        </div>
+        <span id="badge-status-3" style="font-size: 0.82rem; color: var(--cma-text-muted);">🔒 Verrouillé</span>
+      </div>
+
+      <!-- ================= NIVEAU 1 ================= -->
+      <div id="cnt-lvl-1">
+
+        <!-- Ex 1.1 -->
+        <div class="exercise-box" id="exbox-p1-1">
+          <div class="exercise-meta">
+            <span>Exercice 1.1 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Calcul direct de concentration massique ($C_m = m / V$)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Calculer la concentration massique $C_m$ en $g/L$ pour les préparations suivantes :
+          </p>
+
+          <div class="q-item" id="q-p1-1-1">
+            <div class="q-title">a) Dissolution de $m = 15\text{ g}$ de sels exfoliants dans $V = 1\text{ L}$ d'eau :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_1_a" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_a()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-a"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-1-2">
+            <div class="q-title">b) Dissolution de $m = 30\text{ g}$ de poudre de henné dans $V = 2\text{ L}$ d'eau :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_1_b" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_b()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-b"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-1-3">
+            <div class="q-title">c) Dissolution de $m = 50\text{ g}$ de cristaux adoucissants dans $V = 0{,}5\text{ L}$ d'eau :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_1_c" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_c()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-c"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-1-4">
+            <div class="q-title">d) Dissolution de $m = 8\text{ g}$ d'acide lactique dans $V = 0{,}4\text{ L}$ d'eau :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_1_d" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_d()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-d"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-2">
+          <div class="exercise-meta">
+            <span>Exercice 1.2 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Calcul de la masse de soluté à peser ($m = C_m \times V$)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Déterminer la masse $m$ en grammes (g) de soluté à peser pour préparer les solutions suivantes :
+          </p>
+
+          <div class="q-item" id="q-p1-2-1">
+            <div class="q-title">a) $V = 1\text{ L}$ de shampooing antipelliculaire à $C_m = 12\text{ g/L}$ :</div>
+            <div class="input-row">
+              <span class="input-unit">$m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_2_a" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_a()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-a"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-2-2">
+            <div class="q-title">b) $V = 2\text{ L}$ d'eau de rinçage neutralisante à $C_m = 5\text{ g/L}$ :</div>
+            <div class="input-row">
+              <span class="input-unit">$m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_2_b" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_b()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-b"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-2-3">
+            <div class="q-title">c) $V = 0{,}5\text{ L}$ de lotion stimulante à $C_m = 25\text{ g/L}$ :</div>
+            <div class="input-row">
+              <span class="input-unit">$m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_2_c" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_c()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-c"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-2-4">
+            <div class="q-title">d) $V = 0{,}25\text{ L}$ (soit 250 mL) de soin brillance à $C_m = 40\text{ g/L}$ :</div>
+            <div class="input-row">
+              <span class="input-unit">$m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_2_d" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_d()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-d"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-3">
+          <div class="exercise-meta">
+            <span>Exercice 1.3 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Conversions indispensables de volume (mL vers L)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Convertir chaque volume en litres (L) :
+          </p>
+
+          <div class="q-item" id="q-p1-3-1">
+            <div class="q-title">a) $500\text{ mL} =$</div>
+            <div class="input-row">
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_3_a" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_a()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-a"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-3-2">
+            <div class="q-title">b) $250\text{ mL} =$</div>
+            <div class="input-row">
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_3_b" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_b()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-b"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-3-3">
+            <div class="q-title">c) $100\text{ mL} =$</div>
+            <div class="input-row">
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_3_c" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_c()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-c"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-3-4">
+            <div class="q-title">d) $750\text{ mL} =$</div>
+            <div class="input-row">
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_3_d" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_d()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-d"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-3-5">
+            <div class="q-title">e) $50\text{ mL} =$</div>
+            <div class="input-row">
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_3_e" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_e()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-e"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.4 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-4">
+          <div class="exercise-meta">
+            <span>Exercice 1.4 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Préparation d'une lotion déjaunissante au salon de Sainte-Clotilde
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Une apprentie doit préparer $V = 500\text{ mL}$ d'une lotion de rinçage contenant de la poudre de camomille à $C_m = 16\text{ g/L}$.
+          </p>
+
+          <div class="q-item" id="q-p1-4-1">
+            <div class="q-title">1. Convertir $V = 500\text{ mL}$ en litres :</div>
+            <div class="input-row">
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_4_v" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_4_v()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-4-v"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-4-2">
+            <div class="q-title">2. Calculer la masse $m$ de poudre de camomille à peser ($m = C_m \times V$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex1_4_m" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_4_m()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-4-m"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-4-3">
+            <div class="q-title">3. Nommer la verrerie jaugée pour mesurer précisément 500 mL :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex1_4_verr" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_4_verr()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-4-verr"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.5 -->
+        <div class="exercise-box locked-exercise" id="exbox-p1-5">
+          <div class="exercise-meta">
+            <span>Exercice 1.5 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Identification des étapes de manipulation en laboratoire
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Donner le numéro d'ordre chronologique (de 1 à 4) pour chaque étape :
+          </p>
+
+          <div class="q-item" id="q-p1-5-1">
+            <div class="q-title">• Étape A : Ajuster au trait de jauge avec le compte-gouttes</div>
+            <div class="input-row">
+              <span class="input-unit">Rang =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_5_a" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_a()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-a"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-5-2">
+            <div class="q-title">• Étape B : Peser la poudre sur la balance après avoir fait la TARE</div>
+            <div class="input-row">
+              <span class="input-unit">Rang =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_5_b" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_b()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-b"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-5-3">
+            <div class="q-title">• Étape C : Dissoudre le solide dans la fiole à moitié remplie par agitation</div>
+            <div class="input-row">
+              <span class="input-unit">Rang =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_5_c" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_c()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-c"></div>
+          </div>
+
+          <div class="q-item" id="q-p1-5-4">
+            <div class="q-title">• Étape D : Verser la poudre dans la fiole jaugée à l'aide d'un entonnoir</div>
+            <div class="input-row">
+              <span class="input-unit">Rang =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_5_d" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_d()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-d"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= NIVEAU 2 ================= -->
+      <div id="cnt-lvl-2" style="display: none;">
+
+        <!-- Ex 2.1 -->
+        <div class="exercise-box" id="exbox-p2-1">
+          <div class="exercise-meta">
+            <span>Exercice 2.1 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Lotion tonique au romarin à Saint-Denis
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Préparation de 4 flacons de 250 mL à la concentration $C_m = 15\text{ g/L}$.
+          </p>
+
+          <div class="q-item" id="q-p2-1-1">
+            <div class="q-title">1. Volume total à préparer pour les 4 flacons en litres (L) :</div>
+            <div class="input-row">
+              <span class="input-unit">$V_{\text{total}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_1_v" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_v()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-v"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-1-2">
+            <div class="q-title">2. Masse totale $m$ d'extrait de romarin à peser (g) :</div>
+            <div class="input-row">
+              <span class="input-unit">$m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_1_m" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_m()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-m"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-1-3">
+            <div class="q-title">3. Le pot contient 100 g. Masse restante dans le pot après préparation :</div>
+            <div class="input-row">
+              <span class="input-unit">Reste =</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_1_reste" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_reste()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-reste"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-p2-2">
+          <div class="exercise-meta">
+            <span>Exercice 2.2 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Calcul du volume maximal réalisable ($V = m / C_m$)
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Il reste $m = 18\text{ g}$ de poudre nacrée pour balayage. Protocole : $C_m = 30\text{ g/L}$.
+          </p>
+
+          <div class="q-item" id="q-p2-2-1">
+            <div class="q-title">2. Calculer le volume maximal $V$ en litres que l'on peut préparer :</div>
+            <div class="input-row">
+              <span class="input-unit">$V =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_2_vl" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_2_vl()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-2-vl"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-2-2">
+            <div class="q-title">3. Exprimer ce volume en millilitres (mL) pour choisir la fiole :</div>
+            <div class="input-row">
+              <span class="input-unit">$V =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_2_vml" placeholder="Votre résultat...">
+              <span class="input-unit">mL</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_2_vml()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-2-vml"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-p2-3">
+          <div class="exercise-meta">
+            <span>Exercice 2.3 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Bain de traitement au sulfate de zinc sous climat tropical
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Dissolution de $12{,}5\text{ g}$ de sulfate de zinc dans $2{,}5\text{ L}$ d'eau tiède.
+          </p>
+
+          <div class="q-item" id="q-p2-3-1">
+            <div class="q-title">1. Calculer la concentration massique $C_m$ du bain en g/L :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_3_cm" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_3_cm()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-3-cm"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-3-2">
+            <div class="q-title">2. La notice préconise entre 4 et 6 g/L. La solution est-elle conforme ? (oui / non)</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex2_3_conf" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_3_conf()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-3-conf"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.4 -->
+        <div class="exercise-box locked-exercise" id="exbox-p2-4">
+          <div class="exercise-meta">
+            <span>Exercice 2.4 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Dépassement</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Erreur de pesée et ajustement de concentration
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Au lieu de 10 g, l'apprenti a pesé et dissous 15 g dans une fiole de 500 mL ($0{,}5\text{ L}$).
+          </p>
+
+          <div class="q-item" id="q-p2-4-1">
+            <div class="q-title">1. Calculer la concentration massique réelle de la solution obtenue (g/L) :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_4_cm" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_cm()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-cm"></div>
+          </div>
+
+          <div class="q-item" id="q-p2-4-2">
+            <div class="q-title">3. Quel volume d'eau final $V_{\text{final}}$ (en L) faudrait-il pour que ces 15 g correspondent à 20 g/L ?</div>
+            <div class="input-row">
+              <span class="input-unit">$V_{\text{final}} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex2_4_v" placeholder="Votre résultat...">
+              <span class="input-unit">L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_v()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-v"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= NIVEAU 3 ================= -->
+      <div id="cnt-lvl-3" style="display: none;">
+
+        <!-- Ex 3.1 -->
+        <div class="exercise-box" id="exbox-p3-1">
+          <div class="exercise-meta">
+            <span>Exercice 3.1 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Saturation et solubilité limite au sel marin à Saint-Gilles
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Solubilité max du sel : $s = 360\text{ g/L}$ à 25°C. L'apprenti verse 95 g de sel dans 250 mL ($0{,}250\text{ L}$) d'eau.
+          </p>
+
+          <div class="q-item" id="q-p3-1-1">
+            <div class="q-title">1. Calculer la concentration massique théorique si tout était dissous ($95 / 0{,}250$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_1_cm" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_cm()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-cm"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-1-2">
+            <div class="q-title">4. Masse maximale $m_{\max}$ de sel soluble dans 250 mL ($360 \times 0{,}250$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$m_{\max} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_1_mmax" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_mmax()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-mmax"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-1-3">
+            <div class="q-title">Masse de sel non dissous restant au fond ($95 - m_{\max}$) :</div>
+            <div class="input-row">
+              <span class="input-unit">Reste non dissous =</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_1_reste" placeholder="Votre résultat...">
+              <span class="input-unit">g</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_reste()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-reste"></div>
+          </div>
+        </div>
+
+        <!-- Ex 3.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-p3-2">
+          <div class="exercise-meta">
+            <span>Exercice 3.2 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Dissolution et dilution au salon de Sainte-Clotilde
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Étape 1 : 20 g d'acide citrique dans 200 mL ($0{,}2\text{ L}$) $\rightarrow S_1$.<br>
+            Étape 2 : prélèvement de 20 mL dilué dans une fiole de 100 mL $\rightarrow S_2$.
+          </p>
+
+          <div class="q-item" id="q-p3-2-1">
+            <div class="q-title">1. Calculer la concentration massique $C_{m1}$ de la solution mère $S_1$ (g/L) :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_{m1} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_2_cm1" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_cm1()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-cm1"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-2-2">
+            <div class="q-title">2. Calculer le facteur de dilution $k = \frac{100\text{ mL}}{20\text{ mL}}$ :</div>
+            <div class="input-row">
+              <span class="input-unit">$k =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex3_2_k" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_k()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-k"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-2-3">
+            <div class="q-title">3. En déduire la concentration finale $C_{m2} = \frac{C_{m1}}{k}$ (g/L) :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_{m2} =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_2_cm2" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_cm2()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-cm2"></div>
+          </div>
+        </div>
+
+        <!-- Ex 3.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-p3-3">
+          <div class="exercise-meta">
+            <span>Exercice 3.3 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Simulation PhET 'Concentration' et passage à la concentration molaire
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            On dissout $m = 29{,}25\text{ g}$ de NaCl ($M = 58{,}5\text{ g/mol}$) dans $V = 0{,}5\text{ L}$ d'eau.
+          </p>
+
+          <div class="q-item" id="q-p3-3-1">
+            <div class="q-title">1. Calculer la concentration massique $C_m$ en g/L :</div>
+            <div class="input-row">
+              <span class="input-unit">$C_m =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_3_cm" placeholder="Votre résultat...">
+              <span class="input-unit">g/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_3_cm()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-3-cm"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-3-2">
+            <div class="q-title">2. Calculer la quantité de matière $n = \frac{m}{M}$ en moles :</div>
+            <div class="input-row">
+              <span class="input-unit">$n =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_3_n" placeholder="Votre résultat...">
+              <span class="input-unit">mol</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_3_n()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-3-n"></div>
+          </div>
+
+          <div class="q-item" id="q-p3-3-3">
+            <div class="q-title">3. En déduire la concentration molaire $C = \frac{n}{V}$ en mol/L :</div>
+            <div class="input-row">
+              <span class="input-unit">$C =$</span>
+              <input type="text" inputmode="decimal" class="cma-input" id="ex3_3_c" placeholder="Votre résultat...">
+              <span class="input-unit">mol/L</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_3_c()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-3-c"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 4 — BILAN ET ATTESTATION OFFICIELLE  -->
+    <!-- ========================================== -->
+    <section id="step-4" class="step-section">
+      <div class="card no-print">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Bilan de compétences & Attestation officielle CMA Formation
+        </h2>
+        <p style="font-size: 0.93rem; color: var(--cma-text-muted); margin-bottom: 12px;">
+          Félicitations pour vos calculs et manipulations en chimie des solutions ! Veuillez inscrire votre prénom et nom ci-dessous pour actualiser et imprimer votre attestation officielle.
+        </p>
+
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-weight: 600; font-size: 0.92rem; margin-bottom: 6px;">
+            Nom et Prénom de l'apprenant(e) :
+          </label>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="studentNameInput" placeholder="Votre résultat..." oninput="updateStudentName(this.value)">
+            <button class="btn btn-corail" onclick="window.print()">
+              🖨️ Imprimer / Exporter en PDF
+            </button>
+          </div>
+        </div>
+
+        <div class="badge-shelf">
+          <div class="cma-badge" id="badge-stat-cap">
+            <span>🧪</span>
+            <span>Maître de la Dissolution & Concentration (Socle CAP)</span>
+          </div>
+          <div class="cma-badge locked" id="badge-stat-bonus">
+            <span>⭐</span>
+            <span>Expert Formulations Salons & Ajustement de Volumes</span>
+          </div>
+          <div class="cma-badge locked" id="badge-stat-master">
+            <span>🏆</span>
+            <span>Élite Chimie Appliquée & Dilution en Deux Temps</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attestation officielle imprimable -->
+      <div class="attestation-sheet" id="attestationPrintArea">
+        <div class="att-header">
+          <img src="logo.png" alt="Logo CMA Formation" class="att-logo" onerror="this.src='https://placehold.co/120x48/A50F23/ffffff?text=CMA+Formation'">
+          <div>
+            <h2 class="att-title">Attestation Pédagogique de Réussite</h2>
+            <div class="att-sub">CMA Formation de Sainte-Clotilde • Île de La Réunion</div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.95rem; line-height: 1.6; color: var(--cma-text);">
+          <p>La direction pédagogique et le pôle Physique-Chimie certifient que l'apprenant(e) :</p>
+          <p style="text-align: center; margin: 12px 0;">
+            <span class="att-learner" id="attestationLearnerDisplay">APPRENANT(E) EN FORMATION</span>
+          </p>
+          <p>
+            a suivi et validé avec succès l'ensemble du parcours d'apprentissage consacré à la <strong>préparation de solutions par dissolution</strong>, à la détermination rigoureuse de la concentration massique selon la relation fondamentale <strong>$C_m = \frac{m}{V}$</strong>, au calcul de la masse de soluté à peser $m = C_m \times V$ et à l'exécution du protocole expérimental sécurisé au laboratoire et en salon de coiffure réunionnais.
+          </p>
+
+          <div class="att-grid">
+            <div>
+              <strong>Séance :</strong> S6 P1 - Dissolution & Concentration massique (Cm = m/V)<br>
+              <strong>Diplôme :</strong> CAP Métiers de la Coiffure (Gr. 1)<br>
+              <strong>Date d'évaluation :</strong> <span id="currentDateDisplay"></span>
+            </div>
+            <div>
+              <strong>Socle CAP validé :</strong> <span id="attSocleScore" style="color: var(--cma-bordeaux); font-weight: bold;">0%</span><br>
+              <strong>Points Bonus Dépassement :</strong> <span id="attBonusScore" style="color: var(--cma-corail); font-weight: bold;">0 pts</span><br>
+              <strong>Protocole expérimental :</strong> <span style="color: var(--cma-success); font-weight: bold;">Certifié conforme</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.88rem; color: var(--cma-text-muted); margin-top: 10px;">
+            <strong>Compétences attestées :</strong> C1 (S'approprier : identifier soluté, solvant et conversions mL $\rightarrow$ L), C2 (Analyser : manipuler $C_m = m / V$ et $m = C_m \times V$), C3 (Réaliser : protocole de dissolution, tare et ménisque), C4 (Communiquer : validation de conformité et consignes d'atelier).
+          </p>
+        </div>
+
+        <div class="att-footer">
+          <div style="font-size: 0.8rem; color: var(--cma-text-muted);">
+            Attestation pédagogique de réussite de séance • Document numérique d'atelier
+          </div>
+          <div class="att-sig-block">
+            <div>Formatrice Référente Physique-Chimie :</div>
+            <div class="att-sig-name">Rachel Lamberet-Lezais</div>
+            <div style="font-size: 0.78rem; color: var(--cma-text-muted);">CMA Formation Sainte-Clotilde</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* État global réactif */
+    const appState = {
+      currentStep: 1,
+      learnerName: "APPRENANT(E) EN FORMATION",
+      disc: { q1: false, q2: false, q3: false, q4: false, q5: false, q6: false },
+      lvl1: {
+        '1-1-a': false, '1-1-b': false, '1-1-c': false, '1-1-d': false,
+        '1-2-a': false, '1-2-b': false, '1-2-c': false, '1-2-d': false,
+        '1-3-a': false, '1-3-b': false, '1-3-c': false, '1-3-d': false, '1-3-e': false,
+        '1-4-v': false, '1-4-m': false, '1-4-verr': false,
+        '1-5-a': false, '1-5-b': false, '1-5-c': false, '1-5-d': false
+      },
+      lvl2: {
+        '2-1-v': false, '2-1-m': false, '2-1-reste': false,
+        '2-2-vl': false, '2-2-vml': false,
+        '2-3-cm': false, '2-3-conf': false,
+        '2-4-cm': false, '2-4-v': false
+      },
+      lvl3: {
+        '3-1-cm': false, '3-1-mmax': false, '3-1-reste': false,
+        '3-2-cm1': false, '3-2-k': false, '3-2-cm2': false,
+        '3-3-cm': false, '3-3-n': false, '3-3-c': false
+      },
+      unlockedLvl2: false,
+      unlockedLvl3: false,
+      sim: { m: 5.0, v: 250 }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const today = new Date();
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      document.getElementById('currentDateDisplay').textContent = today.toLocaleDateString('fr-FR', options);
+
+      updateSim();
+      updateProgressBar();
+    });
+
+    function switchStep(stepNumber) {
+      appState.currentStep = stepNumber;
+      for (let i = 1; i <= 4; i++) {
+        const tab = document.getElementById(`tab-step-${i}`);
+        const sec = document.getElementById(`step-${i}`);
+        if (tab && sec) {
+          if (i === stepNumber) {
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            sec.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+            tab.setAttribute('aria-selected', 'false');
+            sec.classList.remove('active');
+          }
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    function toggleAccordion(header) {
+      header.parentElement.classList.toggle('open');
+    }
+
+    function updateStudentName(val) {
+      const trimmed = val.trim();
+      const display = document.getElementById('attestationLearnerDisplay');
+      if (trimmed.length > 0) {
+        display.textContent = trimmed.toUpperCase();
+        appState.learnerName = trimmed;
+      } else {
+        display.textContent = "APPRENANT(E) EN FORMATION";
+        appState.learnerName = "APPRENANT(E) EN FORMATION";
+      }
+    }
+
+    function parseInputNumber(valStr) {
+      if (!valStr) return null;
+      const clean = valStr.toString().trim().replace(',', '.');
+      const num = parseFloat(clean);
+      return isNaN(num) ? null : num;
+    }
+
+    function setFeedback(elemId, type, message) {
+      const fb = document.getElementById(elemId);
+      if (!fb) return;
+      fb.className = `feedback-box ${type}`;
+      fb.innerHTML = message;
+    }
+
+    function showCustomModal(msg) {
+      const existing = document.getElementById('cma-dialog-box');
+      if (existing) existing.remove();
+
+      const modal = document.createElement('div');
+      modal.id = 'cma-dialog-box';
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100vw';
+      modal.style.height = '100vh';
+      modal.style.backgroundColor = 'rgba(0, 0, 0, 0.45)';
+      modal.style.display = 'flex';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      modal.style.zIndex = '9999';
+      modal.style.padding = '16px';
+
+      modal.innerHTML = `
+        <div style="background: white; border-radius: 12px; max-width: 380px; width: 100%; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-left: 6px solid #A50F23;">
+          <h3 style="color: #A50F23; margin-bottom: 10px; font-size: 1.1rem;">Information CMA Formation</h3>
+          <p style="font-size: 0.95rem; color: #1E293B; line-height: 1.5; margin-bottom: 16px;">${msg}</p>
+          <div style="text-align: right;">
+            <button class="btn btn-primary btn-sm" onclick="document.getElementById('cma-dialog-box').remove()">Compris</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function updateProgressBar() {
+      const totalL1 = Object.keys(appState.lvl1).length;
+      let countL1 = 0;
+      for (const k in appState.lvl1) if (appState.lvl1[k]) countL1++;
+
+      const pctCap = Math.round((countL1 / totalL1) * 100);
+      document.getElementById('capProgressTxt').textContent = `${pctCap}%`;
+      document.getElementById('attSocleScore').textContent = `${pctCap}%`;
+
+      if (pctCap >= 100 && !appState.unlockedLvl2) {
+        appState.unlockedLvl2 = true;
+        document.getElementById('hdr-lvl-2').classList.remove('locked');
+        document.getElementById('badge-status-2').textContent = 'Disponible !';
+        document.getElementById('badge-status-1').textContent = '✅ Validé (100%)';
+        document.getElementById('badge-stat-cap').classList.add('unlocked');
+      }
+
+      let bonus = 0;
+      for (const k in appState.lvl2) if (appState.lvl2[k]) bonus += 10;
+      for (const k in appState.lvl3) if (appState.lvl3[k]) bonus += 15;
+
+      document.getElementById('bonusScoreTxt').textContent = `+${bonus} pts`;
+      document.getElementById('attBonusScore').textContent = `+${bonus} pts`;
+
+      const totalL2 = Object.keys(appState.lvl2).length;
+      let countL2 = 0;
+      for (const k in appState.lvl2) if (appState.lvl2[k]) countL2++;
+
+      if (countL2 === totalL2 && !appState.unlockedLvl3) {
+        appState.unlockedLvl3 = true;
+        document.getElementById('hdr-lvl-3').classList.remove('locked');
+        document.getElementById('badge-status-3').textContent = 'Disponible !';
+        document.getElementById('badge-status-2').textContent = '✅ Validé (Bonus max)';
+        document.getElementById('badge-stat-bonus').classList.remove('locked');
+        document.getElementById('badge-stat-bonus').classList.add('unlocked');
+      }
+
+      const totalL3 = Object.keys(appState.lvl3).length;
+      let countL3 = 0;
+      for (const k in appState.lvl3) if (appState.lvl3[k]) countL3++;
+
+      if (countL3 === totalL3) {
+        document.getElementById('badge-status-3').textContent = '✅ Maîtrise totale !';
+        document.getElementById('badge-stat-master').classList.remove('locked');
+        document.getElementById('badge-stat-master').classList.add('unlocked');
+      }
+
+      const globalPct = Math.min(100, Math.round((countL1 + countL2 + countL3) / (totalL1 + totalL2 + totalL3) * 100));
+      document.getElementById('globalProgressBar').style.width = `${globalPct}%`;
+    }
+
+    function switchLvlTab(lvl) {
+      if (lvl === 2 && !appState.unlockedLvl2) {
+        showCustomModal("Le Niveau 2 🟡 est verrouillé. Vous devez d'abord valider les 5 exercices du Niveau 1 🟢 (Socle CAP à 100%) !");
+        return;
+      }
+      if (lvl === 3 && !appState.unlockedLvl3) {
+        showCustomModal("Le Niveau 3 🔴 est verrouillé. Vous devez d'abord réussir l'ensemble des exercices du Niveau 2 🟡 !");
+        return;
+      }
+
+      const tabs = [1, 2, 3];
+      tabs.forEach(l => {
+        const hdr = document.getElementById(`hdr-lvl-${l}`);
+        const cnt = document.getElementById(`cnt-lvl-${l}`);
+        if (hdr && cnt) {
+          if (l === lvl) {
+            hdr.classList.add('active-lvl');
+            cnt.style.display = 'block';
+          } else {
+            hdr.classList.remove('active-lvl');
+            cnt.style.display = 'none';
+          }
+        }
+      });
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    /* ================= DÉCOUVERTE ================= */
+    function checkDisc1() {
+      const v = document.getElementById('disc_q1').value.trim().toLowerCase();
+      if (!v) { setFeedback('fb-disc-1', 'hint', 'Nommez le produit solide.'); return; }
+      if (v.includes('acide') || v.includes('citrique') || v.includes('poudre')) {
+        setFeedback('fb-disc-1', 'correct', 'Exact ! Le soluté est l\'<strong>acide citrique en poudre</strong> (l\'eau déminéralisée étant le solvant).');
+        document.getElementById('block-disc-1').classList.add('completed');
+        appState.disc.q1 = true;
+      } else {
+        setFeedback('fb-disc-1', 'incorrect', 'Indiquez le nom du produit solide dissous (acide citrique).');
+      }
+    }
+
+    function checkDisc2() {
+      const v = parseInputNumber(document.getElementById('disc_q2').value);
+      if (v === 0.25 || v === 0.250) {
+        setFeedback('fb-disc-2', 'correct', 'Exact : $250\text{ mL} = \\mathbf{0{,}250\text{ L}}$ (on divise par 1 000).');
+        document.getElementById('block-disc-2').classList.add('completed');
+        appState.disc.q2 = true;
+      } else {
+        setFeedback('fb-disc-2', 'incorrect', 'Pour convertir en litres, divisez par 1 000 : 250 / 1000 = 0,25 L.');
+      }
+    }
+
+    function checkDisc3() {
+      const v = document.getElementById('disc_q3').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === 'cm*v' || v === 'cmxv' || v === 'v*cm' || v === 'c_m*v' || v === 'cm.v') {
+        setFeedback('fb-disc-3', 'correct', 'Parfait ! De $C_m = \\frac{m}{V}$, on déduit : <strong>$m = C_m \\times V$</strong>.');
+        document.getElementById('block-disc-3').classList.add('completed');
+        appState.disc.q3 = true;
+      } else {
+        setFeedback('fb-disc-3', 'incorrect', 'La formule est m = Cm * V.');
+      }
+    }
+
+    function checkDisc4() {
+      const v = parseInputNumber(document.getElementById('disc_q4').value);
+      if (v === 5 || v === 5.0) {
+        setFeedback('fb-disc-4', 'correct', 'Bravo ! $m = 20\text{ g/L} \\times 0{,}250\text{ L} = \\mathbf{5{,}0\text{ g}}$ d\'acide citrique à peser.');
+        document.getElementById('block-disc-4').classList.add('completed');
+        appState.disc.q4 = true;
+      } else {
+        setFeedback('fb-disc-4', 'incorrect', 'Calculez 20 * 0,25 = 5 g.');
+      }
+    }
+
+    function checkDisc5() {
+      const v = document.getElementById('disc_q5').value.trim().toLowerCase();
+      if (v.includes('tare') || v.includes('tarrer') || v.includes('zero') || v.includes('zéro')) {
+        setFeedback('fb-disc-5', 'correct', 'Très bien ! On effectue la <strong>TARE</strong> pour remettre l\'affichage à 0,0 g et ne peser que la poudre.');
+        document.getElementById('block-disc-5').classList.add('completed');
+        appState.disc.q5 = true;
+      } else {
+        setFeedback('fb-disc-5', 'incorrect', 'On effectue la TARE (remise à zéro de la balance).');
+      }
+    }
+
+    function checkDisc6() {
+      const v = document.getElementById('disc_q6').value.trim().toLowerCase();
+      if (v.includes('agit') || v.includes('dissou') || v.includes('tiède') || v.includes('homog') || v.includes('entonnoir') || v.includes('mélang')) {
+        setFeedback('fb-disc-6', 'correct', 'Parfait : <strong>Agiter énergiquement</strong> la fiole fermée aux deux tiers avec de l\'eau tiède jusqu\'à dissolution complète de tous les cristaux.');
+        document.getElementById('block-disc-6').classList.add('completed');
+        appState.disc.q6 = true;
+      } else {
+        setFeedback('fb-disc-6', 'incorrect', 'Indiquez qu\'il faut agiter la fiole fermée pour assurer une dissolution complète.');
+      }
+    }
+
+    /* ================= NIVEAU 1 ================= */
+    function checkEx1_1_a() {
+      const v = parseInputNumber(document.getElementById('ex1_1_a').value);
+      if (v === 15) {
+        setFeedback('fb-ex1-1-a', 'correct', 'Exact : $C_m = \\frac{15}{1} = \\mathbf{15\text{ g/L}}$.');
+        appState.lvl1['1-1-a'] = true;
+        document.getElementById('q-p1-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-a', 'incorrect', '15 / 1 = 15 g/L.'); }
+    }
+
+    function checkEx1_1_b() {
+      const v = parseInputNumber(document.getElementById('ex1_1_b').value);
+      if (v === 15) {
+        setFeedback('fb-ex1-1-b', 'correct', 'Exact : $C_m = \\frac{30}{2} = \\mathbf{15\text{ g/L}}$.');
+        appState.lvl1['1-1-b'] = true;
+        document.getElementById('q-p1-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-b', 'incorrect', '30 / 2 = 15 g/L.'); }
+    }
+
+    function checkEx1_1_c() {
+      const v = parseInputNumber(document.getElementById('ex1_1_c').value);
+      if (v === 100) {
+        setFeedback('fb-ex1-1-c', 'correct', 'Exact : $C_m = \\frac{50}{0{,}5} = \\mathbf{100\text{ g/L}}$.');
+        appState.lvl1['1-1-c'] = true;
+        document.getElementById('q-p1-1-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-c', 'incorrect', '50 / 0,5 = 100 g/L.'); }
+    }
+
+    function checkEx1_1_d() {
+      const v = parseInputNumber(document.getElementById('ex1_1_d').value);
+      if (v === 20) {
+        setFeedback('fb-ex1-1-d', 'correct', 'Exact : $C_m = \\frac{8}{0{,}4} = \\mathbf{20\text{ g/L}}$.');
+        appState.lvl1['1-1-d'] = true;
+        document.getElementById('q-p1-1-4').classList.add('completed');
+        document.getElementById('exbox-p1-2').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-d', 'incorrect', '8 / 0,4 = 20 g/L.'); }
+    }
+
+    function checkEx1_2_a() {
+      const v = parseInputNumber(document.getElementById('ex1_2_a').value);
+      if (v === 12) {
+        setFeedback('fb-ex1-2-a', 'correct', 'Exact : $m = 12 \times 1 = \\mathbf{12\text{ g}}$.');
+        appState.lvl1['1-2-a'] = true;
+        document.getElementById('q-p1-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-a', 'incorrect', '12 * 1 = 12 g.'); }
+    }
+
+    function checkEx1_2_b() {
+      const v = parseInputNumber(document.getElementById('ex1_2_b').value);
+      if (v === 10) {
+        setFeedback('fb-ex1-2-b', 'correct', 'Exact : $m = 5 \times 2 = \\mathbf{10\text{ g}}$.');
+        appState.lvl1['1-2-b'] = true;
+        document.getElementById('q-p1-2-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-b', 'incorrect', '5 * 2 = 10 g.'); }
+    }
+
+    function checkEx1_2_c() {
+      const v = parseInputNumber(document.getElementById('ex1_2_c').value);
+      if (v === 12.5) {
+        setFeedback('fb-ex1-2-c', 'correct', 'Exact : $m = 25 \times 0{,}5 = \\mathbf{12{,}5\text{ g}}$.');
+        appState.lvl1['1-2-c'] = true;
+        document.getElementById('q-p1-2-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-c', 'incorrect', '25 * 0,5 = 12,5 g.'); }
+    }
+
+    function checkEx1_2_d() {
+      const v = parseInputNumber(document.getElementById('ex1_2_d').value);
+      if (v === 10) {
+        setFeedback('fb-ex1-2-d', 'correct', 'Exact : $m = 40 \times 0{,}25 = \\mathbf{10\text{ g}}$.');
+        appState.lvl1['1-2-d'] = true;
+        document.getElementById('q-p1-2-4').classList.add('completed');
+        document.getElementById('exbox-p1-3').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-d', 'incorrect', '40 * 0,25 = 10 g.'); }
+    }
+
+    function checkEx1_3_a() {
+      const v = parseInputNumber(document.getElementById('ex1_3_a').value);
+      if (v === 0.5) {
+        setFeedback('fb-ex1-3-a', 'correct', 'Exact : $500\text{ mL} = \\mathbf{0{,}5\text{ L}}$.');
+        appState.lvl1['1-3-a'] = true;
+        document.getElementById('q-p1-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-a', 'incorrect', '500 / 1000 = 0,5 L.'); }
+    }
+
+    function checkEx1_3_b() {
+      const v = parseInputNumber(document.getElementById('ex1_3_b').value);
+      if (v === 0.25) {
+        setFeedback('fb-ex1-3-b', 'correct', 'Exact : $250\text{ mL} = \\mathbf{0{,}25\text{ L}}$.');
+        appState.lvl1['1-3-b'] = true;
+        document.getElementById('q-p1-3-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-b', 'incorrect', '250 / 1000 = 0,25 L.'); }
+    }
+
+    function checkEx1_3_c() {
+      const v = parseInputNumber(document.getElementById('ex1_3_c').value);
+      if (v === 0.1) {
+        setFeedback('fb-ex1-3-c', 'correct', 'Exact : $100\text{ mL} = \\mathbf{0{,}1\text{ L}}$.');
+        appState.lvl1['1-3-c'] = true;
+        document.getElementById('q-p1-3-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-c', 'incorrect', '100 / 1000 = 0,1 L.'); }
+    }
+
+    function checkEx1_3_d() {
+      const v = parseInputNumber(document.getElementById('ex1_3_d').value);
+      if (v === 0.75) {
+        setFeedback('fb-ex1-3-d', 'correct', 'Exact : $750\text{ mL} = \\mathbf{0{,}75\text{ L}}$.');
+        appState.lvl1['1-3-d'] = true;
+        document.getElementById('q-p1-3-4').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-d', 'incorrect', '750 / 1000 = 0,75 L.'); }
+    }
+
+    function checkEx1_3_e() {
+      const v = parseInputNumber(document.getElementById('ex1_3_e').value);
+      if (v === 0.05) {
+        setFeedback('fb-ex1-3-e', 'correct', 'Exact : $50\text{ mL} = \\mathbf{0{,}05\text{ L}}$.');
+        appState.lvl1['1-3-e'] = true;
+        document.getElementById('q-p1-3-5').classList.add('completed');
+        document.getElementById('exbox-p1-4').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-e', 'incorrect', '50 / 1000 = 0,05 L.'); }
+    }
+
+    function checkEx1_4_v() {
+      const v = parseInputNumber(document.getElementById('ex1_4_v').value);
+      if (v === 0.5) {
+        setFeedback('fb-ex1-4-v', 'correct', 'Exact : $500\text{ mL} = \\mathbf{0{,}5\text{ L}}$.');
+        appState.lvl1['1-4-v'] = true;
+        document.getElementById('q-p1-4-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-4-v', 'incorrect', '500 mL = 0,5 L.'); }
+    }
+
+    function checkEx1_4_m() {
+      const v = parseInputNumber(document.getElementById('ex1_4_m').value);
+      if (v === 8) {
+        setFeedback('fb-ex1-4-m', 'correct', 'Exact : $m = 16 \times 0{,}5 = \\mathbf{8\text{ g}}$.');
+        appState.lvl1['1-4-m'] = true;
+        document.getElementById('q-p1-4-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-4-m', 'incorrect', '16 * 0,5 = 8 g.'); }
+    }
+
+    function checkEx1_4_verr() {
+      const v = document.getElementById('ex1_4_verr').value.trim().toLowerCase();
+      if (v.includes('fiole') && v.includes('jaug')) {
+        setFeedback('fb-ex1-4-verr', 'correct', 'Exact : <strong>Fiole jaugée de 500 mL</strong>.');
+        appState.lvl1['1-4-verr'] = true;
+        document.getElementById('q-p1-4-3').classList.add('completed');
+        document.getElementById('exbox-p1-5').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-4-verr', 'incorrect', 'Nommez la fiole jaugée.'); }
+    }
+
+    function checkEx1_5_a() {
+      const v = parseInputNumber(document.getElementById('ex1_5_a').value);
+      if (v === 4) {
+        setFeedback('fb-ex1-5-a', 'correct', 'Exact : l\'ajustement au trait de jauge est la <strong>dernière étape (Rang 4)</strong>.');
+        appState.lvl1['1-5-a'] = true;
+        document.getElementById('q-p1-5-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-5-a', 'incorrect', 'L\'ajustement final est le rang 4.'); }
+    }
+
+    function checkEx1_5_b() {
+      const v = parseInputNumber(document.getElementById('ex1_5_b').value);
+      if (v === 1) {
+        setFeedback('fb-ex1-5-b', 'correct', 'Exact : la pesée sur balance après TARE est la <strong>première étape (Rang 1)</strong>.');
+        appState.lvl1['1-5-b'] = true;
+        document.getElementById('q-p1-5-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-5-b', 'incorrect', 'La pesée est le rang 1.'); }
+    }
+
+    function checkEx1_5_c() {
+      const v = parseInputNumber(document.getElementById('ex1_5_c').value);
+      if (v === 3) {
+        setFeedback('fb-ex1-5-c', 'correct', 'Exact : la dissolution à mi-hauteur par agitation est le <strong>Rang 3</strong>.');
+        appState.lvl1['1-5-c'] = true;
+        document.getElementById('q-p1-5-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-5-c', 'incorrect', 'La dissolution par agitation est le rang 3.'); }
+    }
+
+    function checkEx1_5_d() {
+      const v = parseInputNumber(document.getElementById('ex1_5_d').value);
+      if (v === 2) {
+        setFeedback('fb-ex1-5-d', 'correct', 'Bravo ! Le transfert à l\'entonnoir est le <strong>Rang 2</strong>. SOCLE CAP VALIDÉ À 100% !');
+        appState.lvl1['1-5-d'] = true;
+        document.getElementById('q-p1-5-4').classList.add('completed');
+        updateProgressBar();
+        showCustomModal("Félicitations ! Vous avez validé l'intégralité du Niveau 1 🟢 (Socle CAP à 100%). Votre Attestation Officielle CMA Formation est débloquée et le Niveau 2 🟡 est accessible !");
+      } else { setFeedback('fb-ex1-5-d', 'incorrect', 'Le transfert est le rang 2.'); }
+    }
+
+    /* ================= NIVEAU 2 ================= */
+    function checkEx2_1_v() {
+      const v = parseInputNumber(document.getElementById('ex2_1_v').value);
+      if (v === 1 || v === 1.0) {
+        setFeedback('fb-ex2-1-v', 'correct', 'Exact : $4 \times 250\text{ mL} = 1000\text{ mL} = \\mathbf{1\text{ L}}$.');
+        appState.lvl2['2-1-v'] = true;
+        document.getElementById('q-p2-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-v', 'incorrect', '4 * 250 mL = 1 000 mL = 1 L.'); }
+    }
+
+    function checkEx2_1_m() {
+      const v = parseInputNumber(document.getElementById('ex2_1_m').value);
+      if (v === 15) {
+        setFeedback('fb-ex2-1-m', 'correct', 'Exact : $m = 15\text{ g/L} \times 1\text{ L} = \\mathbf{15\text{ g}}$.');
+        appState.lvl2['2-1-m'] = true;
+        document.getElementById('q-p2-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-m', 'incorrect', '15 * 1 = 15 g.'); }
+    }
+
+    function checkEx2_1_reste() {
+      const v = parseInputNumber(document.getElementById('ex2_1_reste').value);
+      if (v === 85) {
+        setFeedback('fb-ex2-1-reste', 'correct', 'Exact : $100 - 15 = \\mathbf{85\text{ g}}$ restants dans le pot.');
+        appState.lvl2['2-1-reste'] = true;
+        document.getElementById('q-p2-1-3').classList.add('completed');
+        document.getElementById('exbox-p2-2').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-reste', 'incorrect', '100 - 15 = 85 g.'); }
+    }
+
+    function checkEx2_2_vl() {
+      const v = parseInputNumber(document.getElementById('ex2_2_vl').value);
+      if (v === 0.6) {
+        setFeedback('fb-ex2-2-vl', 'correct', 'Exact : $V = \\frac{18}{30} = \\mathbf{0{,}6\text{ L}}$.');
+        appState.lvl2['2-2-vl'] = true;
+        document.getElementById('q-p2-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-2-vl', 'incorrect', '18 / 30 = 0,6 L.'); }
+    }
+
+    function checkEx2_2_vml() {
+      const v = parseInputNumber(document.getElementById('ex2_2_vml').value);
+      if (v === 600) {
+        setFeedback('fb-ex2-2-vml', 'correct', 'Exact : $0{,}6\text{ L} = \\mathbf{600\text{ mL}}$.');
+        appState.lvl2['2-2-vml'] = true;
+        document.getElementById('q-p2-2-2').classList.add('completed');
+        document.getElementById('exbox-p2-3').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-2-vml', 'incorrect', '0,6 * 1000 = 600 mL.'); }
+    }
+
+    function checkEx2_3_cm() {
+      const v = parseInputNumber(document.getElementById('ex2_3_cm').value);
+      if (v === 5) {
+        setFeedback('fb-ex2-3-cm', 'correct', 'Exact : $C_m = \\frac{12{,}5}{2{,}5} = \\mathbf{5\text{ g/L}}$.');
+        appState.lvl2['2-3-cm'] = true;
+        document.getElementById('q-p2-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-3-cm', 'incorrect', '12,5 / 2,5 = 5 g/L.'); }
+    }
+
+    function checkEx2_3_conf() {
+      const v = document.getElementById('ex2_3_conf').value.trim().toLowerCase();
+      if (v === 'oui' || v.includes('conforme')) {
+        setFeedback('fb-ex2-3-conf', 'correct', 'Exact : 5 g/L est bien compris entre 4 et 6 g/L (préparation conforme).');
+        appState.lvl2['2-3-conf'] = true;
+        document.getElementById('q-p2-3-2').classList.add('completed');
+        document.getElementById('exbox-p2-4').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-3-conf', 'incorrect', 'Répondez par "oui".'); }
+    }
+
+    function checkEx2_4_cm() {
+      const v = parseInputNumber(document.getElementById('ex2_4_cm').value);
+      if (v === 30) {
+        setFeedback('fb-ex2-4-cm', 'correct', 'Exact : $C_m = \\frac{15}{0{,}5} = \\mathbf{30\text{ g/L}}$ (solution sur-concentrée).');
+        appState.lvl2['2-4-cm'] = true;
+        document.getElementById('q-p2-4-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-cm', 'incorrect', '15 / 0,5 = 30 g/L.'); }
+    }
+
+    function checkEx2_4_v() {
+      const v = parseInputNumber(document.getElementById('ex2_4_v').value);
+      if (v === 0.75) {
+        setFeedback('fb-ex2-4-v', 'correct', 'Bravo ! $V_{\\text{final}} = \\frac{15}{20} = \\mathbf{0{,}75\text{ L}}$ (soit 750 mL). NIVEAU 2 VALIDÉ !');
+        appState.lvl2['2-4-v'] = true;
+        document.getElementById('q-p2-4-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-v', 'incorrect', '15 / 20 = 0,75 L.'); }
+    }
+
+    /* ================= NIVEAU 3 ================= */
+    function checkEx3_1_cm() {
+      const v = parseInputNumber(document.getElementById('ex3_1_cm').value);
+      if (v === 380) {
+        setFeedback('fb-ex3-1-cm', 'correct', 'Exact : $C_m = \\frac{95}{0{,}250} = \\mathbf{380\text{ g/L}} > 360\text{ g/L}$.');
+        appState.lvl3['3-1-cm'] = true;
+        document.getElementById('q-p3-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-cm', 'incorrect', '95 / 0,25 = 380 g/L.'); }
+    }
+
+    function checkEx3_1_mmax() {
+      const v = parseInputNumber(document.getElementById('ex3_1_mmax').value);
+      if (v === 90) {
+        setFeedback('fb-ex3-1-mmax', 'correct', 'Exact : $m_{\\max} = 360 \times 0{,}250 = \\mathbf{90\text{ g}}$.');
+        appState.lvl3['3-1-mmax'] = true;
+        document.getElementById('q-p3-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-mmax', 'incorrect', '360 * 0,25 = 90 g.'); }
+    }
+
+    function checkEx3_1_reste() {
+      const v = parseInputNumber(document.getElementById('ex3_1_reste').value);
+      if (v === 5) {
+        setFeedback('fb-ex3-1-reste', 'correct', 'Exact : $95 - 90 = \\mathbf{5\text{ g}}$ de cristaux de sel non dissous au fond.');
+        appState.lvl3['3-1-reste'] = true;
+        document.getElementById('q-p3-1-3').classList.add('completed');
+        document.getElementById('exbox-p3-2').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-reste', 'incorrect', '95 - 90 = 5 g.'); }
+    }
+
+    function checkEx3_2_cm1() {
+      const v = parseInputNumber(document.getElementById('ex3_2_cm1').value);
+      if (v === 100) {
+        setFeedback('fb-ex3-2-cm1', 'correct', 'Exact : $C_{m1} = \\frac{20}{0{,}200} = \\mathbf{100\text{ g/L}}$.');
+        appState.lvl3['3-2-cm1'] = true;
+        document.getElementById('q-p3-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-cm1', 'incorrect', '20 / 0,2 = 100 g/L.'); }
+    }
+
+    function checkEx3_2_k() {
+      const v = parseInputNumber(document.getElementById('ex3_2_k').value);
+      if (v === 5) {
+        setFeedback('fb-ex3-2-k', 'correct', 'Exact : $k = \\frac{100}{20} = \\mathbf{5}$ (facteur de dilution).');
+        appState.lvl3['3-2-k'] = true;
+        document.getElementById('q-p3-2-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-k', 'incorrect', '100 / 20 = 5.'); }
+    }
+
+    function checkEx3_2_cm2() {
+      const v = parseInputNumber(document.getElementById('ex3_2_cm2').value);
+      if (v === 20) {
+        setFeedback('fb-ex3-2-cm2', 'correct', 'Exact : $C_{m2} = \\frac{100}{5} = \\mathbf{20\text{ g/L}}$.');
+        appState.lvl3['3-2-cm2'] = true;
+        document.getElementById('q-p3-2-3').classList.add('completed');
+        document.getElementById('exbox-p3-3').classList.remove('locked-exercise');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-cm2', 'incorrect', '100 / 5 = 20 g/L.'); }
+    }
+
+    function checkEx3_3_cm() {
+      const v = parseInputNumber(document.getElementById('ex3_3_cm').value);
+      if (v === 58.5) {
+        setFeedback('fb-ex3-3-cm', 'correct', 'Exact : $C_m = \\frac{29{,}25}{0{,}5} = \\mathbf{58{,}5\text{ g/L}}$.');
+        appState.lvl3['3-3-cm'] = true;
+        document.getElementById('q-p3-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-3-cm', 'incorrect', '29,25 / 0,5 = 58,5 g/L.'); }
+    }
+
+    function checkEx3_3_n() {
+      const v = parseInputNumber(document.getElementById('ex3_3_n').value);
+      if (v === 0.5) {
+        setFeedback('fb-ex3-3-n', 'correct', 'Exact : $n = \\frac{29{,}25}{58{,}5} = \\mathbf{0{,}5\text{ mol}}$.');
+        appState.lvl3['3-3-n'] = true;
+        document.getElementById('q-p3-3-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-3-n', 'incorrect', '29,25 / 58,5 = 0,5 mol.'); }
+    }
+
+    function checkEx3_3_c() {
+      const v = parseInputNumber(document.getElementById('ex3_3_c').value);
+      if (v === 1 || v === 1.0) {
+        setFeedback('fb-ex3-3-c', 'correct', 'Bravo ! $C = \\frac{0{,}5}{0{,}5} = \\mathbf{1{,}0\text{ mol/L}}$. On vérifie bien $C_m = C \times M = 1 \times 58{,}5$. NIVEAU 3 COMPLÉTÉ !');
+        appState.lvl3['3-3-c'] = true;
+        document.getElementById('q-p3-3-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-3-c', 'incorrect', '0,5 / 0,5 = 1 mol/L.'); }
+    }
+
+    /* ================= LOGIQUE DU SIMULATEUR FIOLE ================= */
+    function updateSim() {
+      appState.sim.m = parseFloat(document.getElementById('sliderSimM').value);
+      appState.sim.v = parseInt(document.getElementById('sliderSimV').value, 10);
+
+      const m = appState.sim.m;
+      const v = appState.sim.v;
+      const vl = v / 1000;
+      const cm = (m / vl).toFixed(1);
+
+      document.getElementById('txtSimM').textContent = `${m.toFixed(1).replace('.', ',')} g`;
+      document.getElementById('txtSimV').textContent = `${v} mL (${vl.toFixed(3).replace('.', ',')} L)`;
+      document.getElementById('txtSimCm').textContent = `${cm.replace('.', ',')} g/L`;
+
+      const tFormule = document.getElementById('txtSimFormule');
+      tFormule.innerHTML = `$$C_m = \\frac{${m.toFixed(1).replace('.', ',')}\\text{ g}}{${vl.toFixed(3).replace('.', ',')}\\text{ L}} = ${cm.replace('.', ',')}\\text{ g/L}$$`;
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([tFormule]);
+      }
+
+      const diag = document.getElementById('txtSimDiagnostic');
+      const numCm = parseFloat(cm);
+      if (numCm < 10) {
+        diag.style.color = '#D97706';
+        diag.textContent = '⚠️ Solution très diluée (effet lustrant faible)';
+      } else if (numCm <= 30) {
+        diag.style.color = '#16A34A';
+        diag.textContent = '✓ Dosage parfait pour le rinçage lustrant au bac';
+      } else {
+        diag.style.color = '#A50F23';
+        diag.textContent = '⚠️ Solution très concentrée (risque de picotement sur cuir chevelu)';
+      }
+
+      drawSimCanvas(numCm, v);
+    }
+
+    function resetSimToSalon() {
+      document.getElementById('sliderSimM').value = 5;
+      document.getElementById('sliderSimV').value = 250;
+      updateSim();
+    }
+
+    function drawSimCanvas(cm, volMl) {
+      const canvas = document.getElementById('simCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // Col de la fiole
+      const neckW = 26;
+      const neckH = 65;
+      const neckX = (w - neckW) / 2;
+      const neckY = 20;
+
+      // Corps conique/arrondi
+      const bottomY = h - 15;
+      const bottomW = 85;
+      const bottomX = (w - bottomW) / 2;
+
+      // Intensité de teinte selon concentration
+      const alpha = Math.min(0.85, 0.15 + (cm / 60) * 0.7);
+
+      ctx.save();
+      // Tracé contour intérieur pour masque liquide
+      ctx.beginPath();
+      ctx.moveTo(neckX, neckY);
+      ctx.lineTo(neckX, neckY + neckH);
+      ctx.lineTo(bottomX, bottomY - 10);
+      ctx.quadraticCurveTo(bottomX, bottomY, bottomX + 15, bottomY);
+      ctx.lineTo(bottomX + bottomW - 15, bottomY);
+      ctx.quadraticCurveTo(bottomX + bottomW, bottomY, bottomX + bottomW, bottomY - 10);
+      ctx.lineTo(neckX + neckW, neckY + neckH);
+      ctx.lineTo(neckX + neckW, neckY);
+      ctx.closePath();
+      ctx.clip();
+
+      // Hauteur de remplissage (proportionnelle au volume sur 1000 mL)
+      const fillHeight = 35 + (volMl / 1000) * 115;
+      const fillY = bottomY - fillHeight;
+
+      ctx.fillStyle = `rgba(238, 60, 61, ${alpha})`;
+      ctx.fillRect(0, fillY, w, h);
+
+      // Ménisque en haut du liquide
+      ctx.strokeStyle = `rgba(165, 15, 35, 0.8)`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(neckX - 10, fillY);
+      ctx.quadraticCurveTo(w / 2, fillY + 4, neckX + neckW + 10, fillY);
+      ctx.stroke();
+
+      ctx.restore();
+
+      // Tracé verre de la fiole
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(neckX, neckY);
+      ctx.lineTo(neckX, neckY + neckH);
+      ctx.lineTo(bottomX, bottomY - 10);
+      ctx.quadraticCurveTo(bottomX, bottomY, bottomX + 15, bottomY);
+      ctx.lineTo(bottomX + bottomW - 15, bottomY);
+      ctx.quadraticCurveTo(bottomX + bottomW, bottomY, bottomX + bottomW, bottomY - 10);
+      ctx.lineTo(neckX + neckW, neckY + neckH);
+      ctx.lineTo(neckX + neckW, neckY);
+      ctx.stroke();
+
+      // Trait de jauge gravé
+      ctx.strokeStyle = '#A50F23';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(neckX - 4, neckY + 30);
+      ctx.lineTo(neckX + neckW + 4, neckY + 30);
+      ctx.stroke();
+
+      // Libellé fiole
+      ctx.fillStyle = '#64748B';
+      ctx.font = 'bold 9px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(`${volMl} mL`, w / 2, bottomY - 18);
+    }
+  </script>
+</body>
+</html>

@@ -75,5 +75,23 @@ window.APPLICATIONS = [
   "description": "Calculer des contours de miroirs, convertir les unités et estimer une commande.",
   "lien": "./applications/A1S5M2/index.html",
   "publication": "2026-11-13T07:50:00+04:00"
+},
+{
+  "code": "A1S6P1",
+  "publication": "2026-11-13T13:00:00+04:00",
+  "discipline": "Physique-Chimie",
+  "seance": "ANNÉE 1 • S6 P1",
+  "titre": "Dissolution & concentration massique",
+  "description": "Préparer une solution par dissolution et calculer sa concentration massique avec la relation Cm = m/V.",
+  "lien": "./applications/A1S6P1/index.html"
+},
+{
+  "code": "A1S7P1",
+  "publication": "2026-12-04T07:50:00+04:00",
+  "discipline": "Physique-Chimie",
+  "seance": "ANNÉE 1 • S7 P1",
+  "titre": "Tension, intensité & plaques signalétiques",
+  "description": "Lire une plaque signalétique, distinguer tension et intensité et étudier la charge électrique des appareils du salon.",
+  "lien": "./applications/A1S7P1/index.html"
 }
 ];
