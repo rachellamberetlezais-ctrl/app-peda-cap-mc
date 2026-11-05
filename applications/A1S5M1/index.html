@@ -1,12 +1,2669 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#A50F23"><title>Équations du premier degré | CMA Formation</title><link rel="stylesheet" href="lesson.css?v=2"></head><body>
-<a class="skip" href="#contenu">Aller au contenu</a><header><div class="header-inner"><img class="logo" src="logo.png" alt="CMA Formation"><div class="header-copy"><span class="eyebrow">Cours digitalisé · CAP Métiers de la Coiffure</span><h1 id="lesson-title">Équations du premier degré</h1><p id="lesson-subtitle"></p><p id="lesson-code">A1S5M1 · Mathématiques</p></div></div><div class="ribbon" aria-hidden="true"></div></header>
-<div class="preview">Prévisualisation formateur · Cette activité n’est pas ouverte dans le catalogue apprenant.</div>
-<div class="topline"><a href="../../index.html#mathematiques">← Portail Coiffure A1 · Semaine B</a><div class="progress"><progress id="progress-value" max="1" value="0" aria-label="Réponses correctes dans l’entraînement"></progress><span id="progress-text">Entraînement</span></div></div>
-<nav role="tablist" aria-label="Étapes de la séance"><button role="tab" id="tab-decouverte" aria-controls="decouverte" aria-selected="true">1 · Découverte</button><button role="tab" id="tab-cours" aria-controls="cours" aria-selected="false" tabindex="-1">2 · Cours & simulateur</button><button role="tab" id="tab-exercices" aria-controls="exercices" aria-selected="false" tabindex="-1">3 · Entraînement</button><button role="tab" id="tab-bilan" aria-controls="bilan" aria-selected="false" tabindex="-1">4 · Bilan</button></nav>
-<main id="contenu"><section class="game-hero" aria-label="Ton parcours de réussite"><div class="hero-copy"><span class="hero-kicker">LE SALON DES DÉFIS · MATHÉMATIQUES</span><h2>À toi de jouer<span>les maths du métier.</span></h2><p>Observe, essaie, réussis. Chaque défi te rapproche du prochain niveau.</p><div class="hero-rewards"><span id="badge-0" class="reward">☆ Socle CAP</span><span id="badge-1" class="reward">☆ Autonomie</span><span id="badge-2" class="reward">☆ Défi expert</span></div></div><div class="hero-art" aria-hidden="true"><svg viewBox="0 0 340 215"><circle cx="165" cy="110" r="100" fill="#ffffff0c"/><rect x="65" y="24" width="205" height="150" rx="20" fill="#fff5ec"/><rect x="75" y="34" width="185" height="130" rx="14" fill="#f7d3c0"/><path d="M165 70V140M100 95H230M100 95L80 125H120ZM230 95L210 125H250Z" stroke="#A50F23" stroke-width="5" fill="#ffefb9"/><text x="165" y="60" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="18" fill="#A50F23">22x + 14 = 190</text><rect x="130" y="175" width="70" height="29" rx="14" fill="#ffe4a0"/><text x="165" y="195" text-anchor="middle" font-family="Arial" font-weight="bold" fill="#772b18">x = ?</text><path d="M285 45v20M275 55h20M45 140v20M35 150h20" stroke="#ffc685" stroke-width="4"/></svg></div><div class="game-stats"><div><strong id="game-xp">0 XP</strong><span>Points d’entraînement</span></div><div><strong id="game-done">0 / 12</strong><span>Défis réussis</span></div><div><strong id="game-rank">En mission</strong><span>Ton étape</span></div><progress id="game-meter" max="12" value="0" aria-label="Défis réussis sur 12"></progress></div></section><p id="game-event" class="game-event" role="status" aria-live="polite"></p><details class="help"><summary>Outils d’aide · méthode et lecture</summary><p>1. Je repère les données et les unités. 2. Je choisis une formule. 3. Je fais une étape à la fois. 4. Je vérifie le résultat. Les virgules et les points décimaux sont acceptés.</p><button id="text-size" class="secondary" aria-pressed="false">Agrandir le texte</button></details>
-<section id="decouverte" class="tab-panel" role="tabpanel" aria-labelledby="tab-decouverte"><div class="lesson-intro"><div><h2 id="title-decouverte" tabindex="-1">Une situation du salon, un problème à résoudre</h2><p>Prérequis : <span id="prerequisites"></span></p></div><span class="pill">C1 · C2 · C3 · C4</span></div><div id="objectives" class="objectives"></div><div id="discovery-exercises"></div><div class="actions"><button class="coral" data-next="cours">Continuer vers le cours →</button></div></section>
-<section id="cours" class="tab-panel" role="tabpanel" aria-labelledby="tab-cours" hidden><div class="lesson-intro"><h2 id="title-cours" tabindex="-1">Comprendre et manipuler</h2><span class="pill">Cours & atelier</span></div><div id="course-content"></div><article id="simulation" class="card"></article><div class="actions"><button class="coral" data-next="exercices">Passer à l’entraînement →</button></div></section>
-<section id="exercices" class="tab-panel" role="tabpanel" aria-labelledby="tab-exercices" hidden><div class="lesson-intro"><h2 id="title-exercices" tabindex="-1">Ton parcours de défis</h2><span class="pill">3 niveaux · 12 défis</span></div><p id="game-hint" class="game-hint"></p><p class="game-rules">Chaque bonne réponse vérifiée rapporte 10 XP, une seule fois. Tous les défis d’un niveau doivent être réussis pour ouvrir le suivant. Les essais sont illimités, sans perte de points.</p><div class="level-picker" role="group" aria-label="Niveau d’entraînement"><button data-level="0" aria-pressed="true"><span class="level-dot" style="background:#2e8752" aria-hidden="true"></span>1 · Guidé</button><button data-level="1" aria-pressed="false"><span class="level-dot" style="background:#b88019" aria-hidden="true"></span>2 · Autonome</button><button data-level="2" aria-pressed="false"><span class="level-dot" style="background:#be3445" aria-hidden="true"></span>3 · Approfondissement</button></div><div class="mission-toolbar"><strong id="mission-counter"></strong><div id="mission-dots" aria-label="Choisir un défi"></div></div><div id="training-content"></div><div class="mission-navigation"><button id="mission-prev" class="secondary">← Défi précédent</button><button id="mission-next" class="primary">Défi suivant →</button></div><div class="actions"><button class="coral" data-next="bilan">Faire le bilan →</button></div></section>
-<section id="bilan" class="tab-panel" role="tabpanel" aria-labelledby="tab-bilan" hidden><div class="lesson-intro"><h2 id="title-bilan" tabindex="-1">Évaluation de la séance</h2><span class="pill">15–20 min · /8</span></div><p class="important">Réponds avant de consulter le corrigé. Le contrôle automatique porte sur les réponses fermées et numériques. Ton raisonnement et ta rédaction restent à apprécier avec le formateur.</p><div id="evaluation-content"></div><div class="actions"><button id="check-evaluation" class="primary">Vérifier le bilan</button><button id="print-bilan" class="secondary">Imprimer ce bilan</button></div><div id="eval-score" class="evaluation-score" role="status">Le bilan n’a pas encore été vérifié.</div></section>
-<details class="teacher-details"><summary>Repères pour la relecture formateur</summary><ul id="teacher-notes"></ul><p>Supports créés à partir du dossier pédagogique de Rachel Lamberet-Lezais. Version de test : les cartes sont réservées à l’accès formateur. Les fichiers GitHub Pages restent publics par lien direct. Les XP et badges sont des repères d’entraînement, sans valeur de certification. La progression est conservée tant que cette page reste ouverte. Aucun compte, nom ni réponse individuelle n’est transmis ou enregistré durablement.</p></details>
-</main><footer>CMA Formation Sainte-Clotilde · Rachel Lamberet-Lezais · CAP Coiffure A1 · A1S5M1</footer><noscript><p>Active JavaScript pour utiliser les exercices et les simulateurs.</p></noscript><script src="data.js"></script><script src="lesson.js?v=2"></script></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S5 M1 - Équations du premier degré ax + b = c | CAP Métiers de la Coiffure - CMA Sainte-Clotilde</title>
+
+  <!-- MathJax v3 pour le rendu mathématique fluide -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        enableMenu: false
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* Charte graphique officielle CMA Formation */
+    :root {
+      --cma-bordeaux: #A50F23;
+      --cma-bordeaux-dark: #7F0B1A;
+      --cma-corail: #EE3C3D;
+      --cma-corail-light: #FEE2E2;
+      --cma-bg: #F8FAFC;
+      --cma-card-bg: #FFFFFF;
+      --cma-text: #1E293B;
+      --cma-text-muted: #64748B;
+      --cma-border: #E2E8F0;
+      --cma-success: #16A34A;
+      --cma-success-bg: #DCFCE7;
+      --cma-warning: #D97706;
+      --cma-warning-bg: #FEF3C7;
+      --radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 14px rgba(165, 15, 35, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--cma-bg);
+      color: var(--cma-text);
+      line-height: 1.5;
+      font-size: 15px;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Puces officielles CMA Formation */
+    .icon-bullet {
+      height: 18px;
+      width: 18px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+      margin-right: 6px;
+    }
+
+    /* Header principal conforme aux directives CMA */
+    .app-header {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 20px;
+      padding-top: 14px;
+      padding-left: 16px;
+      padding-right: 16px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
+      border-bottom: 1px solid var(--cma-border);
+    }
+
+    .header-content {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .app-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-titles {
+      flex: 1;
+    }
+
+    .header-titles h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      line-height: 1.25;
+    }
+
+    .header-titles p {
+      font-size: 0.82rem;
+      color: var(--cma-text-muted);
+      margin-top: 3px;
+    }
+
+    /* Ruban officiel répété au bord inférieur du header */
+    .cma-wave-border {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: 14px;
+      margin: 0;
+      border: 0;
+      background-image: url("ruban_vague.png");
+      background-repeat: repeat-x;
+      background-size: 102.941176px 102.941176px;
+      background-position: left -46.941176px;
+    }
+
+    /* Barre de progression compacte de 8px */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background-color: #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cma-corail) 0%, var(--cma-bordeaux) 100%);
+      transition: width 0.4s ease;
+    }
+
+    /* Onglets de navigation tactiles Mobile-First */
+    .nav-container {
+      max-width: 960px;
+      margin: 12px auto 6px auto;
+      padding: 0 12px;
+      width: 100%;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-btn {
+      flex: 1 0 auto;
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--cma-border);
+      background: #FFFFFF;
+      color: var(--cma-text);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--cma-corail);
+      color: var(--cma-bordeaux);
+    }
+
+    .nav-btn.active {
+      background: var(--cma-bordeaux);
+      color: #FFFFFF;
+      border-color: var(--cma-bordeaux);
+      box-shadow: 0 2px 8px rgba(165, 15, 35, 0.3);
+    }
+
+    /* Conteneur principal */
+    .main-container {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px 14px 40px 14px;
+      flex: 1;
+    }
+
+    .step-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .step-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cartes & Éléments de présentation */
+    .card {
+      background: var(--cma-card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--cma-border);
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-callout {
+      background: #F1F5F9;
+      border-left: 4px solid var(--cma-corail);
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 14px;
+      font-size: 0.93rem;
+    }
+
+    .info-callout strong {
+      color: var(--cma-bordeaux);
+    }
+
+    /* Champs de saisie Mobile-First conformes */
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .cma-input {
+      font-size: 16px;
+      height: 44px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 8px;
+      color: var(--cma-text);
+      background: #FFFFFF;
+      min-width: 140px;
+      flex: 1;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .cma-input:focus {
+      outline: none;
+      border-color: var(--cma-corail);
+      box-shadow: 0 0 0 3px rgba(238, 60, 61, 0.15);
+    }
+
+    .input-unit {
+      font-weight: 600;
+      color: var(--cma-text-muted);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .btn {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--cma-bordeaux);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--cma-bordeaux-dark);
+    }
+
+    .btn-corail {
+      background: var(--cma-corail);
+      color: #FFFFFF;
+    }
+
+    .btn-corail:hover {
+      background: #D92B2C;
+    }
+
+    .btn-sm {
+      min-height: 38px;
+      padding: 6px 14px;
+      font-size: 0.88rem;
+    }
+
+    /* Retours pédagogiques bienveillants */
+    .feedback-box {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .feedback-box.correct {
+      display: block;
+      background: var(--cma-success-bg);
+      border: 1px solid var(--cma-success);
+      color: #065F46;
+    }
+
+    .feedback-box.incorrect {
+      display: block;
+      background: #FEE2E2;
+      border: 1px solid #EF4444;
+      color: #991B1B;
+    }
+
+    .feedback-box.hint {
+      display: block;
+      background: var(--cma-warning-bg);
+      border: 1px solid var(--cma-warning);
+      color: #92400E;
+    }
+
+    /* Accordéons pour le cours */
+    .accordion-item {
+      border: 1px solid var(--cma-border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    .accordion-header {
+      padding: 14px 16px;
+      min-height: 48px;
+      background: #FFFFFF;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .accordion-header::after {
+      content: '+';
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--cma-corail);
+    }
+
+    .accordion-item.open .accordion-header::after {
+      content: '−';
+    }
+
+    .accordion-body {
+      padding: 14px 16px;
+      border-top: 1px solid var(--cma-border);
+      background: #FDFDFE;
+      display: none;
+      font-size: 0.93rem;
+    }
+
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+
+    /* Tableaux adaptatifs */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid var(--cma-border);
+    }
+
+    .cma-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      min-width: 480px;
+    }
+
+    .cma-table th {
+      background: #F8FAFC;
+      color: var(--cma-bordeaux);
+      font-weight: 700;
+      padding: 10px;
+      border-bottom: 2px solid var(--cma-border);
+    }
+
+    .cma-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--cma-border);
+      background: #FFFFFF;
+    }
+
+    /* Simulateur Balance Algébrique Interactive */
+    .balance-sim-wrapper {
+      background: #FFFFFF;
+      border-radius: 12px;
+      border: 1px solid var(--cma-border);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .balance-canvas {
+      width: 100%;
+      height: 220px;
+      background: #FFFDFD;
+      border: 1px solid var(--cma-border);
+      border-radius: 8px;
+      display: block;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 600px) {
+      .controls-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .control-card {
+      background: #F8FAFC;
+      border: 1px solid var(--cma-border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .control-card label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      margin-bottom: 4px;
+    }
+
+    .sim-slider {
+      width: 100%;
+      height: 6px;
+      accent-color: var(--cma-bordeaux);
+      cursor: pointer;
+    }
+
+    .step-box-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .step-box-flow {
+        flex-direction: row;
+      }
+    }
+
+    .step-pill-card {
+      flex: 1;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 8px;
+      padding: 10px;
+      background: #FFFFFF;
+      font-size: 0.86rem;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .step-pill-card.active-step {
+      border-color: var(--cma-corail);
+      background: var(--cma-corail-light);
+      font-weight: bold;
+    }
+
+    /* Entraînement gamifié */
+    .score-banner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .score-card {
+      background: #FFFFFF;
+      border: 1px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .score-card.cap-highlight {
+      border-color: #86EFAC;
+      background: #F0FDF4;
+    }
+
+    .score-card-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--cma-text-muted);
+    }
+
+    .score-card-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      margin-top: 2px;
+    }
+
+    .level-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+    }
+
+    .level-card.active-lvl {
+      border-color: var(--cma-bordeaux);
+      box-shadow: 0 0 0 2px rgba(165, 15, 35, 0.1);
+    }
+
+    .level-card.locked {
+      background: #F1F5F9;
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+
+    .level-pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .pill-l1 { background: #DCFCE7; color: #15803D; }
+    .pill-l2 { background: #FEF3C7; color: #B45309; }
+    .pill-l3 { background: #EDE9FE; color: #6D28D9; }
+
+    .exercise-box {
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .exercise-box.locked-exercise {
+      display: none;
+    }
+
+    .exercise-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cma-text-muted);
+    }
+
+    .badge-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .tag-cap { background: var(--cma-corail-light); color: var(--cma-bordeaux); }
+    .tag-bonus { background: #FEF3C7; color: #B45309; }
+    .tag-expert { background: #EDE9FE; color: #6D28D9; }
+
+    .q-item {
+      padding: 12px;
+      border-radius: 8px;
+      background: #F8FAFC;
+      border: 1px solid var(--cma-border);
+      margin-bottom: 12px;
+    }
+
+    .q-item.completed {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+    }
+
+    .q-title {
+      font-weight: 600;
+      font-size: 0.94rem;
+      margin-bottom: 8px;
+      color: var(--cma-text);
+    }
+
+    /* Badges */
+    .badge-shelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .cma-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--cma-border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .cma-badge.unlocked {
+      border-color: #F59E0B;
+      background: #FFFBEB;
+      color: #92400E;
+    }
+
+    .cma-badge.locked {
+      opacity: 0.5;
+      background: #F1F5F9;
+      color: #94A3B8;
+    }
+
+    /* Attestation officielle */
+    .attestation-sheet {
+      background: #FFFFFF;
+      border: 3px double var(--cma-bordeaux);
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .att-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 2px solid var(--cma-corail);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .att-logo {
+      max-height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .att-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .att-sub {
+      font-size: 0.88rem;
+      color: var(--cma-text-muted);
+      font-weight: 600;
+    }
+
+    .att-learner {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--cma-bordeaux);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .att-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 16px 0;
+      background: #F8FAFC;
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid var(--cma-border);
+    }
+
+    @media (min-width: 600px) {
+      .att-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .att-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--cma-border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .att-sig-block {
+      text-align: right;
+      font-size: 0.85rem;
+    }
+
+    .att-sig-name {
+      font-weight: 700;
+      color: var(--cma-bordeaux);
+      margin-top: 4px;
+    }
+
+    /* Impression / Export PDF */
+    @media print {
+      body {
+        background: #FFFFFF;
+        color: #000000;
+      }
+      .app-header, .progress-track, .nav-container, .step-section:not(#step-4), .no-print, .btn, .input-row, input, select {
+        display: none !important;
+      }
+      #step-4 {
+        display: block !important;
+      }
+      .main-container {
+        padding: 0;
+        max-width: 100%;
+      }
+      .attestation-sheet {
+        border: 2px solid #A50F23;
+        box-shadow: none;
+        page-break-inside: avoid;
+        margin: 0;
+        padding: 20px;
+      }
+    }
+
+    .trainer-preview{padding:10px 16px;background:#fff3d9;text-align:center;font-size:12px;color:#715020}.trainer-preview a{color:#A50F23;font-weight:bold;margin-left:12px}
+    .balance-canvas{height:240px}.sim-description{margin:10px 0 0;color:#7F0B1A;font-size:14px;font-weight:600;min-height:24px}.cma-input{max-width:100%;min-width:0;width:160px}.control-card{min-width:0}.input-row{min-width:0}.card,.exercise-box,.q-item,.header-titles{min-width:0;overflow-wrap:anywhere}.step-pill-card{overflow-wrap:anywhere}button:disabled{opacity:.5;cursor:not-allowed}button:focus-visible,[role=button]:focus-visible{outline:3px solid #2879af;outline-offset:3px}.attestation-sheet{overflow-wrap:anywhere}.att-title{overflow-wrap:anywhere}.step-box-flow>*{min-width:0}mjx-container[display=true]{overflow-x:auto;overflow-y:hidden;max-width:100%}
+    @media(max-width:450px){.balance-sim-wrapper{padding:10px}.main-container{padding:12px}.card{padding:16px 12px}.attestation-sheet{padding:16px 12px}.input-row .btn{max-width:100%}.nav-btn{min-width:0;white-space:normal}.header-content{gap:10px}.app-logo{max-width:70px}.header-titles h1{font-size:1.1rem}.balance-canvas{height:240px}.att-grid{grid-template-columns:minmax(0,1fr)}.att-title{font-size:1.25rem}.att-sub{font-size:.8rem}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+
+  <!-- En-tête principal officiel CMA Formation -->
+  <header class="app-header">
+    <div class="header-content">
+      <img src="logo.png" alt="Logo CMA Formation" class="app-logo" >
+      <div class="header-titles">
+        <h1>Équations du premier degré : forme ax + b = c</h1>
+        <p>Mathématiques | CAP Métiers de la Coiffure | Année 1 - S5 M1 | CMA Formation Sainte-Clotilde (Rachel Lamberet-Lezais)</p>
+      </div>
+    </div>
+    <!-- Ruban officiel répété au bord inférieur du header -->
+    <div class="cma-wave-border"></div>
+  </header>
+
+  <div class="trainer-preview no-print"><strong>Aperçu formateur uniquement</strong> · <a href="../../index.html#mathematiques">← Portail Coiffure A1 · Semaine B</a></div>
+  <!-- Barre de progression générale compacte (8px) -->
+  <div class="progress-track" aria-label="Progression de la séance">
+    <div class="progress-bar-fill" id="globalProgressBar"></div>
+  </div>
+
+  <!-- Barre d'onglets tactiles Mobile-First -->
+  <div class="nav-container">
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-btn active" onclick="switchStep(1)" id="tab-step-1" role="tab" aria-selected="true">
+        <span>1.</span> Découverte
+      </button>
+      <button class="nav-btn" onclick="switchStep(2)" id="tab-step-2" role="tab" aria-selected="false">
+        <span>2.</span> Cours & Balance
+      </button>
+      <button class="nav-btn" onclick="switchStep(3)" id="tab-step-3" role="tab" aria-selected="false">
+        <span>3.</span> Entraînement
+      </button>
+      <button class="nav-btn" onclick="switchStep(4)" id="tab-step-4" role="tab" aria-selected="false">
+        <span>4.</span> Bilan & Attestation
+      </button>
+    </nav>
+  </div>
+
+  <!-- Conteneur principal SPA -->
+  <main class="main-container">
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 1 — DÉCOUVERTE                      -->
+    <!-- ========================================== -->
+    <section id="step-1" class="step-section active">
+      <div class="card">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Mise en situation : Bilan d'activité du samedi à Sainte-Clotilde
+        </h2>
+        <div class="info-callout">
+          <strong>Contexte professionnel réunionnais :</strong> Au salon « L'Atelier Kréol » à Sainte-Clotilde, Sarah, apprentie coiffeuse de 1re année, effectue le bilan financier du samedi soir avec sa tutrice.<br><br>
+          Durant la journée, Sarah a réalisé exclusivement des forfaits <strong>« Brushing & Soin Protecteur »</strong> facturés <strong>22,00 €</strong> l'unité.<br>
+          Le salon applique également une participation forfaitaire fixe de <strong>14,00 €</strong> pour la mise à disposition et l'entretien quotidien du matériel thermique (brosses céramiques, séchoirs ioniques à haute puissance, peignes carbone).<br>
+          Le montant total encaissé sur la journée par Sarah s'élève exactement à <strong>190,00 € TTC</strong>.<br><br>
+          La tutrice demande à Sarah d'établir sa fiche d'activité en calculant avec précision le nombre exact de prestations « Brushing » qu'elle a exécutées dans la journée.
+        </div>
+        <p style="font-weight: 600; color: var(--cma-bordeaux); margin-bottom: 8px;">
+          Problématique professionnelle :
+        </p>
+        <p style="font-size: 0.93rem; color: var(--cma-text); margin-bottom: 14px;">
+          Comment modéliser cette situation par une équation du premier degré du type $ax + b = c$ et isoler pas à pas l'inconnue $x$ pour déterminer le nombre exact de brushings réalisés ?
+        </p>
+
+        <!-- Tableau interactif de caisse -->
+        <div class="table-scroll">
+          <table class="cma-table">
+            <thead>
+              <tr>
+                <th>Tarif unitaire d'un brushing ($a$)</th>
+                <th>Forfait fixe de matériel ($b$)</th>
+                <th>Nombre de brushings ($x$)</th>
+                <th>Montant total encaissé ($c$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>22,00 €</strong></td>
+                <td><strong>14,00 €</strong></td>
+                <td><span style="color: var(--cma-bordeaux); font-weight: bold;">... ? (inconnue $x$)</span></td>
+                <td><strong>190,00 €</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Questions d'investigation -->
+      <div class="card">
+        <h3 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Questions d'investigation (Étape de découverte)
+        </h3>
+
+        <!-- Q1 -->
+        <div class="q-item" id="block-disc-1">
+          <div class="q-title">1. [C1 - S'informer] Identifier l'inconnue $x$ du problème et préciser ce qu'elle représente :</div>
+          <div class="input-row">
+            <select class="cma-input" id="disc_q1"><option value="">Choisir une réponse</option><option value="number">Le nombre de brushings réalisés</option><option value="price">Le prix d’un brushing</option><option value="fixed">Le forfait fixe</option></select>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc1()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-1"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-item" id="block-disc-2">
+          <div class="q-title">2. [C1 - S'informer] Exprimer le montant variable encaissé pour les brushings en fonction de $x$ et du prix unitaire $a = 22,00\text{ €}$ :</div>
+          <div class="input-row">
+            <span class="input-unit">Montant variable =</span>
+            <input type="text" class="cma-input" id="disc_q2" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc2()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-2"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-item" id="block-disc-3">
+          <div class="q-title">3. [C2 - Exécuter] Écrire l'égalité reliant le montant total (montant variable + forfait fixe de $14,00\text{ €}$) à la somme encaissée de $190,00\text{ €}$ :</div>
+          <div class="input-row">
+            <span class="input-unit">Équation :</span>
+            <input type="text" class="cma-input" id="disc_q3" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc3()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-3"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-item" id="block-disc-4">
+          <div class="q-title">4. [C2 - Exécuter] Résoudre l'équation $22x + 14 = 190$ en deux étapes : d'abord soustraire 14 aux deux membres, puis diviser par 22. Donner la valeur de $x$ :</div>
+          <div class="input-row">
+            <span class="input-unit">$x =$</span>
+            <input type="text" inputmode="numeric" class="cma-input" id="disc_q4" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc4()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-4"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-item" id="block-disc-5">
+          <div class="q-title">5. [C3 - Appliquer] Vérifier la solution trouvée en calculant le membre de gauche $22 \times x + 14$ :</div>
+          <div class="input-row">
+            <span class="input-unit">Calcul de vérification =</span>
+            <input type="text" inputmode="numeric" class="cma-input" id="disc_q5" placeholder="Votre résultat...">
+            <span class="input-unit">€</span>
+            <button class="btn btn-primary btn-sm" onclick="checkDisc5()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-5"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-item" id="block-disc-6">
+          <div class="q-title">6. [C4 - Communiquer] Rédiger la conclusion professionnelle à destination de la tutrice en précisant le nombre de clientes coiffées par Sarah :</div>
+          <div class="input-row">
+            <span class="input-unit">Nombre de clientes =</span>
+            <input type="text" inputmode="numeric" class="cma-input" id="disc_q6" placeholder="Votre résultat...">
+            <button class="btn btn-primary btn-sm" onclick="checkDisc6()">Valider</button>
+          </div>
+          <div class="feedback-box" id="fb-disc-6"></div>
+        </div>
+
+        <div style="text-align: right; margin-top: 14px;">
+          <button class="btn btn-corail" onclick="switchStep(2)">Passer au Cours & Balance Algébrique →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 2 — COURS ET SIMULATEUR INTERACTIF   -->
+    <!-- ========================================== -->
+    <section id="step-2" class="step-section">
+      <div class="card">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Synthèse de cours : Équations du type ax + b = c
+        </h2>
+
+        <div class="accordion-item open">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            1. Définition d'une équation du premier degré
+          </div>
+          <div class="accordion-body">
+            <p>• Une <strong>équation du premier degré à une inconnue $x$</strong> de la forme $ax + b = c$ (avec $a \neq 0$) comporte :</p>
+            <ul style="padding-left: 20px; margin: 8px 0;">
+              <li>Un terme variable dépendant de l'inconnue : $ax$ ($a$ étant le coefficient multiplicateur, par exemple le prix unitaire d'un brushing).</li>
+              <li>Deux termes constants indépendants : $b$ (terme fixe ajouté) et $c$ (valeur totale cible).</li>
+            </ul>
+            <p>• <strong>Résoudre l'équation</strong> consiste à déterminer la valeur numérique unique de $x$ qui rend l'égalité vraie.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            2. Méthode universelle de résolution pas à pas (Principe de la balance)
+          </div>
+          <div class="accordion-body">
+            <p>Une équation fonctionne comme une <strong>balance de Roberval à l'équilibre</strong> : toute opération effectuée sur le membre de gauche doit obligatoirement être appliquée au membre de droite pour maintenir l'égalité.</p>
+            <div style="background: #FFF5F5; border-left: 4px solid var(--cma-bordeaux); padding: 10px; margin: 10px 0; border-radius: 4px;">
+              <strong>Étape 1 : Isoler le terme variable $ax$</strong><br>
+              On élimine le terme constant $+ b$ en soustrayant $b$ aux deux membres de l'égalité :<br>
+              $$ax + b - b = c - b \iff ax = c - b$$
+              <br>
+              <strong>Étape 2 : Isoler l'inconnue $x$</strong><br>
+              On élimine le coefficient multiplicateur $a$ en divisant les deux membres par $a$ ($a \neq 0$) :<br>
+              $$\frac{ax}{a} = \frac{c - b}{a} \iff x = \frac{c - b}{a}$$
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            3. Exemple type pas à pas
+          </div>
+          <div class="accordion-body">
+            <p>Résoudre $4x + 15 = 47$ :</p>
+            <ul style="padding-left: 20px; margin: 8px 0;">
+              <li><strong>Étape 1 :</strong> On soustrait 15 des deux côtés :<br>
+                $$4x = 47 - 15 = 32$$
+              </li>
+              <li><strong>Étape 2 :</strong> On divise par 4 des deux côtés :<br>
+                $$x = \frac{32}{4} = 8$$
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            4. Vérification obligatoire en situation professionnelle
+          </div>
+          <div class="accordion-body">
+            <p>Avant de valider une facture ou un relevé d'activité de salon, on réinjecte la solution $x$ trouvée dans le membre de gauche :</p>
+            <p style="text-align: center; font-weight: bold; margin: 8px 0; color: var(--cma-bordeaux);">
+              $$4 \times 8 + 15 = 32 + 15 = 47$$
+            </p>
+            <p>Le résultat obtenu est bien égal au membre de droite (47). La solution $x = 8$ est formellement certifiée exacte.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulateur interactif : Balance Algébrique -->
+      <div class="card">
+        <h3 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Simulateur interactif : Balance Algébrique d'Équation ax + b = c
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--cma-text-muted); margin-bottom: 12px;">
+          Ajustez les curseurs $a$, $b$ et $c$ puis suivez la résolution étape par étape. Visualisez l'état d'équilibre parfait de la balance à chaque manipulation algébrique.
+        </p>
+
+        <div class="balance-sim-wrapper">
+          <!-- Canvas de la balance -->
+          <canvas id="balanceCanvas" class="balance-canvas" width="600" height="240" role="img" aria-label="Balance algébrique"></canvas><p id="sim-description" class="sim-description" role="status"></p>
+
+          <!-- Contrôles des paramètres -->
+          <div class="controls-grid">
+            <div class="control-card">
+              <label>Prix unitaire / Coeff $a$ : <span id="valA" style="font-size: 1rem; font-weight: bold;">22</span></label>
+              <input type="range" class="sim-slider" id="sliderA" min="1" max="50" step="1" value="22" oninput="updateSimParams()">
+            </div>
+            <div class="control-card">
+              <label>Forfait fixe $b$ : <span id="valB" style="font-size: 1rem; font-weight: bold;">14</span></label>
+              <input type="range" class="sim-slider" id="sliderB" min="0" max="60" step="1" value="14" oninput="updateSimParams()">
+            </div>
+            <div class="control-card">
+              <label>Total facturé $c$ : <span id="valC" style="font-size: 1rem; font-weight: bold;">190</span></label>
+              <input type="range" class="sim-slider" id="sliderC" min="20" max="350" step="2" value="190" oninput="updateSimParams()">
+            </div>
+          </div>
+
+          <!-- Boutons de progression pas à pas -->
+          <div class="step-box-flow">
+            <div class="step-pill-card active-step" id="simStepCard0">
+              <strong>Équation initiale :</strong><br>
+              <span id="txtStep0">$22x + 14 = 190$</span>
+            </div>
+            <div class="step-pill-card" id="simStepCard1">
+              <strong>Étape 1 : Soustraction</strong><br>
+              <span id="txtStep1">Soustraction de $b$</span>
+            </div>
+            <div class="step-pill-card" id="simStepCard2">
+              <strong>Étape 2 : Division & Solution</strong><br>
+              <span id="txtStep2">Division par $a$</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px; justify-content: center; margin-top: 14px; flex-wrap: wrap;">
+            <button class="btn btn-sm btn-primary" onclick="setSimStep(0)">1. Poser l'égalité</button>
+            <button class="btn btn-sm btn-primary" onclick="setSimStep(1)">2. Soustraire b</button>
+            <button class="btn btn-sm btn-primary" onclick="setSimStep(2)">3. Diviser par a</button>
+            <button class="btn btn-sm btn-corail" onclick="resetSimToScenario()">Réinitialiser au salon (22x+14=190)</button>
+          </div>
+        </div>
+
+        <div style="text-align: right; margin-top: 14px;">
+          <button class="btn btn-corail" onclick="switchStep(3)">Accéder aux Entraînements Gamifiés →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 3 — ENTRAÎNEMENT GAMIFIÉ             -->
+    <!-- ========================================== -->
+    <section id="step-3" class="step-section">
+
+      <!-- Barre de score différenciée -->
+      <div class="score-banner">
+        <div class="score-card cap-highlight">
+          <div class="score-card-title">Socle CAP (Niveau 1)</div>
+          <div class="score-card-val" id="capProgressTxt">0%</div>
+        </div>
+        <div class="score-card">
+          <div class="score-card-title">Bonus Élite / Dépassement</div>
+          <div class="score-card-val" id="bonusScoreTxt">+0 pts</div>
+        </div>
+      </div>
+
+      <!-- Sélecteurs de niveaux -->
+      <div class="level-card active-lvl" id="hdr-lvl-1" onclick="switchLvlTab(1)">
+        <div>
+          <span class="level-pill pill-l1">NIVEAU 1 🟢</span>
+          <div style="font-weight: 700; margin-top: 4px;">Débutant / Socle CAP (5 Exercices complets)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Valide 100% du socle CAP et débloque l’attestation pédagogique</div>
+        </div>
+        <span id="badge-status-1" style="font-weight: bold; color: var(--cma-bordeaux);">En cours</span>
+      </div>
+
+      <div class="level-card locked" id="hdr-lvl-2" onclick="switchLvlTab(2)">
+        <div>
+          <span class="level-pill pill-l2">NIVEAU 2 🟡</span>
+          <div style="font-weight: 700; margin-top: 4px;">Avancé / Dépassement (4 Exercices)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Coiffeur à domicile, réapprovisionnement, décoloration, décimaux</div>
+        </div>
+        <span id="badge-status-2" style="font-size: 0.82rem; color: var(--cma-text-muted);">🔒 Verrouillé</span>
+      </div>
+
+      <div class="level-card locked" id="hdr-lvl-3" onclick="switchLvlTab(3)">
+        <div>
+          <span class="level-pill pill-l3">NIVEAU 3 🔴</span>
+          <div style="font-weight: 700; margin-top: 4px;">Expert / Excellence & Évaluation (3 Situations + Éval)</div>
+          <div style="font-size: 0.78rem; color: var(--cma-text-muted);">Audit journée mariage, formules contrat, tableur et Évaluation formelle</div>
+        </div>
+        <span id="badge-status-3" style="font-size: 0.82rem; color: var(--cma-text-muted);">🔒 Verrouillé</span>
+      </div>
+
+      <!-- ================= NIVEAU 1 ================= -->
+      <div id="cnt-lvl-1">
+
+        <!-- Ex 1.1 -->
+        <div class="exercise-box" id="exbox-m1-1">
+          <div class="exercise-meta">
+            <span>Exercice 1.1 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Résolution guidée en deux étapes
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Résoudre l'équation $3x + 8 = 29$ en complétant les étapes de calcul pas à pas.
+          </p>
+
+          <div class="q-item" id="q-m1-1-1">
+            <div class="q-title">1. Soustraire 8 aux deux membres : $3x = 29 - 8 =$</div>
+            <div class="input-row">
+              <span class="input-unit">$3x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_1_sub" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_sub()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-sub"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-1-2">
+            <div class="q-title">2. Diviser par 3 : $x = \frac{21}{3} =$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_1_div" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_div()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-div"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-1-3">
+            <div class="q-title">3. Vérification : Calculer $3 \times 7 + 8 =$</div>
+            <div class="input-row">
+              <span class="input-unit">Résultat =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_1_verif" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_1_verif()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-1-verif"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-m1-2">
+          <div class="exercise-meta">
+            <span>Exercice 1.2 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Résolution d'équations élémentaires directes
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Résoudre dans l'ensemble des réels les équations suivantes :
+          </p>
+
+          <div class="q-item" id="q-m1-2-1">
+            <div class="q-title">a) $5x + 7 = 37$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_2_a" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_a()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-a"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-2-2">
+            <div class="q-title">b) $2x + 12 = 30$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_2_b" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_b()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-b"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-2-3">
+            <div class="q-title">c) $4x - 6 = 26$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_2_c" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_c()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-c"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-2-4">
+            <div class="q-title">d) $6x - 9 = 27$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_2_d" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_2_d()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-2-d"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-m1-3">
+          <div class="exercise-meta">
+            <span>Exercice 1.3 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Prestations 'Brushing et Soin Express' à Saint-Denis
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Dans un salon dionysien, un apprenti facture chaque brushing 20,00 €. Il ajoute un forfait fixe de 10,00 € pour les produits d'hygiène de la journée. Le montant total encaissé sur sa session est de 110,00 €.
+          </p>
+
+          <div class="q-item" id="q-m1-3-1">
+            <div class="q-title">1. Poser l'équation reliant le nombre de brushings $x$ à la recette totale :</div>
+            <div class="input-row">
+              <span class="input-unit">Équation :</span>
+              <input type="text" class="cma-input" id="ex1_3_eq" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_eq()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-eq"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-3-2">
+            <div class="q-title">2. Résoudre l'équation pour déterminer le nombre de clientes coiffées ($x$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_3_ans" placeholder="Votre résultat...">
+              <span class="input-unit">clientes</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_3_ans()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-3-ans"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.4 -->
+        <div class="exercise-box locked-exercise" id="exbox-m1-4">
+          <div class="exercise-meta">
+            <span>Exercice 1.4 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Vente de kits de shampooings avec panier cadeau
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Un salon vend des flacons de shampooing à 15,00 € l'unité dans une corbeille d'emballage cadeau facturée 5,00 €. Une cliente règle une facture totale de 65,00 € pour l'achat de $x$ flacons et de la corbeille.
+          </p>
+
+          <div class="q-item" id="q-m1-4-1">
+            <div class="q-title">1. Écrire l'équation modélisant cet achat ($15x + 5 = 65$) :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex1_4_eq" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_4_eq()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-4-eq"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-4-2">
+            <div class="q-title">2. Calculer le nombre de flacons achetés ($x$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_4_ans" placeholder="Votre résultat...">
+              <span class="input-unit">flacons</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_4_ans()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-4-ans"></div>
+          </div>
+        </div>
+
+        <!-- Ex 1.5 -->
+        <div class="exercise-box locked-exercise" id="exbox-m1-5">
+          <div class="exercise-meta">
+            <span>Exercice 1.5 / 1.5</span>
+            <span class="badge-tag tag-cap">Socle CAP</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Test et validation d'une solution
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            On considère l'équation $8x + 14 = 78$ modélisant la vente de soins capillaires.
+          </p>
+
+          <div class="q-item" id="q-m1-5-1">
+            <div class="q-title">1. Tester si $x = 7$ est solution en calculant $8 \times 7 + 14$ :</div>
+            <div class="input-row">
+              <span class="input-unit">Résultat pour $x=7$ :</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_5_t7" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_t7()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-t7"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-5-2">
+            <div class="q-title">2. Tester si $x = 8$ est solution en calculant $8 \times 8 + 14$ :</div>
+            <div class="input-row">
+              <span class="input-unit">Résultat pour $x=8$ :</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_5_t8" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_t8()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-t8"></div>
+          </div>
+
+          <div class="q-item" id="q-m1-5-3">
+            <div class="q-title">3. Conclure sur la valeur exacte de la solution $x$ :</div>
+            <div class="input-row">
+              <span class="input-unit">Solution $x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex1_5_concl" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx1_5_concl()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex1-5-concl"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= NIVEAU 2 ================= -->
+      <div id="cnt-lvl-2" style="display: none;">
+
+        <!-- Ex 2.1 -->
+        <div class="exercise-box" id="exbox-m2-1">
+          <div class="exercise-meta">
+            <span>Exercice 2.1 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Élite</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Facturation d'un coiffeur à domicile dans les Hauts de Sainte-Marie
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Un coiffeur à domicile facture un forfait déplacement fixe de 18,00 € pour couvrir ses frais de route, plus 24,00 € par coupe-brushing réalisée ($x$). Lors d'une matinée auprès d'une même famille, il encaisse un total de 114,00 €.
+          </p>
+
+          <div class="q-item" id="q-m2-1-1">
+            <div class="q-title">1. Traduire cette situation par une équation de la forme $ax + b = c$ :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex2_1_eq" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_eq()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-eq"></div>
+          </div>
+
+          <div class="q-item" id="q-m2-1-2">
+            <div class="q-title">2. Résoudre l'équation pour trouver le nombre de coupes réalisées ($x$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex2_1_ans" placeholder="Votre résultat...">
+              <span class="input-unit">coupes</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_ans()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-ans"></div>
+          </div>
+
+          <div class="q-item" id="q-m2-1-3">
+            <div class="q-title">3. Vérification : Calculer $24 \times 4 + 18$ :</div>
+            <div class="input-row">
+              <span class="input-unit">Total calculé =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex2_1_verif" placeholder="Votre résultat...">
+              <span class="input-unit">€</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_1_verif()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-1-verif"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-m2-2">
+          <div class="exercise-meta">
+            <span>Exercice 2.2 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Élite</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Réapprovisionnement de matériel thermique professionnel
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            La gérante d'un salon commande $x$ lisseurs professionnels à 45,00 € l'unité auprès d'un grossiste local. La livraison express à Sainte-Clotilde fait l'objet de frais de port fixes de 15,00 €. Le montant total de la facture s'élève à 285,00 € TTC.
+          </p>
+
+          <div class="q-item" id="q-m2-2-1">
+            <div class="q-title">1. Écrire l'équation vérifiée par $x$ :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex2_2_eq" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_2_eq()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-2-eq"></div>
+          </div>
+
+          <div class="q-item" id="q-m2-2-2">
+            <div class="q-title">2. Calculer le nombre de fers à lisser commandés ($x$) :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex2_2_ans" placeholder="Votre résultat...">
+              <span class="input-unit">lisseurs</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_2_ans()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-2-ans"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-m2-3">
+          <div class="exercise-meta">
+            <span>Exercice 2.3 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Élite</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Forfait décoloration et patine avec supplément chevelure longue
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Pour une prestation technique complexe, le salon facture une dose de base de décolorant à 35,00 €, augmentée de 8,50 € par dose supplémentaire $x$ de crème oxydante à 30 volumes. La cliente règle une note finale de 69,00 €.
+          </p>
+
+          <div class="q-item" id="q-m2-3-1">
+            <div class="q-title">1. Poser l'équation reliant $x$ au montant de 69,00 € :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex2_3_eq" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_3_eq()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-3-eq"></div>
+          </div>
+
+          <div class="q-item" id="q-m2-3-2">
+            <div class="q-title">2. Résoudre l'équation pour déterminer le nombre de doses supplémentaires $x$ :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex2_3_ans" placeholder="Votre résultat...">
+              <span class="input-unit">doses</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_3_ans()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-3-ans"></div>
+          </div>
+        </div>
+
+        <!-- Ex 2.4 -->
+        <div class="exercise-box locked-exercise" id="exbox-m2-4">
+          <div class="exercise-meta">
+            <span>Exercice 2.4 / 2.4</span>
+            <span class="badge-tag tag-bonus">Bonus Élite</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Équations avec coefficients décimaux
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Résoudre dans l'ensemble des réels les équations suivantes :
+          </p>
+
+          <div class="q-item" id="q-m2-4-1">
+            <div class="q-title">a) $3,5x + 12 = 47$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex2_4_a" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_a()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-a"></div>
+          </div>
+
+          <div class="q-item" id="q-m2-4-2">
+            <div class="q-title">b) $2,4x - 5 = 19$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex2_4_b" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_b()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-b"></div>
+          </div>
+
+          <div class="q-item" id="q-m2-4-3">
+            <div class="q-title">c) $1,5x + 4,5 = 22,5$</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex2_4_c" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx2_4_c()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex2-4-c"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= NIVEAU 3 ================= -->
+      <div id="cnt-lvl-3" style="display: none;">
+
+        <!-- Ex 3.1 -->
+        <div class="exercise-box" id="exbox-m3-1">
+          <div class="exercise-meta">
+            <span>Exercice 3.1 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Audit de rentabilité d'une journée 'Spéciale Mariage' à Saint-Gilles
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Pour un événement balnéaire, une équipe loue un salon éphémère (coût fixe 120,00 €). Le forfait est à 55,00 € par cliente avec 10,00 € de consommables, soit une marge brute unitaire de 45,00 €. En fin de journée, le bénéfice net s'élève à 330,00 € ($45x - 120 = 330$).
+          </p>
+
+          <div class="q-item" id="q-m3-1-1">
+            <div class="q-title">1. Écrire l'équation modélisant le bénéfice net :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex3_1_eq" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_eq()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-eq"></div>
+          </div>
+
+          <div class="q-item" id="q-m3-1-2">
+            <div class="q-title">2. Résoudre l'équation pour déterminer le nombre de clientes $x$ coiffées :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex3_1_ans" placeholder="Votre résultat...">
+              <span class="input-unit">clientes</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_ans()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-ans"></div>
+          </div>
+
+          <div class="q-item" id="q-m3-1-3">
+            <div class="q-title">3. Si l'équipe avait reçu 12 clientes au total, quel aurait été le bénéfice net ? ($45 \times 12 - 120$)</div>
+            <div class="input-row">
+              <span class="input-unit">Bénéfice net =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex3_1_benef12" placeholder="Votre résultat...">
+              <span class="input-unit">€</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_1_benef12()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-1-benef12"></div>
+          </div>
+        </div>
+
+        <!-- Ex 3.2 -->
+        <div class="exercise-box locked-exercise" id="exbox-m3-2">
+          <div class="exercise-meta">
+            <span>Exercice 3.2 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Comparaison de deux formules de rémunération d'un artisan coiffeur
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Formule 1 : Fixe de 350 € + 15 € par prestation ($R_1(x) = 15x + 350$).<br>
+            Formule 2 : Fixe de 200 € + 20 € par prestation ($R_2(x) = 20x + 200$).
+          </p>
+
+          <div class="q-item" id="q-m3-2-1">
+            <div class="q-title">1. Poser l'égalité $R_2(x) = R_1(x)$ :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex3_2_eq" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_eq()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-eq"></div>
+          </div>
+
+          <div class="q-item" id="q-m3-2-2">
+            <div class="q-title">2. En soustrayant $15x$ aux deux membres, ramener à la forme $ax + b = c$ :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="ex3_2_red" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_red()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-red"></div>
+          </div>
+
+          <div class="q-item" id="q-m3-2-3">
+            <div class="q-title">3. Résoudre l'équation pour déterminer le nombre de prestations $x$ d'équilibre :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="ex3_2_ans" placeholder="Votre résultat...">
+              <span class="input-unit">prestations</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_ans()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-ans"></div>
+          </div>
+
+          <div class="q-item" id="q-m3-2-4">
+            <div class="q-title">4. Pour 35 prestations dans le mois, quelle formule rapporte le plus ? (Formule 1 ou Formule 2)</div>
+            <div class="input-row">
+              <select class="cma-input" id="ex3_2_choix"><option value="">Choisir une réponse</option><option value="1">Formule 1</option><option value="2">Formule 2</option></select>
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_2_choix()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-2-choix"></div>
+          </div>
+        </div>
+
+        <!-- Ex 3.3 -->
+        <div class="exercise-box locked-exercise" id="exbox-m3-3">
+          <div class="exercise-meta">
+            <span>Exercice 3.3 / 3.3</span>
+            <span class="badge-tag tag-expert">Expert / Excellence</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Automatisation sur tableur et algorithmique
+          </h4>
+          <p style="font-size: 0.92rem; margin-bottom: 12px;">
+            Dans un tableur : Cellule A2 = $a$, Cellule B2 = $b$, Cellule C2 = $c$. On souhaite calculer $x$ en D2.
+          </p>
+
+          <div class="q-item" id="q-m3-3-1">
+            <div class="q-title">1. Écrire la formule tableur à insérer en cellule D2 :</div>
+            <div class="input-row">
+              <span class="input-unit">D2 =</span>
+              <input type="text" class="cma-input" id="ex3_3_formule" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEx3_3_formule()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-ex3-3-formule"></div>
+          </div>
+        </div>
+
+        <!-- ÉVALUATION FORMELLE -->
+        <div class="exercise-box" id="exbox-eval" style="border: 2px solid var(--cma-bordeaux);">
+          <div class="exercise-meta">
+            <span style="color: var(--cma-bordeaux); font-weight: 800;">ÉVALUATION FORMELLE SOMMATIVE</span>
+            <span class="badge-tag tag-expert">Barème : /8 pts</span>
+          </div>
+          <h4 style="color: var(--cma-bordeaux); margin-bottom: 8px;">
+            <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+            Contrôle de conformité : Suivi d'activité et facturation du forfait brushing
+          </h4>
+          <div class="info-callout">
+            <strong>Contexte de l'épreuve :</strong> Au salon « L'Atelier Kréol » à Sainte-Clotilde, un apprenti fait le point sur son activité du samedi. Il a réalisé des forfaits « Coupe & Brushing » facturés au tarif unique de <strong>24,00 €</strong> par cliente. Le salon facture également un forfait fixe d'entretien et de désinfection des postes de travail de <strong>16,00 €</strong> pour la journée. Le chiffre d'affaires total encaissé par l'apprenti sur sa feuille de caisse s'élève à <strong>184,00 € TTC</strong>.
+          </div>
+
+          <div class="q-item" id="q-eval-1">
+            <div class="q-title">1. [C1 - 1 pt] Que représente l'inconnue $x$ dans ce problème ?</div>
+            <div class="input-row">
+              <select class="cma-input" id="eval_q1"><option value="">Choisir une réponse</option><option value="price">Le prix d’une coupe</option><option value="number">Le nombre de prestations réalisées</option><option value="time">La durée totale</option></select>
+              <button class="btn btn-primary btn-sm" onclick="checkEval1()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-eval-1"></div>
+          </div>
+
+          <div class="q-item" id="q-eval-2">
+            <div class="q-title">2. [C1 - 2 pts] Écrire l'équation du premier degré de la forme $ax + b = c$ modélisant la recette :</div>
+            <div class="input-row">
+              <input type="text" class="cma-input" id="eval_q2" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEval2()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-eval-2"></div>
+          </div>
+
+          <div class="q-item" id="q-eval-3">
+            <div class="q-title">3. [C2 - 2 pts] Résoudre algébriquement cette équation pour trouver $x$ :</div>
+            <div class="input-row">
+              <span class="input-unit">$x =$</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="eval_q3" placeholder="Votre résultat...">
+              <button class="btn btn-primary btn-sm" onclick="checkEval3()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-eval-3"></div>
+          </div>
+
+          <div class="q-item" id="q-eval-4">
+            <div class="q-title">4. [C3 - 1 pt] Vérifier en calculant le montant de gauche $24 \times x + 16$ :</div>
+            <div class="input-row">
+              <span class="input-unit">Montant total =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="eval_q4" placeholder="Votre résultat...">
+              <span class="input-unit">€</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEval4()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-eval-4"></div>
+          </div>
+
+          <div class="q-item" id="q-eval-5">
+            <div class="q-title">5. [C4 - 2 pts] Sachant qu'un brushing dure en moyenne 45 minutes, calculer le temps total consacré à cette prestation pour les 7 clientes :</div>
+            <div class="input-row">
+              <span class="input-unit">Temps total =</span>
+              <input type="text" inputmode="numeric" class="cma-input" id="eval_q5" placeholder="Votre résultat...">
+              <span class="input-unit">minutes</span>
+              <button class="btn btn-primary btn-sm" onclick="checkEval5()">Valider</button>
+            </div>
+            <div class="feedback-box" id="fb-eval-5"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ÉTAPE 4 — BILAN ET ATTESTATION OFFICIELLE  -->
+    <!-- ========================================== -->
+    <section id="step-4" class="step-section">
+      <div class="card no-print">
+        <h2 class="card-title">
+          <img src="fleche_rouge.png" alt="" class="icon-bullet" onerror="this.style.display='none'">
+          Bilan de compétences & Attestation pédagogique de séance
+        </h2>
+        <p style="font-size: 0.93rem; color: var(--cma-text-muted); margin-bottom: 12px;">
+          Félicitations pour vos réussites en résolution d'équations professionnelles ! Veuillez inscrire votre prénom et nom ci-dessous pour actualiser et imprimer votre attestation pédagogique de séance.
+        </p>
+
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-weight: 600; font-size: 0.92rem; margin-bottom: 6px;">
+            Nom et Prénom de l'apprenant(e) :
+          </label>
+          <div class="input-row">
+            <input type="text" class="cma-input" id="studentNameInput" placeholder="Votre résultat..." oninput="updateStudentName(this.value)">
+            <button class="btn btn-corail" id="print-attestation" onclick="window.print()" disabled>
+              🖨️ Imprimer / Exporter en PDF
+            </button>
+          </div>
+        </div>
+
+        <div class="badge-shelf">
+          <div class="cma-badge locked" id="badge-stat-cap">
+            <span>⚖️</span>
+            <span>Maître de l'Équation Linéaire (Socle CAP)</span>
+          </div>
+          <div class="cma-badge locked" id="badge-stat-bonus">
+            <span>⭐</span>
+            <span>Expert Facturation Salon & Coefficients Décimaux</span>
+          </div>
+          <div class="cma-badge locked" id="badge-stat-master">
+            <span>🏆</span>
+            <span>Élite Algébrique & Modélisation Tableur</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attestation officielle imprimable -->
+      <div class="attestation-sheet" id="attestationPrintArea"><p id="att-validation-status" class="info-callout">Parcours en cours : le socle n’est pas encore validé.</p>
+        <div class="att-header">
+          <img src="logo.png" alt="Logo CMA Formation" class="att-logo" >
+          <div>
+            <h2 class="att-title">Attestation Pédagogique de Réussite</h2>
+            <div class="att-sub">CMA Formation de Sainte-Clotilde • Île de La Réunion</div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.95rem; line-height: 1.6; color: var(--cma-text);">
+          <p>Bilan automatique de l’entraînement de l’apprenant(e) :</p>
+          <p style="text-align: center; margin: 12px 0;">
+            <span class="att-learner" id="attestationLearnerDisplay">APPRENANT(E) EN FORMATION</span>
+          </p>
+          <p>
+            a travaillé sur un parcours consacré à la modélisation et à la <strong>résolution algébrique des équations du premier degré de la forme $ax + b = c$</strong>, au calcul précis de volumes de prestations capillaires (brushings, soins et matériel) et à la vérification arithmétique rigoureuse en situation professionnelle réunionnaise.
+          </p>
+
+          <div class="att-grid">
+            <div>
+              <strong>Séance :</strong> S5 M1 - Équations du premier degré (ax + b = c)<br>
+              <strong>Diplôme :</strong> CAP Métiers de la Coiffure (Gr. 1)<br>
+              <strong>Date d'évaluation :</strong> <span id="currentDateDisplay"></span>
+            </div>
+            <div>
+              <strong>Socle CAP validé :</strong> <span id="attSocleScore" style="color: var(--cma-bordeaux); font-weight: bold;">0%</span><br>
+              <strong>Points Bonus Dépassement :</strong> <span id="attBonusScore" style="color: var(--cma-corail); font-weight: bold;">0 pts</span><br>
+              <strong>Note Évaluation Formelle :</strong> <span id="attEvalScore" style="color: var(--cma-bordeaux); font-weight: bold;">0 / 8 pts</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.88rem; color: var(--cma-text-muted); margin-top: 10px;">
+            <strong>Objectifs travaillés durant cette séance :</strong> C1 (S'informer : identifier l'inconnue et modéliser une recette), C2 (Exécuter : isoler pas à pas $x$ par soustraction et division), C3 (Appliquer : vérifier la cohérence numérique), C4 (Communiquer : formuler un bilan d'activité clair).
+          </p>
+        </div>
+
+        <div class="att-footer">
+          <div style="font-size: 0.8rem; color: var(--cma-text-muted);">
+            Attestation pédagogique de séance • Repère d’entraînement, sans valeur de diplôme • À relire avec la formatrice
+          </div>
+          <div class="att-sig-block">
+            <div>Formatrice Référente Mathématiques :</div>
+            <div class="att-sig-name">Rachel Lamberet-Lezais</div>
+            <div style="font-size: 0.78rem; color: var(--cma-text-muted);">CMA Formation Sainte-Clotilde</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* État global réactif de l'application */
+    const appState = {
+      currentStep: 1,
+      learnerName: "APPRENANT(E) EN FORMATION",
+      disc: { q1: false, q2: false, q3: false, q4: false, q5: false, q6: false },
+      lvl1: {
+        '1-1-sub': false, '1-1-div': false, '1-1-verif': false,
+        '1-2-a': false, '1-2-b': false, '1-2-c': false, '1-2-d': false,
+        '1-3-eq': false, '1-3-ans': false,
+        '1-4-eq': false, '1-4-ans': false,
+        '1-5-t7': false, '1-5-t8': false, '1-5-concl': false
+      },
+      lvl2: {
+        '2-1-eq': false, '2-1-ans': false, '2-1-verif': false,
+        '2-2-eq': false, '2-2-ans': false,
+        '2-3-eq': false, '2-3-ans': false,
+        '2-4-a': false, '2-4-b': false, '2-4-c': false
+      },
+      lvl3: {
+        '3-1-eq': false, '3-1-ans': false, '3-1-benef12': false,
+        '3-2-eq': false, '3-2-red': false, '3-2-ans': false, '3-2-choix': false,
+        '3-3-formule': false
+      },
+      eval: { q1: 0, q2: 0, q3: 0, q4: 0, q5: 0 },
+      unlockedLvl2: false,
+      unlockedLvl3: false,
+      sim: { a: 22, b: 14, c: 190, step: 0 }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const today = new Date();
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      document.getElementById('currentDateDisplay').textContent = today.toLocaleDateString('fr-FR', options);
+
+      updateSimParams();
+      updateProgressBar();
+      new ResizeObserver(()=>drawBalanceCanvas()).observe(document.querySelector('.balance-sim-wrapper'));
+      document.querySelectorAll('.feedback-box').forEach(el=>el.setAttribute('role','status'));
+      document.querySelectorAll('.q-item').forEach(q=>{const input=q.querySelector('input,select');const title=q.querySelector('.q-title');if(input&&title)input.setAttribute('aria-label',title.textContent.replace(/\$/g,''));});
+      document.querySelectorAll('.control-card').forEach(card=>{const label=card.querySelector('label'),input=card.querySelector('input');if(label&&input)label.htmlFor=input.id;});
+      document.getElementById('studentNameInput').setAttribute('aria-label','Nom et prénom facultatifs, conservés uniquement dans la page');
+      document.querySelectorAll('.accordion-header').forEach(el=>{el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-expanded',String(el.parentElement.classList.contains('open')));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleAccordion(el);}});});
+      document.querySelectorAll('.level-card').forEach((el,i)=>{el.tabIndex=0;el.setAttribute('role','button');el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();switchLvlTab(i+1);}});});
+    });
+
+    function switchStep(stepNumber) {
+      appState.currentStep = stepNumber;
+      for (let i = 1; i <= 4; i++) {
+        const tab = document.getElementById(`tab-step-${i}`);
+        const sec = document.getElementById(`step-${i}`);
+        if (tab && sec) {
+          if (i === stepNumber) {
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            sec.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+            tab.setAttribute('aria-selected', 'false');
+            sec.classList.remove('active');
+          }
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise().catch(()=>{});
+      }
+      if(stepNumber===2)drawBalanceCanvas();
+    }
+
+    function toggleAccordion(header) {
+      header.parentElement.classList.toggle('open');header.setAttribute('aria-expanded',String(header.parentElement.classList.contains('open')));
+    }
+
+    function updateStudentName(val) {
+      const trimmed = val.trim();
+      const display = document.getElementById('attestationLearnerDisplay');
+      if (trimmed.length > 0) {
+        display.textContent = trimmed.toUpperCase();
+        appState.learnerName = trimmed;
+      } else {
+        display.textContent = "APPRENANT(E) EN FORMATION";
+        appState.learnerName = "APPRENANT(E) EN FORMATION";
+      }
+    }
+
+    function parseInputNumber(valStr) {
+      if (!valStr) return null;
+      const clean = valStr.toString().trim().replace(/[\s\u00a0\u202f]/g, '').replace(',', '.');
+      return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(clean) && Number.isFinite(Number(clean)) ? Number(clean) : null;
+    }
+
+    function setFeedback(elemId, type, message) {
+      const fb = document.getElementById(elemId);
+      if (!fb) return;
+      fb.className = `feedback-box ${type}`;
+      fb.innerHTML = message;
+      if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([fb]).catch(()=>{});
+    }
+
+    function showCustomModal(msg) {
+      const existing = document.getElementById('cma-dialog-box');
+      if (existing) existing.remove();
+
+      const modal = document.createElement('div');
+      modal.id = 'cma-dialog-box';
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100vw';
+      modal.style.height = '100vh';
+      modal.style.backgroundColor = 'rgba(0, 0, 0, 0.45)';
+      modal.style.display = 'flex';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      modal.style.zIndex = '9999';
+      modal.style.padding = '16px';
+
+      modal.innerHTML = `
+        <div style="background: white; border-radius: 12px; max-width: 380px; width: 100%; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-left: 6px solid #A50F23;">
+          <h3 style="color: #A50F23; margin-bottom: 10px; font-size: 1.1rem;">Information CMA Formation</h3>
+          <p style="font-size: 0.95rem; color: #1E293B; line-height: 1.5; margin-bottom: 16px;">${msg}</p>
+          <div style="text-align: right;">
+            <button class="btn btn-primary btn-sm" onclick="document.getElementById('cma-dialog-box').remove()">Compris</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function updateProgressBar() {
+      for (let level=1;level<=3;level++) {
+        const count={1:5,2:4,3:3}[level], state=appState['lvl'+level];
+        for(let ex=1;ex<count;ex++) {
+          const keys=Object.keys(state).filter(k=>k.startsWith(level+'-'+ex+'-'));
+          if(keys.length && keys.every(k=>state[k])) document.getElementById('exbox-m'+level+'-'+(ex+1)).classList.remove('locked-exercise');
+        }
+      }
+      document.querySelectorAll('.exercise-box').forEach(box=>box.querySelectorAll('input,select,button').forEach(el=>el.disabled=box.classList.contains('locked-exercise')));
+
+      const totalL1 = Object.keys(appState.lvl1).length;
+      let countL1 = 0;
+      for (const k in appState.lvl1) if (appState.lvl1[k]) countL1++;
+
+      const pctCap = Math.round((countL1 / totalL1) * 100);
+      document.getElementById('capProgressTxt').textContent = `${pctCap}%`;
+      document.getElementById('attSocleScore').textContent = `${pctCap}%`;
+
+      if (pctCap >= 100 && !appState.unlockedLvl2) {
+        appState.unlockedLvl2 = true;
+        document.getElementById('hdr-lvl-2').classList.remove('locked');
+        document.getElementById('badge-status-2').textContent = 'Disponible !';
+        document.getElementById('badge-status-1').textContent = '✅ Validé (100%)';
+        document.getElementById('badge-stat-cap').classList.remove('locked');
+        document.getElementById('badge-stat-cap').classList.add('unlocked');
+      }
+
+      let bonus = 0;
+      for (const k in appState.lvl2) if (appState.lvl2[k]) bonus += 10;
+      for (const k in appState.lvl3) if (appState.lvl3[k]) bonus += 15;
+
+      document.getElementById('bonusScoreTxt').textContent = `+${bonus} pts`;
+      document.getElementById('attBonusScore').textContent = `+${bonus} pts`;
+
+      const totalL2 = Object.keys(appState.lvl2).length;
+      let countL2 = 0;
+      for (const k in appState.lvl2) if (appState.lvl2[k]) countL2++;
+
+      if (countL2 === totalL2 && !appState.unlockedLvl3) {
+        appState.unlockedLvl3 = true;
+        document.getElementById('hdr-lvl-3').classList.remove('locked');
+        document.getElementById('badge-status-3').textContent = 'Disponible !';
+        document.getElementById('badge-status-2').textContent = '✅ Validé (Bonus max)';
+        document.getElementById('badge-stat-bonus').classList.remove('locked');
+        document.getElementById('badge-stat-bonus').classList.add('unlocked');
+      }
+
+      const totalL3 = Object.keys(appState.lvl3).length;
+      let countL3 = 0;
+      for (const k in appState.lvl3) if (appState.lvl3[k]) countL3++;
+
+      if (countL3 === totalL3) {
+        document.getElementById('badge-status-3').textContent = '✅ Maîtrise totale !';
+        document.getElementById('badge-stat-master').classList.remove('locked');
+        document.getElementById('badge-stat-master').classList.add('unlocked');
+      }
+
+      // Note évaluation
+      let evalTotal = 0;
+      for (const k in appState.eval) evalTotal += appState.eval[k];
+      document.getElementById('attEvalScore').textContent = `${evalTotal} / 8 pts`;
+
+      const globalPct = Math.min(100, Math.round((countL1 + countL2 + countL3) / (totalL1 + totalL2 + totalL3) * 100));
+      document.getElementById('globalProgressBar').style.width = `${globalPct}%`;
+      document.getElementById('print-attestation').disabled=pctCap<100;
+      document.getElementById('att-validation-status').textContent=pctCap===100?'Socle de cette séance validé à 100 %. Les niveaux complémentaires et le score du bilan sont indiqués ci-dessous.':'Parcours en cours : socle validé à '+pctCap+' %. Cette fiche n’atteste pas encore la réussite du socle.';
+      for(let level=1;level<=3;level++)document.getElementById('hdr-lvl-'+level).setAttribute('aria-disabled',String(level===2&&!appState.unlockedLvl2||level===3&&!appState.unlockedLvl3));
+    }
+
+    function switchLvlTab(lvl) {
+      if (lvl === 2 && !appState.unlockedLvl2) {
+        showCustomModal("Le Niveau 2 🟡 est verrouillé. Vous devez d'abord valider les 5 exercices du Niveau 1 🟢 (Socle CAP à 100%) !");
+        return;
+      }
+      if (lvl === 3 && !appState.unlockedLvl3) {
+        showCustomModal("Le Niveau 3 🔴 est verrouillé. Vous devez d'abord réussir l'ensemble des exercices du Niveau 2 🟡 !");
+        return;
+      }
+
+      const tabs = [1, 2, 3];
+      tabs.forEach(l => {
+        const hdr = document.getElementById(`hdr-lvl-${l}`);
+        const cnt = document.getElementById(`cnt-lvl-${l}`);
+        if (hdr && cnt) {
+          if (l === lvl) {
+            hdr.classList.add('active-lvl');
+            cnt.style.display = 'block';
+          } else {
+            hdr.classList.remove('active-lvl');
+            cnt.style.display = 'none';
+          }
+        }
+      });
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    /* ================= DÉCOUVERTE ================= */
+    function checkDisc1() {
+      const v = document.getElementById('disc_q1').value.trim().toLowerCase();
+      if (!v) { setFeedback('fb-disc-1', 'hint', 'Précisez ce que représente x.'); return; }
+      if (v === 'number') {
+        setFeedback('fb-disc-1', 'correct', 'Exact ! $x$ représente le <strong>nombre de brushings</strong> réalisés par Sarah dans sa journée.');
+        document.getElementById('block-disc-1').classList.add('completed');
+        appState.disc.q1 = true;
+      } else {
+        setFeedback('fb-disc-1', 'incorrect', 'Indiquez le nombre de forfaits brushings réalisés.');
+      }
+    }
+
+    function checkDisc2() {
+      const v = document.getElementById('disc_q2').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '22x' || v === '22*x' || v === '22,00x' || v === '22.00x') {
+        setFeedback('fb-disc-2', 'correct', 'Parfait ! Le montant variable s\'écrit <strong>$22x$</strong>.');
+        document.getElementById('block-disc-2').classList.add('completed');
+        appState.disc.q2 = true;
+      } else {
+        setFeedback('fb-disc-2', 'incorrect', 'Le montant variable est le prix unitaire (22) multiplié par x : 22x.');
+      }
+    }
+
+    function checkDisc3() {
+      const v = document.getElementById('disc_q3').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '22x+14=190' || v === '14+22x=190' || v === '190=22x+14') {
+        setFeedback('fb-disc-3', 'correct', 'Excellent ! L\'équation modélisatrice est : <strong>$22x + 14 = 190$</strong>.');
+        document.getElementById('block-disc-3').classList.add('completed');
+        appState.disc.q3 = true;
+      } else {
+        setFeedback('fb-disc-3', 'incorrect', 'L\'équation relie le montant variable (22x) + le forfait fixe (14) au total (190) : 22x + 14 = 190.');
+      }
+    }
+
+    function checkDisc4() {
+      const v = parseInputNumber(document.getElementById('disc_q4').value);
+      if (v === 8) {
+        setFeedback('fb-disc-4', 'correct', 'Bravo ! $22x = 190 - 14 = 176$, d\'où $x = \\frac{176}{22} = \\mathbf{8}$.');
+        document.getElementById('block-disc-4').classList.add('completed');
+        appState.disc.q4 = true;
+      } else {
+        setFeedback('fb-disc-4', 'incorrect', '190 - 14 = 176, puis 176 / 22 = 8.');
+      }
+    }
+
+    function checkDisc5() {
+      const v = parseInputNumber(document.getElementById('disc_q5').value);
+      if (v === 190) {
+        setFeedback('fb-disc-5', 'correct', 'Exact : $22 \\times 8 + 14 = 176 + 14 = \\mathbf{190\\text{ €}}$. L\'égalité est parfaitement vérifiée !');
+        document.getElementById('block-disc-5').classList.add('completed');
+        appState.disc.q5 = true;
+      } else {
+        setFeedback('fb-disc-5', 'incorrect', 'Calculez 22 * 8 + 14 = 190.');
+      }
+    }
+
+    function checkDisc6() {
+      const v = parseInputNumber(document.getElementById('disc_q6').value);
+      if (v === 8) {
+        setFeedback('fb-disc-6', 'correct', 'Conclusion certifiée : Sarah a réalisé <strong>8 forfaits brushings</strong> durant son samedi à Sainte-Clotilde.');
+        document.getElementById('block-disc-6').classList.add('completed');
+        appState.disc.q6 = true;
+      } else {
+        setFeedback('fb-disc-6', 'incorrect', 'Le nombre de clientes est x = 8.');
+      }
+    }
+
+    /* ================= NIVEAU 1 ================= */
+    function checkEx1_1_sub() {
+      const v = parseInputNumber(document.getElementById('ex1_1_sub').value);
+      if (v === 21) {
+        setFeedback('fb-ex1-1-sub', 'correct', 'Exact : $29 - 8 = \\mathbf{21}$. On a donc $3x = 21$.');
+        appState.lvl1['1-1-sub'] = true;
+        document.getElementById('q-m1-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-sub', 'incorrect', '29 - 8 = 21.'); }
+    }
+
+    function checkEx1_1_div() {
+      const v = parseInputNumber(document.getElementById('ex1_1_div').value);
+      if (v === 7) {
+        setFeedback('fb-ex1-1-div', 'correct', 'Exact : $x = \\frac{21}{3} = \\mathbf{7}$.');
+        appState.lvl1['1-1-div'] = true;
+        document.getElementById('q-m1-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-div', 'incorrect', '21 / 3 = 7.'); }
+    }
+
+    function checkEx1_1_verif() {
+      const v = parseInputNumber(document.getElementById('ex1_1_verif').value);
+      if (v === 29) {
+        setFeedback('fb-ex1-1-verif', 'correct', 'Bravo ! $3 \\times 7 + 8 = 21 + 8 = \\mathbf{29}$. L\'égalité est vérifiée.');
+        appState.lvl1['1-1-verif'] = true;
+        document.getElementById('q-m1-1-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-1-verif', 'incorrect', '3*7 + 8 = 29.'); }
+    }
+
+    function checkEx1_2_a() {
+      const v = parseInputNumber(document.getElementById('ex1_2_a').value);
+      if (v === 6) {
+        setFeedback('fb-ex1-2-a', 'correct', 'Exact : $5x = 30 \\Rightarrow x = \\mathbf{6}$.');
+        appState.lvl1['1-2-a'] = true;
+        document.getElementById('q-m1-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-a', 'incorrect', '37 - 7 = 30, puis 30 / 5 = 6.'); }
+    }
+
+    function checkEx1_2_b() {
+      const v = parseInputNumber(document.getElementById('ex1_2_b').value);
+      if (v === 9) {
+        setFeedback('fb-ex1-2-b', 'correct', 'Exact : $2x = 18 \\Rightarrow x = \\mathbf{9}$.');
+        appState.lvl1['1-2-b'] = true;
+        document.getElementById('q-m1-2-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-b', 'incorrect', '30 - 12 = 18, puis 18 / 2 = 9.'); }
+    }
+
+    function checkEx1_2_c() {
+      const v = parseInputNumber(document.getElementById('ex1_2_c').value);
+      if (v === 8) {
+        setFeedback('fb-ex1-2-c', 'correct', 'Exact : $4x = 26 + 6 = 32 \\Rightarrow x = \\mathbf{8}$.');
+        appState.lvl1['1-2-c'] = true;
+        document.getElementById('q-m1-2-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-c', 'incorrect', '26 + 6 = 32, puis 32 / 4 = 8.'); }
+    }
+
+    function checkEx1_2_d() {
+      const v = parseInputNumber(document.getElementById('ex1_2_d').value);
+      if (v === 6) {
+        setFeedback('fb-ex1-2-d', 'correct', 'Exact : $6x = 27 + 9 = 36 \\Rightarrow x = \\mathbf{6}$.');
+        appState.lvl1['1-2-d'] = true;
+        document.getElementById('q-m1-2-4').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-2-d', 'incorrect', '27 + 9 = 36, puis 36 / 6 = 6.'); }
+    }
+
+    function checkEx1_3_eq() {
+      const v = document.getElementById('ex1_3_eq').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '20x+10=110' || v === '10+20x=110' || v === '110=20x+10') {
+        setFeedback('fb-ex1-3-eq', 'correct', 'Exact : <strong>$20x + 10 = 110$</strong>.');
+        appState.lvl1['1-3-eq'] = true;
+        document.getElementById('q-m1-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-eq', 'incorrect', '20x + 10 = 110.'); }
+    }
+
+    function checkEx1_3_ans() {
+      const v = parseInputNumber(document.getElementById('ex1_3_ans').value);
+      if (v === 5) {
+        setFeedback('fb-ex1-3-ans', 'correct', 'Exact : $20x = 100 \\Rightarrow x = \\mathbf{5}$ clientes.');
+        appState.lvl1['1-3-ans'] = true;
+        document.getElementById('q-m1-3-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-3-ans', 'incorrect', '110 - 10 = 100, puis 100 / 20 = 5.'); }
+    }
+
+    function checkEx1_4_eq() {
+      const v = document.getElementById('ex1_4_eq').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '15x+5=65' || v === '5+15x=65' || v === '65=15x+5') {
+        setFeedback('fb-ex1-4-eq', 'correct', 'Exact : <strong>$15x + 5 = 65$</strong>.');
+        appState.lvl1['1-4-eq'] = true;
+        document.getElementById('q-m1-4-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-4-eq', 'incorrect', '15x + 5 = 65.'); }
+    }
+
+    function checkEx1_4_ans() {
+      const v = parseInputNumber(document.getElementById('ex1_4_ans').value);
+      if (v === 4) {
+        setFeedback('fb-ex1-4-ans', 'correct', 'Exact : $15x = 60 \\Rightarrow x = \\mathbf{4}$ flacons.');
+        appState.lvl1['1-4-ans'] = true;
+        document.getElementById('q-m1-4-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-4-ans', 'incorrect', '65 - 5 = 60, puis 60 / 15 = 4.'); }
+    }
+
+    function checkEx1_5_t7() {
+      const v = parseInputNumber(document.getElementById('ex1_5_t7').value);
+      if (v === 70) {
+        setFeedback('fb-ex1-5-t7', 'correct', 'Exact : $8 \\times 7 + 14 = 56 + 14 = \\mathbf{70} \\neq 78$. Donc $x=7$ n\'est pas solution.');
+        appState.lvl1['1-5-t7'] = true;
+        document.getElementById('q-m1-5-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-5-t7', 'incorrect', '8*7 + 14 = 70.'); }
+    }
+
+    function checkEx1_5_t8() {
+      const v = parseInputNumber(document.getElementById('ex1_5_t8').value);
+      if (v === 78) {
+        setFeedback('fb-ex1-5-t8', 'correct', 'Exact : $8 \\times 8 + 14 = 64 + 14 = \\mathbf{78}$. L\'égalité est vérifiée !');
+        appState.lvl1['1-5-t8'] = true;
+        document.getElementById('q-m1-5-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex1-5-t8', 'incorrect', '8*8 + 14 = 78.'); }
+    }
+
+    function checkEx1_5_concl() {
+      const v = parseInputNumber(document.getElementById('ex1_5_concl').value);
+      if (v === 8) {
+        setFeedback('fb-ex1-5-concl', 'correct', 'Bravo ! La solution est $x = \\mathbf{8}$. SOCLE CAP VALIDÉ À 100% !');
+        appState.lvl1['1-5-concl'] = true;
+        document.getElementById('q-m1-5-3').classList.add('completed');
+        updateProgressBar();
+        showCustomModal("Félicitations ! Vous avez validé l'intégralité du Niveau 1 🟢 (Socle CAP à 100%). Votre Attestation Officielle CMA Formation est débloquée et le Niveau 2 🟡 est accessible !");
+      } else { setFeedback('fb-ex1-5-concl', 'incorrect', 'La solution est x = 8.'); }
+    }
+
+    /* ================= NIVEAU 2 ================= */
+    function checkEx2_1_eq() {
+      const v = document.getElementById('ex2_1_eq').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '24x+18=114' || v === '18+24x=114' || v === '114=24x+18') {
+        setFeedback('fb-ex2-1-eq', 'correct', 'Exact : <strong>$24x + 18 = 114$</strong>.');
+        appState.lvl2['2-1-eq'] = true;
+        document.getElementById('q-m2-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-eq', 'incorrect', '24x + 18 = 114.'); }
+    }
+
+    function checkEx2_1_ans() {
+      const v = parseInputNumber(document.getElementById('ex2_1_ans').value);
+      if (v === 4) {
+        setFeedback('fb-ex2-1-ans', 'correct', 'Exact : $24x = 96 \\Rightarrow x = \\mathbf{4}$ coupes.');
+        appState.lvl2['2-1-ans'] = true;
+        document.getElementById('q-m2-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-ans', 'incorrect', '114 - 18 = 96, puis 96 / 24 = 4.'); }
+    }
+
+    function checkEx2_1_verif() {
+      const v = parseInputNumber(document.getElementById('ex2_1_verif').value);
+      if (v === 114) {
+        setFeedback('fb-ex2-1-verif', 'correct', 'Exact : $24 \\times 4 + 18 = 96 + 18 = \\mathbf{114\\text{ €}}$.');
+        appState.lvl2['2-1-verif'] = true;
+        document.getElementById('q-m2-1-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-1-verif', 'incorrect', '24*4 + 18 = 114.'); }
+    }
+
+    function checkEx2_2_eq() {
+      const v = document.getElementById('ex2_2_eq').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '45x+15=285' || v === '15+45x=285' || v === '285=45x+15') {
+        setFeedback('fb-ex2-2-eq', 'correct', 'Exact : <strong>$45x + 15 = 285$</strong>.');
+        appState.lvl2['2-2-eq'] = true;
+        document.getElementById('q-m2-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-2-eq', 'incorrect', '45x + 15 = 285.'); }
+    }
+
+    function checkEx2_2_ans() {
+      const v = parseInputNumber(document.getElementById('ex2_2_ans').value);
+      if (v === 6) {
+        setFeedback('fb-ex2-2-ans', 'correct', 'Exact : $45x = 270 \\Rightarrow x = \\frac{270}{45} = \\mathbf{6}$ lisseurs.');
+        appState.lvl2['2-2-ans'] = true;
+        document.getElementById('q-m2-2-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-2-ans', 'incorrect', '285 - 15 = 270, puis 270 / 45 = 6.'); }
+    }
+
+    function checkEx2_3_eq() {
+      const v = document.getElementById('ex2_3_eq').value.trim().replace(/\s+/g, '').replace(',', '.').toLowerCase();
+      if (v === '8.5x+35=69' || v === '35+8.5x=69' || v === '8.50x+35=69') {
+        setFeedback('fb-ex2-3-eq', 'correct', 'Exact : <strong>$8,5x + 35 = 69$</strong>.');
+        appState.lvl2['2-3-eq'] = true;
+        document.getElementById('q-m2-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-3-eq', 'incorrect', '8,5x + 35 = 69.'); }
+    }
+
+    function checkEx2_3_ans() {
+      const v = parseInputNumber(document.getElementById('ex2_3_ans').value);
+      if (v === 4) {
+        setFeedback('fb-ex2-3-ans', 'correct', 'Exact : $8,5x = 34 \\Rightarrow x = \\frac{34}{8,5} = \\mathbf{4}$ doses supplémentaires.');
+        appState.lvl2['2-3-ans'] = true;
+        document.getElementById('q-m2-3-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-3-ans', 'incorrect', '69 - 35 = 34, puis 34 / 8,5 = 4.'); }
+    }
+
+    function checkEx2_4_a() {
+      const v = parseInputNumber(document.getElementById('ex2_4_a').value);
+      if (v === 10) {
+        setFeedback('fb-ex2-4-a', 'correct', 'Exact : $3,5x = 35 \\Rightarrow x = \\mathbf{10}$.');
+        appState.lvl2['2-4-a'] = true;
+        document.getElementById('q-m2-4-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-a', 'incorrect', '47 - 12 = 35, puis 35 / 3,5 = 10.'); }
+    }
+
+    function checkEx2_4_b() {
+      const v = parseInputNumber(document.getElementById('ex2_4_b').value);
+      if (v === 10) {
+        setFeedback('fb-ex2-4-b', 'correct', 'Exact : $2,4x = 24 \\Rightarrow x = \\mathbf{10}$.');
+        appState.lvl2['2-4-b'] = true;
+        document.getElementById('q-m2-4-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-b', 'incorrect', '19 + 5 = 24, puis 24 / 2,4 = 10.'); }
+    }
+
+    function checkEx2_4_c() {
+      const v = parseInputNumber(document.getElementById('ex2_4_c').value);
+      if (v === 12) {
+        setFeedback('fb-ex2-4-c', 'correct', 'Bravo ! $1,5x = 18 \\Rightarrow x = \\frac{18}{1,5} = \\mathbf{12}$. NIVEAU 2 VALIDÉ !');
+        appState.lvl2['2-4-c'] = true;
+        document.getElementById('q-m2-4-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex2-4-c', 'incorrect', '22,5 - 4,5 = 18, puis 18 / 1,5 = 12.'); }
+    }
+
+    /* ================= NIVEAU 3 ================= */
+    function checkEx3_1_eq() {
+      const v = document.getElementById('ex3_1_eq').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '45x-120=330' || v === '330=45x-120') {
+        setFeedback('fb-ex3-1-eq', 'correct', 'Exact : <strong>$45x - 120 = 330$</strong>.');
+        appState.lvl3['3-1-eq'] = true;
+        document.getElementById('q-m3-1-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-eq', 'incorrect', '45x - 120 = 330.'); }
+    }
+
+    function checkEx3_1_ans() {
+      const v = parseInputNumber(document.getElementById('ex3_1_ans').value);
+      if (v === 10) {
+        setFeedback('fb-ex3-1-ans', 'correct', 'Exact : $45x = 450 \\Rightarrow x = \\mathbf{10}$ clientes.');
+        appState.lvl3['3-1-ans'] = true;
+        document.getElementById('q-m3-1-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-ans', 'incorrect', '330 + 120 = 450, puis 450 / 45 = 10.'); }
+    }
+
+    function checkEx3_1_benef12() {
+      const v = parseInputNumber(document.getElementById('ex3_1_benef12').value);
+      if (v === 420) {
+        setFeedback('fb-ex3-1-benef12', 'correct', 'Exact : $45 \\times 12 - 120 = 540 - 120 = \\mathbf{420\\text{ €}}$.');
+        appState.lvl3['3-1-benef12'] = true;
+        document.getElementById('q-m3-1-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-1-benef12', 'incorrect', '45*12 - 120 = 420.'); }
+    }
+
+    function checkEx3_2_eq() {
+      const v = document.getElementById('ex3_2_eq').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '20x+200=15x+350' || v === '15x+350=20x+200') {
+        setFeedback('fb-ex3-2-eq', 'correct', 'Exact : <strong>$20x + 200 = 15x + 350$</strong>.');
+        appState.lvl3['3-2-eq'] = true;
+        document.getElementById('q-m3-2-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-eq', 'incorrect', '20x + 200 = 15x + 350.'); }
+    }
+
+    function checkEx3_2_red() {
+      const v = document.getElementById('ex3_2_red').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '5x+200=350' || v === '350=5x+200') {
+        setFeedback('fb-ex3-2-red', 'correct', 'Exact : $20x - 15x + 200 = 350 \\Rightarrow \\mathbf{5x + 200 = 350}$.');
+        appState.lvl3['3-2-red'] = true;
+        document.getElementById('q-m3-2-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-red', 'incorrect', 'En soustrayant 15x : 5x + 200 = 350.'); }
+    }
+
+    function checkEx3_2_ans() {
+      const v = parseInputNumber(document.getElementById('ex3_2_ans').value);
+      if (v === 30) {
+        setFeedback('fb-ex3-2-ans', 'correct', 'Exact : $5x = 150 \\Rightarrow x = \\mathbf{30}$ prestations d\'équilibre.');
+        appState.lvl3['3-2-ans'] = true;
+        document.getElementById('q-m3-2-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-ans', 'incorrect', '350 - 200 = 150, puis 150 / 5 = 30.'); }
+    }
+
+    function checkEx3_2_choix() {
+      const v = document.getElementById('ex3_2_choix').value.trim().toLowerCase();
+      if (v === '2') {
+        setFeedback('fb-ex3-2-choix', 'correct', 'Parfait ! Pour 35 prestations : Formule 1 = $15 \\times 35 + 350 = 875\\text{ €}$ alors que Formule 2 = $20 \\times 35 + 200 = \\mathbf{900\\text{ €}}$. La <strong>Formule 2</strong> est plus avantageuse de 25 € !');
+        appState.lvl3['3-2-choix'] = true;
+        document.getElementById('q-m3-2-4').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-2-choix', 'incorrect', 'Calculez : F1 = 875 €, F2 = 900 €. C\'est la Formule 2.'); }
+    }
+
+    function checkEx3_3_formule() {
+      const v = document.getElementById('ex3_3_formule').value.trim().replace(/\s+/g, '').toUpperCase();
+      if (v === '=(C2-B2)/A2' || v === '=(C2-B2)/$A$2' || v === '=((C2-B2)/A2)') {
+        setFeedback('fb-ex3-3-formule', 'correct', 'Bravo ! La formule exacte est <strong>=(C2-B2)/A2</strong>. NIVEAU 3 COMPLÉTÉ AVEC SUCCÈS !');
+        appState.lvl3['3-3-formule'] = true;
+        document.getElementById('q-m3-3-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-ex3-3-formule', 'incorrect', 'La formule est =(C2-B2)/A2.'); }
+    }
+
+    /* ================= ÉVALUATION FORMELLE ================= */
+    function checkEval1() {
+      const v = document.getElementById('eval_q1').value.trim().toLowerCase();
+      if (v === 'number') {
+        setFeedback('fb-eval-1', 'correct', 'Correct (1/1 pt) : $x$ représente le <strong>nombre de forfaits coupe-brushing</strong> réalisés.');
+        appState.eval.q1 = 1;
+        document.getElementById('q-eval-1').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-eval-1', 'incorrect', 'x est le nombre de prestations / brushings.'); }
+    }
+
+    function checkEval2() {
+      const v = document.getElementById('eval_q2').value.trim().replace(/\s+/g, '').toLowerCase();
+      if (v === '24x+16=184' || v === '16+24x=184' || v === '184=24x+16') {
+        setFeedback('fb-eval-2', 'correct', 'Correct (2/2 pts) : Équation : <strong>$24x + 16 = 184$</strong>.');
+        appState.eval.q2 = 2;
+        document.getElementById('q-eval-2').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-eval-2', 'incorrect', '24x + 16 = 184.'); }
+    }
+
+    function checkEval3() {
+      const v = parseInputNumber(document.getElementById('eval_q3').value);
+      if (v === 7) {
+        setFeedback('fb-eval-3', 'correct', 'Correct (2/2 pts) : $24x = 184 - 16 = 168 \\Rightarrow x = \\frac{168}{24} = \\mathbf{7}$ brushings.');
+        appState.eval.q3 = 2;
+        document.getElementById('q-eval-3').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-eval-3', 'incorrect', '184 - 16 = 168, puis 168 / 24 = 7.'); }
+    }
+
+    function checkEval4() {
+      const v = parseInputNumber(document.getElementById('eval_q4').value);
+      if (v === 184) {
+        setFeedback('fb-eval-4', 'correct', 'Correct (1/1 pt) : $24 \\times 7 + 16 = 168 + 16 = \\mathbf{184\\text{ €}}$.');
+        appState.eval.q4 = 1;
+        document.getElementById('q-eval-4').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-eval-4', 'incorrect', '24*7 + 16 = 184.'); }
+    }
+
+    function checkEval5() {
+      const v = parseInputNumber(document.getElementById('eval_q5').value);
+      if (v === 315) {
+        setFeedback('fb-eval-5', 'correct', 'Correct (2/2 pts) : $7 \\times 45\\text{ min} = \\mathbf{315\\text{ minutes}}$ (soit 5 heures et 15 minutes). Évaluation terminée !');
+        appState.eval.q5 = 2;
+        document.getElementById('q-eval-5').classList.add('completed');
+        updateProgressBar();
+      } else { setFeedback('fb-eval-5', 'incorrect', '7 * 45 = 315 minutes.'); }
+    }
+
+    /* ================= LOGIQUE DU SIMULATEUR BALANCE ================= */
+    function updateSimParams() {
+      appState.sim.a = parseInt(document.getElementById('sliderA').value, 10);
+      appState.sim.b = parseInt(document.getElementById('sliderB').value, 10);
+      appState.sim.c = parseInt(document.getElementById('sliderC').value, 10);
+
+      document.getElementById('valA').textContent = appState.sim.a;
+      document.getElementById('valB').textContent = appState.sim.b;
+      document.getElementById('valC').textContent = appState.sim.c;
+
+      setSimStep(appState.sim.step);
+    }
+
+    function resetSimToScenario() {
+      document.getElementById('sliderA').value = 22;
+      document.getElementById('sliderB').value = 14;
+      document.getElementById('sliderC').value = 190;
+      updateSimParams();
+      setSimStep(0);
+    }
+
+    function setSimStep(stepIdx) {
+      appState.sim.step = stepIdx;
+      for (let i = 0; i < 3; i++) {
+        const el = document.getElementById(`simStepCard${i}`);
+        if (el) {
+          if (i === stepIdx) el.classList.add('active-step');
+          else el.classList.remove('active-step');
+        }
+      }
+
+      const { a, b, c } = appState.sim;
+      const t0 = document.getElementById('txtStep0');
+      const t1 = document.getElementById('txtStep1');
+      const t2 = document.getElementById('txtStep2');
+
+      t0.innerHTML = `${a}x + ${b} = ${c}`;
+      t1.innerHTML = `${a}x = ${c} - ${b} = <strong>${c - b}</strong>`;
+      const x=(c-b)/a, rounded=Math.round(x*100)/100, approx=Math.abs(x-rounded)>1e-9;
+      const solDisplay=new Intl.NumberFormat('fr-FR',{maximumFractionDigits:2}).format(rounded);
+      t2.innerHTML = `x = (${c-b}) / ${a} ${approx?'≈':'='} <strong>${solDisplay}</strong>`;
+      const description=['Égalité initiale : '+a+'x + '+b+' = '+c,'On retire '+b+' aux deux membres : '+a+'x = '+(c-b),'On divise les deux membres par '+a+' : x '+(approx?'vaut environ ':'= ')+solDisplay][stepIdx];
+      document.getElementById('balanceCanvas').setAttribute('aria-label',description);
+      document.getElementById('sim-description').textContent=description+(x<0||!Number.isInteger(x)?'. Solution algébrique : cette valeur ne représente pas un nombre entier positif de prestations.':'');
+
+      drawBalanceCanvas();
+    }
+
+    function drawBalanceCanvas() {
+      const canvas = document.getElementById('balanceCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const w=canvas.getBoundingClientRect().width||600,h=240,ratio=window.devicePixelRatio||1;
+      canvas.width=Math.round(w*ratio);canvas.height=h*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);
+      const spread=w*.27,plate=Math.min(80,w*.22);
+      const { a, b, c, step } = appState.sim;
+
+      // Base et pivot central
+      ctx.fillStyle = '#64748B';
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - 30, h - 20);
+      ctx.lineTo(w / 2 + 30, h - 20);
+      ctx.lineTo(w / 2, 70);
+      ctx.closePath();
+      ctx.fill();
+
+      // Fléau horizontal à l'équilibre
+      ctx.strokeStyle = '#A50F23';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - w*.38, 70);
+      ctx.lineTo(w / 2 + w*.38, 70);
+      ctx.stroke();
+
+      // Pivot rotule
+      ctx.fillStyle = '#EE3C3D';
+      ctx.beginPath();
+      ctx.arc(w / 2, 70, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Plateaux suspendus (gauche et droite)
+      drawPlateau(ctx, w / 2 - spread, 70, 90, plate, 'gauche');
+      drawPlateau(ctx, w / 2 + spread, 70, 90, plate, 'droite');
+
+      // Textes et contenus sur les plateaux selon l'étape
+      ctx.fillStyle = '#1E293B';
+      ctx.font = 'bold 15px Arial';
+      ctx.textAlign = 'center';
+
+      if (step === 0) {
+        // Plateau gauche : ax + b
+        ctx.fillStyle = '#A50F23';
+        ctx.fillText(`${a}x + ${b}`, w / 2 - spread, 140);
+        ctx.font = '12px Arial';
+        ctx.fillStyle = '#64748B';
+        ctx.fillText(`Variable + fixe`, w / 2 - spread, 160);
+
+        // Plateau droite : c
+        ctx.font = 'bold 16px Arial';
+        ctx.fillStyle = '#1E293B';
+        ctx.fillText(`${c} €`, w / 2 + spread, 140);
+        ctx.font = '12px Arial';
+        ctx.fillStyle = '#64748B';
+        ctx.fillText(`Total`, w / 2 + spread, 160);
+
+      } else if (step === 1) {
+        // Plateau gauche : ax (après -b)
+        ctx.fillStyle = '#A50F23';
+        ctx.fillText(`${a}x`, w / 2 - spread, 140);
+        ctx.font = '12px Arial';
+        ctx.fillStyle = '#16A34A';
+        ctx.fillText(`(- ${b} retiré)`, w / 2 - spread, 160);
+
+        // Plateau droite : c - b
+        ctx.font = 'bold 16px Arial';
+        ctx.fillStyle = '#1E293B';
+        ctx.fillText(`${c - b} €`, w / 2 + spread, 140);
+        ctx.font = '12px Arial';
+        ctx.fillStyle = '#16A34A';
+        ctx.fillText(`(${c} - ${b} = ${c - b})`, w / 2 + spread, 160);
+
+      } else {
+        // Plateau gauche : x (après division par a)
+        ctx.fillStyle = '#A50F23';
+        ctx.font = 'bold 20px Arial';
+        ctx.fillText(`x`, w / 2 - spread, 140);
+        ctx.font = '12px Arial';
+        ctx.fillStyle = '#64748B';
+        ctx.fillText(`Inconnue isolée`, w / 2 - spread, 160);
+
+        // Plateau droite : solution x
+        const x=(c-b)/a, rounded=Math.round(x*100)/100;
+        const solDisplay=(Math.abs(x-rounded)>1e-9?'≈ ':'')+new Intl.NumberFormat('fr-FR',{maximumFractionDigits:2}).format(rounded);
+        ctx.font = 'bold 20px Arial';
+        ctx.fillStyle = '#16A34A';
+        ctx.fillText(`${solDisplay}`, w / 2 + spread, 140);
+        ctx.font = '12px Arial';
+        ctx.fillStyle = '#64748B';
+        ctx.fillText(`Valeur de x`, w / 2 + spread, 160);
+      }
+
+      // Indicateur d'équilibre
+      ctx.fillStyle = '#16A34A';
+      ctx.font = (w<400?'bold 10px Arial':'bold 12px Arial');
+      ctx.fillText(`MÊME OPÉRATION DES DEUX CÔTÉS`, w / 2, 45);
+    }
+
+    function drawPlateau(ctx, x, beamY, cordLength, plateWidth, side) {
+      // Cordes de suspension
+      ctx.strokeStyle = '#94A3B8';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x, beamY);
+      ctx.lineTo(x - plateWidth / 2, beamY + cordLength);
+      ctx.moveTo(x, beamY);
+      ctx.lineTo(x + plateWidth / 2, beamY + cordLength);
+      ctx.stroke();
+
+      // Coupelle
+      ctx.fillStyle = '#E2E8F0';
+      ctx.strokeStyle = '#64748B';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(x, beamY + cordLength, plateWidth / 2, 0, Math.PI);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+  </script>
+</body>
+</html>
